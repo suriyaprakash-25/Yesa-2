@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { HeroNavigation } from './components/hero/HeroNavigation';
 import { HeroExperience } from './components/hero/HeroExperience';
 import { PhilosophyManifestoSection } from './components/philosophy/PhilosophyManifestoSection';
+import { YesaJourneySection } from './components/journey/YesaJourneySection';
 import { ApplicationModal } from './components/sections/ApplicationModal';
 import { Container } from './components/core/Container';
 import { Badge } from './components/core/Badge';
@@ -21,8 +22,10 @@ export function App() {
   };
 
   const handleNavigateSection = (section: string) => {
-    if (section === 'journey' || section === 'experience' || section === 'fields' || section === 'future') {
-      scrollToSection('philosophy');
+    if (section === 'journey') {
+      scrollToSection('journey');
+    } else if (section === 'experience' || section === 'fields' || section === 'future') {
+      scrollToSection('journey');
     }
   };
 
@@ -43,10 +46,15 @@ export function App() {
           onExplorePath={handleExplorePath}
         />
 
-        {/* 2. Next Major Section: The Philosophy & Core Manifesto */}
+        {/* 2. Philosophy & Core Manifesto */}
         <PhilosophyManifestoSection 
           onOpenApply={() => setIsApplyModalOpen(true)}
-          onExploreJourney={() => setIsApplyModalOpen(true)}
+          onExploreJourney={() => scrollToSection('journey')}
+        />
+
+        {/* 3. The YESA Journey — centerpiece scroll experience */}
+        <YesaJourneySection
+          onBegin={() => setIsApplyModalOpen(true)}
         />
       </main>
 

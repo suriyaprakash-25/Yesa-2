@@ -1,0 +1,118 @@
+:root {
+  /* ==========================================================================
+     YESA DESIGN SYSTEM — FOUNDATIONAL TOKENS
+     Concept: "THE ASCENT" | Institutional & Futuristic Restraint
+     ========================================================================== */
+
+  /* ---------------------------------------------------------
+     1. COLOR SYSTEM (Compatible with Eesa.ai visual standard)
+     --------------------------------------------------------- */
+  /* Canvas & Backgrounds */
+  --color-bg-base: #08090B;
+  --color-bg-subtle: #0B0D10;
+  --color-surface-obsidian: #0E1116;
+  --color-surface-card: #13171E;
+  --color-surface-elevated: #181D26;
+  --color-surface-floating: #1D232E;
+
+  /* Hairline Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --border-glow: rgba(56, 189, 248, 0.35);
+
+  /* Typography Colors */
+  --text-primary: #F3F5F7;
+  --text-secondary: #9BA3AF;
+  --text-muted: #5D6673;
+  --text-dim: #3F4753;
+  --text-inverse: #08090B;
+
+  /* Ascent Strategic Accent Spectrum */
+  --accent-cyan: #38BDF8;
+  --accent-cyan-subtle: rgba(56, 189, 248, 0.12);
+  --accent-cyan-glow: rgba(56, 189, 248, 0.25);
+  
+  --accent-gold: #F59E0B;
+  --accent-gold-subtle: rgba(245, 158, 11, 0.12);
+
+  --accent-emerald: #10B981;
+  --accent-emerald-subtle: rgba(16, 185, 129, 0.12);
+
+  /* ---------------------------------------------------------
+     2. ASCENT PROGRESSION STAGE TOKENS
+     --------------------------------------------------------- */
+  /* Stage 1: Potential / Application */
+  --stage-1-color: #94A3B8;
+  --stage-1-glow: rgba(148, 163, 184, 0.15);
+
+  /* Stage 2: Observation / Volunteering */
+  --stage-2-color: #38BDF8;
+  --stage-2-glow: rgba(56, 189, 248, 0.2);
+
+  /* Stage 3: Paid Internship */
+  --stage-3-color: #34D399;
+  --stage-3-glow: rgba(52, 211, 153, 0.2);
+
+  /* Stage 4: Experienced */
+  --stage-4-color: #FBBF24;
+  --stage-4-glow: rgba(251, 191, 36, 0.25);
+
+  /* Stage 5: World-Class Leader */
+  --stage-5-color: #FFFFFF;
+  --stage-5-glow: rgba(255, 255, 255, 0.35);
+
+  /* ---------------------------------------------------------
+     3. TYPOGRAPHY SCALES & STACKS
+     --------------------------------------------------------- */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Cabinet Grotesk', 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Fluid Display Scale */
+  --text-hero: clamp(2.75rem, 6vw + 1rem, 6.25rem);
+  --text-section: clamp(2rem, 4vw + 0.5rem, 4rem);
+  --text-h2: clamp(1.5rem, 2.5vw + 0.25rem, 2.5rem);
+  --text-h3: clamp(1.25rem, 1.5vw + 0.2rem, 1.75rem);
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-mono-tag: 0.75rem;
+
+  /* Line Heights */
+  --leading-tight: 1.05;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --tracking-widest: 0.15em;
+
+  /* ---------------------------------------------------------
+     4. MOTION & TRANSITIONS (60fps Institutional Easing)
+     --------------------------------------------------------- */
+  --ease-institutional: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --duration-fast: 150ms;
+  --duration-base: 280ms;
+  --duration-medium: 450ms;
+  --duration-slow: 700ms;
+  --duration-journey: 1200ms;
+
+  /* ---------------------------------------------------------
+     5. ELEVATIONS, BLURS & SHADOWS
+     --------------------------------------------------------- */
+  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 12px 32px -4px rgba(0, 0, 0, 0.6);
+  --shadow-glow-cyan: 0 0 35px -5px rgba(56, 189, 248, 0.25);
+  --shadow-glow-stage: 0 0 40px -5px var(--active-stage-glow, rgba(56, 189, 248, 0.2));
+
+  --blur-glass: 16px;
+  --blur-nav: 24px;
+}

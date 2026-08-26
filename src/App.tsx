@@ -3,6 +3,7 @@ import { HeroNavigation } from './components/hero/HeroNavigation';
 import { HeroExperience } from './components/hero/HeroExperience';
 import { PhilosophyManifestoSection } from './components/philosophy/PhilosophyManifestoSection';
 import { YesaJourneySection } from './components/journey/YesaJourneySection';
+import { ChooseFieldSection } from './components/fields/ChooseFieldSection';
 import { ApplicationModal } from './components/sections/ApplicationModal';
 import { Container } from './components/core/Container';
 import { Badge } from './components/core/Badge';
@@ -24,8 +25,10 @@ export function App() {
   const handleNavigateSection = (section: string) => {
     if (section === 'journey') {
       scrollToSection('journey');
-    } else if (section === 'experience' || section === 'fields' || section === 'future') {
-      scrollToSection('journey');
+    } else if (section === 'fields') {
+      scrollToSection('fields');
+    } else if (section === 'experience' || section === 'future') {
+      scrollToSection('fields');
     }
   };
 
@@ -54,7 +57,12 @@ export function App() {
 
         {/* 3. The YESA Journey — centerpiece scroll experience */}
         <YesaJourneySection
-          onBegin={() => setIsApplyModalOpen(true)}
+          onBegin={() => scrollToSection('fields')}
+        />
+
+        {/* 4. Choose Your Field — interactive exploration & pathway revelation */}
+        <ChooseFieldSection
+          onStartJourney={() => setIsApplyModalOpen(true)}
         />
       </main>
 

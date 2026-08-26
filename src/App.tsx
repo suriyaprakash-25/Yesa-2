@@ -4,6 +4,7 @@ import { HeroExperience } from './components/hero/HeroExperience';
 import { PhilosophyManifestoSection } from './components/philosophy/PhilosophyManifestoSection';
 import { YesaJourneySection } from './components/journey/YesaJourneySection';
 import { ChooseFieldSection } from './components/fields/ChooseFieldSection';
+import { ExperienceshipSection } from './components/experience/ExperienceshipSection';
 import { ApplicationModal } from './components/sections/ApplicationModal';
 import { Container } from './components/core/Container';
 import { Badge } from './components/core/Badge';
@@ -27,8 +28,10 @@ export function App() {
       scrollToSection('journey');
     } else if (section === 'fields') {
       scrollToSection('fields');
-    } else if (section === 'experience' || section === 'future') {
-      scrollToSection('fields');
+    } else if (section === 'experience') {
+      scrollToSection('experience');
+    } else if (section === 'future') {
+      scrollToSection('experience');
     }
   };
 
@@ -64,6 +67,9 @@ export function App() {
         <ChooseFieldSection
           onStartJourney={() => setIsApplyModalOpen(true)}
         />
+
+        {/* 5. Experience-ship — practical evolution from observation to leadership */}
+        <ExperienceshipSection />
       </main>
 
       {/* Institutional Monolithic Footer */}

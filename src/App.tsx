@@ -5,6 +5,7 @@ import { PhilosophyManifestoSection } from './components/philosophy/PhilosophyMa
 import { YesaJourneySection } from './components/journey/YesaJourneySection';
 import { ChooseFieldSection } from './components/fields/ChooseFieldSection';
 import { ExperienceshipSection } from './components/experience/ExperienceshipSection';
+import { FutureVisionSection } from './components/future/FutureVisionSection';
 import { ApplicationModal } from './components/sections/ApplicationModal';
 import { Container } from './components/core/Container';
 import { Badge } from './components/core/Badge';
@@ -31,7 +32,7 @@ export function App() {
     } else if (section === 'experience') {
       scrollToSection('experience');
     } else if (section === 'future') {
-      scrollToSection('experience');
+      scrollToSection('future');
     }
   };
 
@@ -70,6 +71,12 @@ export function App() {
 
         {/* 5. Experience-ship — practical evolution from observation to leadership */}
         <ExperienceshipSection />
+
+        {/* 6. The Future Vision — from experienced leadership to venture creation */}
+        <FutureVisionSection
+          onOpenApply={() => setIsApplyModalOpen(true)}
+          onExploreJourney={() => scrollToSection('journey')}
+        />
       </main>
 
       {/* Institutional Monolithic Footer */}

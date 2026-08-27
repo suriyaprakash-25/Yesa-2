@@ -1,69 +1,83 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useSpring } from 'framer-motion';
+import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 export const CustomCursor: React.FC = () => {
-  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
-  const [isHovering, setIsHovering] = useState(false);
+  const [isEnabled] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  });
+
+  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  // Smooth physics-based spring interpolation for sleek movement
+  const springX = useSpring(cursorX, { stiffness: 600, damping: 35, mass: 0.1 });
+  const springY = useSpring(cursorY, { stiffness: 600, damping: 35, mass: 0.1 });
+
   useEffect(() => {
-    // Only enable custom cursor on non-touch devices
-    const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-    if (isTouchDevice) return;
+    if (!isEnabled) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
-    };
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      setIsVisible(true);
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      // Check if hovering over interactive elements
-      if (
-        target.tagName.toLowerCase() === 'button' ||
-        target.tagName.toLowerCase() === 'a' ||
-        target.closest('button') ||
-        target.closest('a') ||
-        target.classList.contains('interactive')
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
+      // Check if hovering interactive elements
+      const target = e.target as HTMLElement | null;
+      if (target) {
+        const isInteractive = Boolean(
+          target.closest('a, button, [role="button"], input, textarea, select, label, .cursor-pointer, [data-cursor-interactive]')
+        );
+        setIsHovered(isInteractive);
       }
     };
 
+    const handleMouseDown = () => setIsClicked(true);
+    const handleMouseUp = () => setIsClicked(false);
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
+
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isVisible]);
+  }, [cursorX, cursorY, isEnabled]);
 
-  const springConfig = { damping: 25, stiffness: 400, mass: 0.2 };
-  const cursorX = useSpring(mousePosition.x - 8, springConfig);
-  const cursorY = useSpring(mousePosition.y - 8, springConfig);
+  if (!isEnabled || !isVisible) return null;
 
-  // Hidden on touch devices via CSS media query
   return (
     <motion.div
-      className="hidden md:block fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+      className="fixed top-0 left-0 pointer-events-none z-[99999] rounded-full -translate-x-1/2 -translate-y-1/2"
       style={{
-        x: cursorX,
-        y: cursorY,
-        opacity: isVisible ? 1 : 0
+        x: springX,
+        y: springY,
+        mixBlendMode: 'difference',
       }}
-    >
-      <motion.div
-        className="bg-white rounded-full flex items-center justify-center origin-center"
-        initial={{ width: 16, height: 16 }}
-        animate={{
-          width: isHovering ? 48 : 16,
-          height: isHovering ? 48 : 16,
-        }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      />
-    </motion.div>
+      animate={{
+        width: isHovered ? 44 : isClicked ? 7 : 9,
+        height: isHovered ? 44 : isClicked ? 7 : 9,
+        backgroundColor: '#FFFFFF',
+        opacity: isVisible ? 1 : 0,
+      }}
+      transition={{
+        type: 'spring',
+        stiffness: 450,
+        damping: 28,
+        mass: 0.15,
+      }}
+    />
   );
 };

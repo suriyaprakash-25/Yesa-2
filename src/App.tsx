@@ -20,20 +20,17 @@ function MainSite() {
     if (applySection) applySection.scrollIntoView({ behavior: 'smooth' });
   };
   const handleExplorePath = () => {
-    const philosophySection = document.getElementById('philosophy');
+    const philosophySection = document.getElementById('philosophy') || document.getElementById('journey');
     if (philosophySection) philosophySection.scrollIntoView({ behavior: 'smooth' });
-  };
-  const handleNavigateSection = (section: string) => {
-    console.log(`Navigating to ${section}`);
   };
 
   return (
     <>
+      <NavigationBar onOpenApply={handleOpenApply} />
       <main className="flex-1">
         <HeroExperience 
           onOpenApply={handleOpenApply}
           onExplorePath={handleExplorePath}
-          onNavigateSection={handleNavigateSection}
         />
         <div id="philosophy">
           <PhilosophyManifestoSection />
@@ -66,16 +63,14 @@ export function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-[var(--color-bg-base)] text-[var(--text-primary)] flex flex-col justify-between selection:bg-[var(--accent-dim)] selection:text-[var(--accent-light)] overflow-clip relative">
-        <CustomCursor />
         <IntroLoader />
+        <CustomCursor />
         <GridBackground />
-        <NavigationBar />
         
         <Routes>
           <Route path="/" element={<MainSite />} />
           <Route path="/style-guide" element={<StyleGuide />} />
         </Routes>
-        
       </div>
     </BrowserRouter>
   );

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowDown } from 'lucide-react';
 import { Container } from '../core/Container';
-import { Button } from '../core/Button';
-import { AscentPathVisualizer } from './AscentPathVisualizer';
+import { HeroInteractiveField } from './HeroInteractiveField';
 
 interface HeroExperienceProps {
   onOpenApply?: () => void;
@@ -14,140 +13,192 @@ interface HeroExperienceProps {
 
 export const HeroExperience: React.FC<HeroExperienceProps> = ({
   onOpenApply,
+  onExplorePath,
 }) => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
-  
+
   // Parallax effects on scroll
-  const yHeroText = useTransform(scrollY, [0, 1000], [0, -150]);
-  const opacityHero = useTransform(scrollY, [0, 500], [1, 0]);
-  const yBgText = useTransform(scrollY, [0, 1000], [0, -300]);
+  const yHeroText = useTransform(scrollY, [0, 900], [0, -120]);
+  const opacityHero = useTransform(scrollY, [0, 450], [1, 0]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
     };
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const handleApply = () => {
+    if (onOpenApply) {
+      onOpenApply();
+    } else {
+      const applyEl = document.getElementById('apply');
+      if (applyEl) applyEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleExplore = () => {
+    if (onExplorePath) {
+      onExplorePath();
+    } else {
+      const journeyEl = document.getElementById('journey') || document.getElementById('philosophy');
+      if (journeyEl) journeyEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Staggered cinematic animation container
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        delayChildren: 1.2,
-        duration: 1.0,
-        ease: [0.16, 1, 0.3, 1]
-      }
-    }
+        delayChildren: 0.2,
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    show: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } 
-    }
+    hidden: { opacity: 0, y: 30, filter: 'blur(6px)' },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+    },
   };
 
-  const scrollToJourney = () => {
-    const el = document.getElementById('journey');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  const microPathSteps = [
+    { label: 'Volunteering', num: '01' },
+    { label: 'Paid Internship', num: '02' },
+    { label: 'Experienced', num: '03' },
+    { label: 'World-Class Leader', num: '04' },
+  ];
 
   return (
-    <section 
+    <section
       ref={containerRef}
-      className="relative min-h-[100vh] w-full bg-[#090D0F] overflow-hidden flex flex-col justify-center pt-20"
+      className="relative min-h-[100vh] w-full bg-[#090D0F] overflow-hidden flex flex-col justify-between pt-32 pb-16 md:pt-40 md:pb-24"
     >
-      {/* Interactive Background Field */}
-      <AscentPathVisualizer mousePosition={mousePos} />
+      {/* Bespoke Interactive Particle/Line Field */}
+      <HeroInteractiveField mousePosition={mousePos} />
 
-      <Container className="relative z-10 w-full h-full flex flex-col justify-center">
-        <motion.div 
-          className="flex flex-col items-start max-w-5xl"
+      {/* Subtle Corner Architectural Accent lines */}
+      <div className="absolute top-28 left-8 w-12 h-12 border-t border-l border-white/[0.08] pointer-events-none hidden lg:block" />
+      <div className="absolute top-28 right-8 w-12 h-12 border-t border-r border-white/[0.08] pointer-events-none hidden lg:block" />
+
+      {/* Main Content Area */}
+      <Container className="relative z-10 w-full flex-1 flex flex-col justify-center">
+        <motion.div
+          className="max-w-4xl flex flex-col items-start"
           variants={containerVariants}
           initial="hidden"
           animate="show"
           style={{ y: yHeroText, opacity: opacityHero }}
         >
-          
-          {/* Eyebrow */}
-          <motion.div variants={itemVariants} className="flex items-center gap-3 mb-8">
-            <div className="relative flex items-center justify-center w-3 h-3">
-              <div className="absolute w-full h-full bg-[var(--accent-base)] rounded-full animate-ping opacity-75" />
-              <div className="relative w-1.5 h-1.5 bg-[var(--accent-light)] rounded-full" />
+          {/* Eyebrow label */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009D9E] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#009D9E]"></span>
+              </span>
+              <span className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-[#8A8A8A] font-medium">
+                100% FREE INCUBATOR PROGRAM
+              </span>
             </div>
-            <span className="font-mono text-xs md:text-sm tracking-widest text-[var(--accent-light)] uppercase">
-              100% FREE INCUBATOR PROGRAM
-            </span>
           </motion.div>
 
-          {/* Main Headline */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <h1 className="hero-heading text-white">
+          {/* Headline: "Incubator for Future Leaders." */}
+          <motion.div variants={itemVariants} className="mb-6 w-full">
+            <h1 className="font-display font-black text-white text-[clamp(2.6rem,7.5vw,6.8rem)] tracking-[-0.04em] leading-[0.98] text-left [overflow-wrap:normal] [word-break:keep-all]">
               Incubator for Future Leaders.
             </h1>
           </motion.div>
 
           {/* Subhead */}
-          <motion.div variants={itemVariants} className="mb-10">
-            <p className="text-white/80 font-display text-2xl md:text-3xl lg:text-4xl tracking-tight font-medium">
-              Choose your field. We provide the path.
+          <motion.div variants={itemVariants} className="mb-8 max-w-xl">
+            <p className="text-lg sm:text-xl md:text-2xl text-[#8A8A8A] font-light tracking-tight leading-snug">
+              Choose your field. <span className="text-white">We provide the path.</span>
             </p>
           </motion.div>
 
-          {/* Micro-path Steps */}
-          <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 mb-16 text-white/50 text-sm md:text-base font-mono tracking-wide">
-            <span className="text-white/80">Volunteering</span>
-            <ArrowRight className="w-4 h-4 text-[var(--accent-base)]/50" />
-            <span className="text-white/80">Paid Internship</span>
-            <ArrowRight className="w-4 h-4 text-[var(--accent-base)]/50" />
-            <span className="text-white/80">Experienced</span>
-            <ArrowRight className="w-4 h-4 text-[var(--accent-base)]/50" />
-            <span className="text-[var(--accent-light)]">World-Class Leader</span>
+          {/* Micro-path line: Connected steps with SVG arrow connectors */}
+          <motion.div variants={itemVariants} className="mb-10 w-full">
+            <div className="inline-flex flex-wrap items-center gap-2 sm:gap-3 py-2.5 px-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+              {microPathSteps.map((step, idx) => (
+                <React.Fragment key={step.label}>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-mono text-[10px] text-[#009D9E] opacity-80">
+                      {step.num}.
+                    </span>
+                    <span className="font-mono text-xs text-white/80 tracking-tight font-medium">
+                      {step.label}
+                    </span>
+                  </div>
+                  {idx < microPathSteps.length - 1 && (
+                    <svg
+                      className="w-3.5 h-3.5 text-[#009D9E]/60 shrink-0 mx-0.5"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M6 3.5L10.5 8L6 12.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
           </motion.div>
 
-          {/* CTAs */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
-            <Button 
-              variant="primary" 
-              size="lg"
-              onClick={onOpenApply}
-              className="group relative overflow-hidden bg-[var(--accent-base)] hover:bg-[var(--accent-light)] text-[#090D0F] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_30px_var(--accent-glow)] border-none"
+          {/* Two CTAs */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 w-full sm:w-auto"
+          >
+            {/* Primary CTA */}
+            <button
+              onClick={handleApply}
+              className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] hover:scale-[1.04] hover:shadow-[0_0_35px_rgba(0,157,158,0.5)] active:scale-95 transition-all duration-200 cursor-pointer shadow-[0_0_20px_rgba(0,157,158,0.25)]"
             >
-              <span className="relative z-10 flex items-center gap-2 font-bold tracking-widest text-sm uppercase">
-                Apply to YESA
-              </span>
-            </Button>
+              <span>Apply to YESA</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
 
-            <button 
-              onClick={scrollToJourney}
-              className="group flex items-center gap-2 text-white/50 hover:text-white transition-colors py-2"
+            {/* Secondary CTA */}
+            <button
+              onClick={handleExplore}
+              className="group flex items-center justify-center sm:justify-start gap-2.5 px-4 py-3 text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
             >
-              <span className="font-mono text-sm tracking-widest uppercase transition-colors">
-                ↓ Explore the Journey
+              <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#009D9E] group-hover:text-[#009D9E] transition-all">
+                <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
+              </div>
+              <span className="font-mono text-xs uppercase tracking-widest font-medium">
+                Explore the Journey
               </span>
             </button>
           </motion.div>
-
         </motion.div>
       </Container>
-      
-      {/* Giant Background Wordmark Scroll Cue */}
-      <motion.div 
-        style={{ y: yBgText }}
-        className="absolute -bottom-24 left-0 w-full flex justify-center pointer-events-none z-0"
-      >
-        <h2 className="font-display font-black text-[30vw] leading-[0.7] text-white/[0.02] select-none text-center whitespace-nowrap overflow-hidden">
-          YESA
-        </h2>
-      </motion.div>
 
+      {/* Large faint "YESA" wordmark bleeding off the bottom edge as a scroll cue */}
+      <div className="relative w-full overflow-hidden pointer-events-none select-none flex justify-center -mb-6 sm:-mb-10 md:-mb-14 opacity-60">
+        <span className="font-display font-black text-[18vw] leading-none text-white/[0.03] tracking-tighter block translate-y-1/4">
+          YESA
+        </span>
+      </div>
     </section>
   );
 };

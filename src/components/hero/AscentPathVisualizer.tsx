@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface AscentPathVisualizerProps {
   mousePosition: { x: number; y: number };
 }
 
 export const AscentPathVisualizer: React.FC<AscentPathVisualizerProps> = ({ mousePosition }) => {
+
+  // Calculate mouse offset for parallax (very subtle)
   const [windowCenter, setWindowCenter] = useState(() => ({
     x: typeof window !== 'undefined' ? window.innerWidth / 2 : 0,
     y: typeof window !== 'undefined' ? window.innerHeight / 2 : 0
@@ -22,71 +24,124 @@ export const AscentPathVisualizer: React.FC<AscentPathVisualizerProps> = ({ mous
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Use springs for smooth parallax follow
-  const springConfig = { damping: 30, stiffness: 50 };
-  const mouseX = useSpring(0, springConfig);
-  const mouseY = useSpring(0, springConfig);
+  // Subtle parallax values
+  const offsetX = (mousePosition.x - windowCenter.x) * 0.05;
+  const offsetY = (mousePosition.y - windowCenter.y) * 0.05;
 
-  useEffect(() => {
-    if (windowCenter.x > 0) {
-      mouseX.set(mousePosition.x - windowCenter.x);
-      mouseY.set(mousePosition.y - windowCenter.y);
-    }
-  }, [mousePosition, windowCenter, mouseX, mouseY]);
-
-  // Different depths parallax at different speeds
-  const layer1X = useTransform(mouseX, [-1000, 1000], [20, -20]);
-  const layer1Y = useTransform(mouseY, [-1000, 1000], [20, -20]);
-  
-  const layer2X = useTransform(mouseX, [-1000, 1000], [50, -50]);
-  const layer2Y = useTransform(mouseY, [-1000, 1000], [50, -50]);
-
-  const layer3X = useTransform(mouseX, [-1000, 1000], [90, -90]);
-  const layer3Y = useTransform(mouseY, [-1000, 1000], [90, -90]);
+  // Visual Nodes representing Choice -> Direction -> Progression
+  const nodes = [
+    { id: 1, y: 400, x: 500 },
+    { id: 2, y: 250, x: 530 },
+    { id: 3, y: 100, x: 480 },
+    { id: 4, y: -50, x: 510 },
+  ];
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 bg-[#090D0F]">
-      
-      {/* Layer 1: Distant Slow Mesh */}
-      <motion.div style={{ x: layer1X, y: layer1Y }} className="absolute inset-0 flex items-center justify-center opacity-[0.03]">
-        <svg viewBox="0 0 1000 800" className="w-full h-full min-w-[1200px]" preserveAspectRatio="xMidYMid slice">
-          <path d="M0,400 Q250,300 500,400 T1000,400" fill="none" stroke="var(--accent-base)" strokeWidth="1" />
-          <path d="M0,600 Q250,500 500,600 T1000,600" fill="none" stroke="var(--accent-base)" strokeWidth="1" />
-          <path d="M0,200 Q250,100 500,200 T1000,200" fill="none" stroke="var(--accent-base)" strokeWidth="1" />
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+      <motion.div
+        className="absolute inset-0 flex items-center justify-center opacity-30 mix-blend-screen"
+        animate={{
+          x: offsetX,
+          y: offsetY,
+        }}
+        transition={{ type: "spring", stiffness: 50, damping: 20 }}
+      >
+        <svg 
+          width="100%" 
+          height="100%" 
+          viewBox="0 0 1000 800" 
+          preserveAspectRatio="xMidYMid slice"
+          className="w-full h-full"
+        >
+          <defs>
+            <linearGradient id="ascentGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stopColor="var(--path-origin)" />
+              <stop offset="50%" stopColor="var(--path-active)" />
+              <stop offset="100%" stopColor="var(--path-glow)" />
+            </linearGradient>
+            
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* Core Ascension Path */}
+          <motion.path
+            d="M500,800 C500,600 500,500 500,400 C500,300 550,300 530,250 C510,200 470,180 480,100 C490,20 510,0 510,-50 C510,-100 510,-150 510,-200"
+            fill="none"
+            stroke="url(#ascentGradient)"
+            strokeWidth="2.5"
+            filter="url(#glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          />
+
+          {/* Architectural structural lines (subtle grid/depth) */}
+          <motion.path
+            d="M500,400 L420,400 L420,300"
+            fill="none"
+            stroke="var(--path-origin)"
+            strokeWidth="1.5"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.6 }}
+            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 1 }}
+          />
+          <motion.path
+            d="M530,250 L600,250 L600,150"
+            fill="none"
+            stroke="var(--path-origin)"
+            strokeWidth="1.5"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.6 }}
+            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 1.5 }}
+          />
+          <motion.path
+            d="M480,100 L430,100 L430,0"
+            fill="none"
+            stroke="var(--path-origin)"
+            strokeWidth="1.5"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.4 }}
+            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 1.8 }}
+          />
+
+          {/* Interactive Nodes */}
+          {nodes.map((node, i) => (
+            <motion.g key={node.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5 + (i * 0.2), duration: 1 }}
+            >
+              {/* Data Node */}
+              <circle 
+                cx={node.x} 
+                cy={node.y} 
+                r="3" 
+                fill="var(--path-active)"
+                filter="url(#glow)"
+              />
+              
+              {/* Ambient Ring */}
+              <motion.circle 
+                cx={node.x} 
+                cy={node.y} 
+                r="16" 
+                fill="none"
+                stroke="var(--path-glow)"
+                strokeWidth="1"
+                opacity="0.3"
+                animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity, delay: i }}
+              />
+            </motion.g>
+          ))}
         </svg>
       </motion.div>
-
-      {/* Layer 2: Medium Structural Lines */}
-      <motion.div style={{ x: layer2X, y: layer2Y }} className="absolute inset-0 flex items-center justify-center opacity-[0.05]">
-        <svg viewBox="0 0 1000 800" className="w-full h-full min-w-[1200px]" preserveAspectRatio="xMidYMid slice">
-          <path d="M300,0 L300,800 M700,0 L700,800 M500,0 L500,800" fill="none" stroke="var(--accent-base)" strokeWidth="1" strokeDasharray="4 8" />
-          <circle cx="500" cy="400" r="150" fill="none" stroke="var(--accent-base)" strokeWidth="1" />
-          <circle cx="500" cy="400" r="2" fill="var(--accent-base)" />
-        </svg>
-      </motion.div>
-
-      {/* Layer 3: Foreground Interactive Particles */}
-      <motion.div style={{ x: layer3X, y: layer3Y }} className="absolute inset-0 flex items-center justify-center opacity-[0.15]">
-        <svg viewBox="0 0 1000 800" className="w-full h-full min-w-[1200px]" preserveAspectRatio="xMidYMid slice">
-          <motion.circle cx="350" cy="250" r="3" fill="var(--accent-base)" 
-            animate={{ opacity: [0.2, 1, 0.2], scale: [1, 1.5, 1] }} 
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} 
-          />
-          <motion.circle cx="650" cy="550" r="4" fill="var(--accent-base)" 
-            animate={{ opacity: [0.2, 1, 0.2], scale: [1, 1.2, 1] }} 
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
-          />
-          <motion.circle cx="750" cy="200" r="2" fill="var(--accent-base)" 
-            animate={{ opacity: [0.1, 0.8, 0.1] }} 
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }} 
-          />
-          
-          <path d="M350,250 L500,400 L650,550" fill="none" stroke="var(--accent-base)" strokeWidth="1" strokeDasharray="2 4" />
-        </svg>
-      </motion.div>
-
-      {/* Gradient Mask to fade out edges */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_#090D0F_70%)] pointer-events-none" />
     </div>
   );
 };

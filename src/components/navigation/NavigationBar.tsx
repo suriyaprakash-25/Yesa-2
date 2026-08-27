@@ -1,125 +1,184 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Button } from '../core/Button';
-import { Container } from '../core/Container';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 
-const NAV_LINKS = [
+interface NavigationBarProps {
+  onOpenApply?: () => void;
+}
+
+interface NavItem {
+  id: string;
+  label: string;
+}
+
+const NAV_ITEMS: NavItem[] = [
   { id: 'journey', label: 'JOURNEY' },
   { id: 'fields', label: 'FIELDS' },
   { id: 'experience', label: 'EXPERIENCE' },
-  { id: 'future', label: 'FUTURE' }
+  { id: 'future', label: 'FUTURE' },
 ];
 
-export const NavigationBar: React.FC = () => {
-  const { scrollY } = useScroll();
-  const [hidden, setHidden] = useState(false);
+export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    
-    if (latest > previous && latest > 150) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-
-    if (latest > 50) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Intersection Observer for scrollspy
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 30);
+
+      // Scrollspy calculation
+      const sections = NAV_ITEMS.map(item => document.getElementById(item.id));
+      const scrollPosition = scrollY + window.innerHeight * 0.35;
+
+      let currentActive = '';
+      for (const section of sections) {
+        if (section) {
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            currentActive = section.id;
+            break;
           }
-        });
-      },
-      { rootMargin: '-20% 0px -80% 0px' }
-    );
+        }
+      }
+      setActiveSection(currentActive);
+    };
 
-    NAV_LINKS.forEach((link) => {
-      const element = document.getElementById(link.id);
-      if (element) observer.observe(element);
-    });
-
-    return () => observer.disconnect();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (id: string) => {
+    setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleApplyClick = () => {
+    setMobileMenuOpen(false);
+    if (onOpenApply) {
+      onOpenApply();
+    } else {
+      const applySection = document.getElementById('apply');
+      if (applySection) {
+        applySection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
-    <motion.nav
-      variants={{
-        visible: { y: 0 },
-        hidden: { y: '-100%' }
-      }}
-      animate={hidden ? 'hidden' : 'visible'}
-      transition={{ duration: 0.35, ease: 'easeInOut' }}
-      className={`fixed top-0 w-full z-[9000] transition-colors duration-300 ${
-        isScrolled ? 'bg-[#090D0F]/80 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'py-3.5 bg-[#090D0F]/80 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.6)]'
+          : 'py-6 bg-transparent border-b border-transparent'
       }`}
     >
-      <Container>
-        <div className="flex items-center justify-between h-20">
-          
-          {/* Logo */}
-          <div 
-            className="text-white font-display font-bold text-2xl tracking-widest cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          >
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
+        
+        {/* Brand Logo "YESA" Left */}
+        <button
+          onClick={scrollToTop}
+          className="flex items-center gap-2.5 group cursor-pointer focus:outline-none"
+        >
+          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
+            <span className="text-[#090D0F] font-display font-black text-xs tracking-tighter">Y.</span>
+          </div>
+          <span className="font-display font-black text-xl tracking-wider text-white">
             YESA
-          </div>
+          </span>
+        </button>
 
-          {/* Links & CTA */}
-          <div className="hidden lg:flex items-center gap-12">
-            <div className="flex gap-8">
-              {NAV_LINKS.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className={`font-mono text-xs tracking-widest uppercase transition-colors duration-300 ${
-                    activeSection === link.id ? 'text-[var(--accent-base)]' : 'text-white/60 hover:text-white'
-                  }`}
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
+        {/* Center-Right Nav Links (Desktop) */}
+        <nav className="hidden md:flex items-center gap-7 lg:gap-9">
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`font-mono text-xs tracking-[0.18em] uppercase transition-all duration-200 cursor-pointer relative py-1.5 ${
+                  isActive
+                    ? 'text-[#009D9E] font-semibold'
+                    : 'text-white/60 hover:text-white'
+                }`}
+              >
+                <span>{item.label}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavIndicator"
+                    className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#009D9E] shadow-[0_0_8px_rgba(0,157,158,0.8)]"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </nav>
 
-            <Button 
-              variant="primary" 
-              size="sm"
-              onClick={() => scrollToSection('apply')}
-              className="group relative overflow-hidden"
-            >
-              <span className="relative z-10 flex items-center gap-2 uppercase tracking-widest text-xs">
-                APPLY
-              </span>
-            </Button>
-          </div>
+        {/* Right CTA Button & Mobile Menu Toggle */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleApplyClick}
+            className="group relative inline-flex items-center justify-center gap-1.5 px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] hover:scale-105 hover:shadow-[0_0_20px_rgba(0,157,158,0.4)] active:scale-95 transition-all duration-200 cursor-pointer"
+          >
+            <span>Apply</span>
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </button>
 
-          {/* Mobile Menu Toggle (Placeholder) */}
-          <div className="lg:hidden">
-            <button className="text-white/80 font-mono text-xs tracking-widest uppercase">
-              MENU
-            </button>
-          </div>
-
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] transition-colors cursor-pointer"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
-      </Container>
-    </motion.nav>
+
+      </div>
+
+      {/* Mobile Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden bg-[#090D0F]/95 backdrop-blur-xl border-b border-white/[0.08] overflow-hidden px-6 py-5"
+          >
+            <div className="flex flex-col gap-3">
+              {NAV_ITEMS.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`flex items-center justify-between py-2.5 px-3 rounded-lg font-mono text-xs uppercase tracking-[0.18em] transition-colors text-left ${
+                      isActive
+                        ? 'bg-white/[0.06] text-[#009D9E] font-semibold border border-[#009D9E]/20'
+                        : 'text-white/70 hover:text-white hover:bg-white/[0.03]'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    {isActive && <div className="w-1.5 h-1.5 rounded-full bg-[#009D9E]" />}
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 };

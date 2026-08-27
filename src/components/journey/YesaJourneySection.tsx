@@ -82,9 +82,9 @@ const JourneyStageContent: React.FC<{
   totalStages: number;
 }> = ({ stage, idx, smoothProgress, totalStages }) => {
   // Broadened triggers to ensure smooth, continuous overlap between fading stages
-  const triggerStart = (idx - 0.7) / totalStages;
+  const triggerStart = (idx - 0.8) / totalStages;
   const triggerPeak = idx / totalStages;
-  const triggerEnd = (idx + 0.7) / totalStages;
+  const triggerEnd = (idx + 0.8) / totalStages;
 
   // activeState drives everything and uses the spring-smoothed progress
   const activeState = useTransform(smoothProgress, 
@@ -92,12 +92,30 @@ const JourneyStageContent: React.FC<{
     [0, 1, 0]
   );
 
-  // Hierarchy separated by element
-  const y = useTransform(activeState, [0, 1], [40, 0]);
-  const titleOpacity = useTransform(activeState, [0, 1], [0.08, 1]);
-  const descOpacity = useTransform(activeState, [0, 1], [0.05, 0.8]);
-  const labelOpacity = useTransform(activeState, [0, 1], [0.3, 1]);
-  const labelY = useTransform(activeState, [0, 1], [10, 0]);
+  // Map opacities directly against smoothProgress to guarantee they reach 0 outside the window.
+  // We include intermediate ghost steps (e.g. 0.08) to preserve the depth effect, but force 0 at the boundaries
+  // to prevent inactive stages from stacking up permanently and creating a white overlay/blob.
+  
+  const midStart = (triggerStart + triggerPeak) / 2;
+  const midEnd = (triggerPeak + triggerEnd) / 2;
+
+  const titleOpacity = useTransform(smoothProgress, 
+    [triggerStart, midStart, triggerPeak, midEnd, triggerEnd], 
+    [0, 0.08, 1, 0.08, 0]
+  );
+  
+  const descOpacity = useTransform(smoothProgress, 
+    [triggerStart, midStart, triggerPeak, midEnd, triggerEnd], 
+    [0, 0.05, 0.8, 0.05, 0]
+  );
+  
+  const labelOpacity = useTransform(smoothProgress, 
+    [triggerStart, midStart, triggerPeak, midEnd, triggerEnd], 
+    [0, 0.3, 1, 0.3, 0]
+  );
+
+  const y = useTransform(activeState, [0, 1], [60, 0]);
+  const labelY = useTransform(activeState, [0, 1], [15, 0]);
   
   // Align left for even, right for odd on desktop
   const isEven = idx % 2 === 0;

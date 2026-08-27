@@ -191,14 +191,14 @@ const JourneyStageContent: React.FC<{
       className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none"
     >
       {/* Center Spine Node (Desktop) / Left Node (Mobile) */}
-      <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-16 h-16 flex items-center justify-center z-20 pointer-events-auto">
+      <div className="absolute left-2.5 sm:left-6 md:left-1/2 md:-translate-x-1/2 w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center z-20 pointer-events-auto">
         <ArchitecturalNode idx={idx} activeProgress={activeState} />
       </div>
 
-      <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 w-full relative z-10">
+      <Container size="full" className="max-w-[1600px] px-3 sm:px-10 lg:px-12 xl:px-16 w-full relative z-10">
         <motion.div
           style={{ y: contentY }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-center w-full pl-12 md:pl-0"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 md:gap-16 lg:gap-24 items-center w-full pl-6 sm:pl-12 md:pl-0"
         >
           {/* Column 1: Text Narrative (or Visual if Odd on Desktop) */}
           <div
@@ -209,23 +209,23 @@ const JourneyStageContent: React.FC<{
             }`}
           >
             {/* Stage Eyebrow */}
-            <div className="inline-flex items-center gap-2.5 mb-4">
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#009D9E] font-semibold">
+            <div className="inline-flex items-center gap-2 mb-2 sm:mb-4">
+              <span className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#009D9E] font-semibold">
                 STAGE {stage.num}
               </span>
-              <div className="w-6 h-[1px] bg-[#009D9E]/40" />
-              <span className="font-mono text-[10px] uppercase tracking-widest text-[#8A8A8A]">
+              <div className="w-4 sm:w-6 h-[1px] bg-[#009D9E]/40" />
+              <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-[#8A8A8A]">
                 {stage.subtitle}
               </span>
             </div>
 
             {/* Headline with strict fluid clamp and word-break rule: never break mid-word */}
-            <h3 className="font-display font-black text-[clamp(2.2rem,4.5vw,4.8rem)] text-white tracking-tight leading-[0.98] mb-5 [overflow-wrap:normal] [word-break:keep-all] break-normal">
+            <h3 className="font-display font-black text-[clamp(1.65rem,5.2vw,4.8rem)] text-white tracking-tight leading-[0.98] mb-3 sm:mb-5 [overflow-wrap:normal] [word-break:keep-all] break-normal">
               {stage.title}
             </h3>
 
             {/* Stage Narrative */}
-            <p className="text-sm md:text-base lg:text-lg text-[#8A8A8A] font-light leading-relaxed max-w-lg">
+            <p className="text-xs sm:text-base lg:text-lg text-[#8A8A8A] font-light leading-relaxed max-w-lg">
               {stage.desc}
             </p>
           </div>
@@ -234,9 +234,9 @@ const JourneyStageContent: React.FC<{
           <div
             className={`flex items-center ${
               isEven
-                ? 'md:justify-start order-2'
-                : 'md:justify-end order-2 md:order-1'
-            } pointer-events-auto`}
+                ? 'justify-start md:justify-start order-2'
+                : 'justify-start md:justify-end order-2 md:order-1'
+            } pointer-events-auto w-full`}
           >
             {renderStageVisual(idx, activeState)}
           </div>

@@ -1,169 +1,184 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion';
 import { Container } from '../core/Container';
-import { DisplayHeading, SubHeading } from '../core/Typography';
-import { Button } from '../core/Button';
+import { DisplayHeading } from '../core/Typography';
 import { ArrowRight } from 'lucide-react';
+import { Button } from '../core/Button';
 
 const ABSTRACT_FIELDS = [
-  { id: 'alpha', name: 'Field Alpha', color: 'bg-sky-400', border: 'border-sky-400/30' },
-  { id: 'beta', name: 'Field Beta', color: 'bg-emerald-400', border: 'border-emerald-400/30' },
-  { id: 'gamma', name: 'Field Gamma', color: 'bg-amber-400', border: 'border-amber-400/30' },
-  { id: 'delta', name: 'Field Delta', color: 'bg-indigo-400', border: 'border-indigo-400/30' }
+  { id: 'alpha', num: '01', title: 'FIELD ALPHA', desc: 'Select this discipline to master the structural path.' },
+  { id: 'beta', num: '02', title: 'FIELD BETA', desc: 'Select this discipline to master the structural path.' },
+  { id: 'gamma', num: '03', title: 'FIELD GAMMA', desc: 'Select this discipline to master the structural path.' },
+  { id: 'delta', num: '04', title: 'FIELD DELTA', desc: 'Select this discipline to master the structural path.' }
 ];
 
-const PATH_STEPS = [
-  "Training",
-  "Experience",
-  "Real-world work",
-  "Leadership"
-];
-
-export const FieldSelectionSection: React.FC = () => {
-  const [activeField, setActiveField] = useState<string | null>(null);
+const FieldNode = ({ activeProgress }: { activeProgress: MotionValue<number> }) => {
+  const scale = useTransform(activeProgress, [0, 1], [1, 1.5]);
+  const borderOpacity = useTransform(activeProgress, [0, 1], [0.3, 1]);
+  const glowOpacity = useTransform(activeProgress, [0, 1], [0, 0.6]);
+  
+  // A subtle horizontal line extending towards the text
+  const lineScaleX = useTransform(activeProgress, [0, 1], [0, 1]);
+  const lineOpacity = useTransform(activeProgress, [0, 1], [0, 0.3]);
 
   return (
-    <section className="relative w-full bg-[#08090B] py-32 md:py-48 overflow-hidden min-h-screen flex flex-col justify-center">
+    <motion.div style={{ scale }} className="relative w-full h-full flex items-center justify-center">
+      {/* Node */}
+      <motion.div 
+        style={{ opacity: borderOpacity }}
+        className="w-3 h-3 md:w-4 md:h-4 bg-[#08090B] border-[2px] border-[var(--accent-base)] rounded-full relative z-10" 
+      />
+      {/* Glow */}
+      <motion.div 
+        style={{ opacity: glowOpacity }}
+        className="absolute w-12 h-12 md:w-20 md:h-20 bg-[var(--accent-glow)] blur-xl rounded-full"
+      />
+      {/* Horizontal Technical Line */}
+      <motion.div 
+        style={{ scaleX: lineScaleX, opacity: lineOpacity }}
+        className="absolute left-1/2 top-1/2 w-[100px] md:w-[200px] h-[1px] bg-[var(--accent-base)] origin-left"
+      />
+    </motion.div>
+  );
+};
+
+const FieldContent: React.FC<{ 
+  field: typeof ABSTRACT_FIELDS[0]; 
+  idx: number;
+  smoothProgress: MotionValue<number>;
+}> = ({ field, idx, smoothProgress }) => {
+  // Map index 0->3 to progress 0.25 -> 1.0 (reserving 0.0 for the title)
+  const peak = (idx + 1) * 0.25;
+  const start = peak - 0.25;
+  const end = peak + 0.25;
+
+  const midStart = (start + peak) / 2;
+  const midEnd = (peak + end) / 2;
+
+  // Active state drives the vertical movement
+  const activeState = useTransform(smoothProgress, [start, peak, end], [0, 1, 0]);
+  const y = useTransform(activeState, [0, 1], [60, 0]);
+
+  // Opacities mapped to explicitly reach 0 outside the window
+  const titleOpacity = useTransform(smoothProgress, [start, midStart, peak, midEnd, end], [0, 0.05, 1, 0.05, 0]);
+  const descOpacity = useTransform(smoothProgress, [start, midStart, peak, midEnd, end], [0, 0.02, 0.8, 0.02, 0]);
+  const labelOpacity = useTransform(smoothProgress, [start, midStart, peak, midEnd, end], [0, 0.1, 1, 0.1, 0]);
+
+  return (
+    <div className="absolute inset-0 flex items-center pointer-events-none overflow-hidden">
       
-      {/* 
-        Transition gradient from the previous light section.
-        Fades from the #F3F5F7 of the World-Class Leader moment into the deep dark.
-      */}
-      <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#F3F5F7] to-[#08090B] pointer-events-none" />
+      {/* Node placed precisely over the left-aligned spine */}
+      <div className="absolute left-6 md:left-24 lg:left-32 -translate-x-1/2 w-24 h-24 flex items-center justify-center">
+        <FieldNode activeProgress={activeState} />
+      </div>
 
-      <Container className="relative z-10 flex flex-col items-center">
-        
-        {/* Headers */}
-        <div className="text-center mb-20 md:mb-32">
-          <DisplayHeading className="mb-6">Choose your field.</DisplayHeading>
-          <SubHeading className="text-white/60 max-w-xl mx-auto">
-            Select an area of focus below. We provide the structured path to master it.
-          </SubHeading>
-        </div>
-
-        <div className="w-full flex flex-col lg:flex-row gap-12 lg:gap-24 items-center lg:items-start justify-center min-h-[400px]">
+      <Container className="relative w-full flex pointer-events-auto">
+        <div className="w-full pl-20 md:pl-48 lg:pl-64 pr-6 flex flex-col justify-center text-left">
           
-          {/* Left Side: Field Selector Grid */}
-          <div className="w-full lg:w-1/3 flex flex-col gap-4">
-            {ABSTRACT_FIELDS.map((field) => {
-              const isSelected = activeField === field.id;
-              const isFaded = activeField !== null && activeField !== field.id;
-
-              return (
-                <button
-                  key={field.id}
-                  onClick={() => setActiveField(isSelected ? null : field.id)}
-                  onMouseEnter={() => setActiveField(field.id)}
-                  className={`
-                    relative w-full text-left p-6 rounded-2xl border transition-all duration-500
-                    ${isSelected ? 'bg-white/10 border-white/30 scale-[1.02]' : 'bg-transparent border-white/5 hover:bg-white/5'}
-                    ${isFaded ? 'opacity-30 blur-[2px]' : 'opacity-100 blur-0'}
-                  `}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`w-3 h-3 rounded-full ${field.color} ${isSelected ? 'shadow-[0_0_15px_currentColor]' : ''}`} />
-                    <span className="font-display text-xl md:text-2xl tracking-wide">{field.name}</span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Right Side: The Path Visualizer */}
-          <div className="w-full lg:w-2/3 h-full min-h-[300px] flex items-center relative">
-            <AnimatePresence mode="wait">
-              {activeField ? (
-                <motion.div
-                  key={activeField}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative"
-                >
-                  
-                  {/* Connecting Line */}
-                  <div className="absolute top-1/2 left-0 w-full h-px bg-white/10 -translate-y-1/2 hidden md:block" />
-                  <motion.div 
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute top-1/2 left-0 w-full h-[2px] bg-sky-400 origin-left -translate-y-1/2 hidden md:block" 
-                    style={{ boxShadow: '0 0 15px rgba(56,189,248,0.5)' }}
-                  />
-
-                  {/* Vertical line for mobile */}
-                  <div className="absolute left-6 top-0 h-full w-px bg-white/10 md:hidden" />
-                  <motion.div 
-                    initial={{ scaleY: 0 }}
-                    animate={{ scaleY: 1 }}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute left-6 top-0 h-full w-[2px] bg-sky-400 origin-top md:hidden" 
-                    style={{ boxShadow: '0 0 15px rgba(56,189,248,0.5)' }}
-                  />
-
-                  {/* Path Steps */}
-                  {PATH_STEPS.map((step, idx) => {
-                    const activeColor = ABSTRACT_FIELDS.find(f => f.id === activeField)?.color || 'bg-sky-400';
-                    return (
-                      <motion.div 
-                        key={step}
-                        initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 + (idx * 0.15), ease: [0.16, 1, 0.3, 1] }}
-                        className="relative z-10 flex flex-row md:flex-col items-center gap-4 md:gap-6 bg-[#08090B] p-2"
-                      >
-                        <div className={`w-12 h-12 rounded-full border-2 border-[#08090B] flex items-center justify-center relative ${activeColor} shadow-[0_0_20px_rgba(56,189,248,0.3)]`}>
-                          <span className="text-[#08090B] font-mono font-bold text-sm">{idx + 1}</span>
-                          
-                          {/* Pulsing ring */}
-                          <motion.div 
-                            className={`absolute inset-0 rounded-full border border-current opacity-50`}
-                            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                            transition={{ duration: 2, repeat: Infinity, delay: idx * 0.2 }}
-                          />
-                        </div>
-                        <span className="font-display font-medium text-white/90 md:text-center text-lg md:text-base">
-                          {step}
-                        </span>
-                      </motion.div>
-                    );
-                  })}
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="empty"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="w-full h-full flex items-center justify-center border border-white/5 rounded-3xl border-dashed py-20"
-                >
-                  <p className="font-mono text-white/30 uppercase tracking-widest text-sm text-center">
-                    Hover a field to reveal the path
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-32 w-full max-w-sm"
-        >
-          <Button variant="primary" size="lg" className="w-full group py-6">
-            <span className="flex items-center justify-center gap-3 text-lg font-medium">
-              Start your journey
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <motion.div style={{ opacity: labelOpacity }} className="flex items-center gap-4 mb-4">
+            <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase">
+              Field {field.num}
             </span>
-          </Button>
-        </motion.div>
+            <div className="h-[1px] w-12 bg-[var(--accent-base)] opacity-50" />
+          </motion.div>
+          
+          <motion.div style={{ y, opacity: titleOpacity }} className="w-full">
+            <DisplayHeading className="mb-6 text-[clamp(2.5rem,6vw+1rem,6rem)] tracking-tight leading-[1] w-full break-words">
+              {field.title}
+            </DisplayHeading>
+          </motion.div>
+          
+          <motion.div style={{ opacity: descOpacity }} className="w-full flex flex-col md:flex-row md:items-center gap-6">
+            <p className="text-white text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-lg">
+              {field.desc}
+            </p>
+            {/* CTA Button appears when field is active */}
+            <motion.div style={{ opacity: activeState }} className="pointer-events-auto">
+              <Button variant="primary" size="sm" className="group">
+                <span className="flex items-center gap-2">
+                  Select
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Button>
+            </motion.div>
+          </motion.div>
 
+        </div>
       </Container>
+    </div>
+  );
+};
+
+export const FieldSelectionSection: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 40,
+    damping: 25,
+    mass: 1,
+    restDelta: 0.0001
+  });
+
+  // Path grows from top to bottom
+  const pathHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+  
+  // Title fades out as we start scrolling to the first field
+  const titleOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
+  const titleY = useTransform(smoothProgress, [0, 0.15], [0, -50]);
+
+  return (
+    <section ref={containerRef} className="relative w-full bg-[#08090B] text-white">
+      {/* 500vh ensures cinematic scrolling (1 viewport for title + 4 fields) */}
+      <div className="h-[500vh] relative">
+        <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
+          
+          {/* Subtle Grid Continuation */}
+          <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-screen">
+            <div className="w-full h-full" style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '4rem 4rem' }} />
+          </div>
+
+          {/* Left-Aligned Architectural Spine */}
+          <div className="absolute top-0 bottom-0 left-6 md:left-24 lg:left-32 w-[1px] bg-white/10 -translate-x-1/2 z-0">
+            <motion.div 
+              className="w-full bg-[var(--accent-base)] shadow-[0_0_20px_var(--accent-glow)] origin-top"
+              style={{ height: pathHeight }}
+            />
+          </div>
+
+          {/* Intro Title */}
+          <motion.div 
+            style={{ opacity: titleOpacity, y: titleY }}
+            className="absolute inset-0 flex items-center pointer-events-none"
+          >
+            <Container className="w-full">
+              <div className="pl-20 md:pl-48 lg:pl-64">
+                <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase mb-6 block">
+                  STAGE 07 — FIELD SELECTION
+                </span>
+                <DisplayHeading className="text-[clamp(3rem,8vw+1rem,8rem)] tracking-tight leading-[0.9]">
+                  CHOOSE<br/>YOUR FIELD
+                </DisplayHeading>
+              </div>
+            </Container>
+          </motion.div>
+
+          {/* The Fields */}
+          {ABSTRACT_FIELDS.map((field, idx) => (
+            <FieldContent 
+              key={field.id}
+              field={field} 
+              idx={idx} 
+              smoothProgress={smoothProgress} 
+            />
+          ))}
+
+        </div>
+      </div>
     </section>
   );
 };

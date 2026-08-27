@@ -15,6 +15,7 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-padding-top: 80px;
 }
 
 body {
@@ -24,7 +25,7 @@ body {
     radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.06), transparent 70%),
     radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.02), transparent 40%);
   background-attachment: fixed;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Glassmorphism & Hairline Surfaces */
@@ -121,6 +122,21 @@ body {
 
 .animate-pulse-subtle {
   animation: pulseSubtle 4s ease-in-out infinite;
+}
+
+@keyframes pulseRing {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 3s ease-in-out infinite;
 }
 
 @keyframes scanline {

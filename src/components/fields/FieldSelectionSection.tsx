@@ -132,7 +132,7 @@ export const FieldSelectionSection: React.FC = () => {
   const titleY = useTransform(smoothProgress, [0, 0.15], [0, -50]);
 
   return (
-    <section ref={containerRef} className="relative w-full bg-[#08090B] text-white">
+    <section ref={containerRef} className="relative w-full bg-[#090D0F] text-white">
       {/* 500vh ensures cinematic scrolling (1 viewport for title + 4 fields) */}
       <div className="h-[500vh] relative">
         <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
@@ -155,7 +155,7 @@ export const FieldSelectionSection: React.FC = () => {
             style={{ opacity: titleOpacity, y: titleY }}
             className="absolute inset-0 flex items-center pointer-events-none"
           >
-            <Container className="w-full">
+            <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 w-full">
               <div className="pl-20 md:pl-48 lg:pl-64">
                 <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase mb-6 block">
                   STAGE 07 — FIELD SELECTION

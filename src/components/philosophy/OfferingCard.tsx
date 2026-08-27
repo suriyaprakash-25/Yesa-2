@@ -10,6 +10,7 @@ interface OfferingCardProps {
   sublabel: string;
   description: string;
   tag: string;
+  spec: string;
   delay?: number;
 }
 
@@ -20,6 +21,7 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({
   sublabel,
   description,
   tag,
+  spec,
   delay = 0,
 }) => {
   // Custom geometric technical line-art icons
@@ -27,7 +29,7 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({
     switch (type) {
       case 'trainings':
         return (
-          <svg viewBox="0 0 48 48" className="w-9 h-9 text-[#009D9E]" fill="none">
+          <svg viewBox="0 0 48 48" className="w-8 h-8 text-[#009D9E]" fill="none">
             {/* Terminal / Knowledge Foundation Matrix */}
             <rect
               x="6"
@@ -54,7 +56,7 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({
         );
       case 'experience':
         return (
-          <svg viewBox="0 0 48 48" className="w-9 h-9 text-[#009D9E]" fill="none">
+          <svg viewBox="0 0 48 48" className="w-8 h-8 text-[#009D9E]" fill="none">
             {/* Stepping Ladder & Transition Vector */}
             <rect x="8" y="30" width="8" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.25" strokeOpacity="0.4" />
             <rect x="20" y="22" width="8" height="18" rx="1.5" stroke="currentColor" strokeWidth="1.25" strokeOpacity="0.6" />
@@ -72,7 +74,7 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({
         );
       case 'leaders':
         return (
-          <svg viewBox="0 0 48 48" className="w-9 h-9 text-[#009D9E]" fill="none">
+          <svg viewBox="0 0 48 48" className="w-8 h-8 text-[#009D9E]" fill="none">
             {/* Interlocking Leadership Triangle Network */}
             <polygon
               points="24,6 42,40 6,40"
@@ -94,7 +96,7 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({
         );
       case 'global':
         return (
-          <svg viewBox="0 0 48 48" className="w-9 h-9 text-[#009D9E]" fill="none">
+          <svg viewBox="0 0 48 48" className="w-8 h-8 text-[#009D9E]" fill="none">
             {/* Geodesic Global Orbit Matrix */}
             <circle cx="24" cy="24" r="17" stroke="currentColor" strokeWidth="1.25" strokeOpacity="0.3" />
             <ellipse cx="24" cy="24" rx="17" ry="6" stroke="currentColor" strokeWidth="1.25" strokeOpacity="0.6" />
@@ -113,46 +115,60 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -4, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
-      className="group relative p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#009D9E]/40 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between min-h-[290px] shadow-[0_4px_24px_rgba(0,0,0,0.5)] overflow-hidden cursor-default"
+      className="group relative p-6 sm:p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#009D9E]/40 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between shadow-[0_4px_24px_rgba(0,0,0,0.5)] overflow-hidden cursor-default"
     >
       {/* Ambient Corner Accent Glow */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-[#009D9E]/0 group-hover:bg-[#009D9E]/10 rounded-full blur-2xl transition-all duration-500 pointer-events-none" />
 
-      {/* Top Bar: Number & Tag */}
+      {/* Top Header: Number & Stage Tag */}
       <div>
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <span className="font-mono text-xs font-bold text-[#009D9E] tracking-wider">
               {num}
             </span>
-            <div className="w-4 h-[1px] bg-[#009D9E]/40" />
+            <div className="w-3 h-[1px] bg-[#009D9E]/40" />
             <span className="font-mono text-[10px] uppercase tracking-widest text-[#8A8A8A]">
               {sublabel}
             </span>
           </div>
 
-          <span className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/[0.03] text-[#8A8A8A] border border-white/[0.06] group-hover:border-[#009D9E]/30 group-hover:text-white transition-colors">
+          <span className="font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/[0.03] text-[#8A8A8A] border border-white/[0.06] group-hover:border-[#009D9E]/30 group-hover:text-white transition-colors">
             {tag}
           </span>
         </div>
 
-        {/* Icon with hover rotation / micro-interaction */}
-        <div className="mb-6 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] w-fit group-hover:border-[#009D9E]/30 group-hover:bg-[#009D9E]/10 transition-all duration-300">
-          <div className="transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6">
-            {renderLineArtIcon()}
+        {/* Icon & Title Row */}
+        <div className="flex items-center gap-3.5 mb-3">
+          <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.04] shrink-0 group-hover:border-[#009D9E]/30 group-hover:bg-[#009D9E]/10 transition-all duration-300">
+            <div className="transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6">
+              {renderLineArtIcon()}
+            </div>
           </div>
+          <h4 className="font-display font-bold text-lg sm:text-xl text-white tracking-tight group-hover:text-[#9AEDFC] transition-colors leading-tight">
+            {title}
+          </h4>
         </div>
 
-        {/* Title */}
-        <h4 className="font-display font-bold text-xl sm:text-2xl text-white mb-2.5 tracking-tight group-hover:text-[#9AEDFC] transition-colors">
-          {title}
-        </h4>
+        {/* Supporting Micro-Spec Feature Line (Closes the vertical gap) */}
+        <div className="py-1.5 px-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04] mb-3 flex items-center gap-2">
+          <span className="w-1 h-1 rounded-full bg-[#009D9E]" />
+          <span className="font-mono text-[10px] text-[#9AEDFC]/90 tracking-tight font-medium">
+            {spec}
+          </span>
+        </div>
+
+        {/* Description */}
+        <p className="text-xs sm:text-[13px] text-[#8A8A8A] font-light leading-relaxed group-hover:text-white/80 transition-colors">
+          {description}
+        </p>
       </div>
 
-      {/* Description */}
-      <p className="text-xs sm:text-sm text-[#8A8A8A] font-light leading-relaxed group-hover:text-white/80 transition-colors mt-2">
-        {description}
-      </p>
+      {/* Bottom Technical Status Line */}
+      <div className="pt-3 mt-4 border-t border-white/[0.04] flex items-center justify-between text-[10px] font-mono text-white/40 group-hover:text-white/60 transition-colors">
+        <span>ARCHITECTURAL TRACK</span>
+        <span className="text-[#009D9E] group-hover:translate-x-0.5 transition-transform">VERIFIED →</span>
+      </div>
     </motion.div>
   );
 };

@@ -12,6 +12,7 @@ interface OfferingItem {
   sublabel: string;
   description: string;
   tag: string;
+  spec: string;
 }
 
 export const InfrastructureSection: React.FC = () => {
@@ -24,6 +25,7 @@ export const InfrastructureSection: React.FC = () => {
       description:
         'Zero-cost barrier. Access foundational knowledge and specialized tracks designed to unearth your potential without financial friction.',
       tag: 'Zero Cost',
+      spec: 'Foundational & Specialized Tracks',
     },
     {
       type: 'experience',
@@ -33,6 +35,7 @@ export const InfrastructureSection: React.FC = () => {
       description:
         'Structured transition from initial observation to paid commercial internship, embedding you inside real-world production environments.',
       tag: 'Industry Paid',
+      spec: 'Observation to Paid Placement',
     },
     {
       type: 'leaders',
@@ -42,6 +45,7 @@ export const InfrastructureSection: React.FC = () => {
       description:
         'Cohort-based progression guided by practitioners who have built, scaled, and led tier-one engineering and venture teams.',
       tag: '1-on-1 Access',
+      spec: 'Cohort-Based Practitioner Guidance',
     },
     {
       type: 'global',
@@ -51,11 +55,12 @@ export const InfrastructureSection: React.FC = () => {
       description:
         'Borderless curriculum and masterclasses from world-class minds, expanding your engineering perspective beyond geographic limitations.',
       tag: 'Borderless',
+      spec: 'Global Masterclasses & Top Minds',
     },
   ];
 
   return (
-    <section className="relative w-full bg-[#090D0F] py-24 md:py-36 border-t border-white/[0.06] overflow-hidden">
+    <section className="relative w-full bg-[#090D0F] pt-32 pb-32 md:pt-44 md:pb-44 border-t border-white/[0.06] overflow-hidden scroll-mt-24">
       {/* Background Subtle Grid Texture */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">
         <div
@@ -69,7 +74,7 @@ export const InfrastructureSection: React.FC = () => {
       </div>
 
       <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
-        {/* Section Header */}
+        {/* Section Header with generous breathing room below sticky nav */}
         <div className="max-w-3xl mb-16 md:mb-20 text-left">
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
@@ -108,25 +113,26 @@ export const InfrastructureSection: React.FC = () => {
             <div className="absolute bottom-6 left-6 w-8 h-8 border-b border-l border-[#009D9E]/60 pointer-events-none" />
             <div className="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-[#009D9E]/60 pointer-events-none" />
 
-            {/* Image Overlay HUD Metadata */}
-            <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-10 right-6 sm:right-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-              <div>
-                <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#009D9E] font-semibold block mb-1">
+            {/* Image Overlay HUD Metadata (with generous right padding to prevent clipping) */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row lg:items-end justify-between gap-5 lg:gap-8 max-w-full">
+              <div className="max-w-2xl">
+                <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#009D9E] font-semibold block mb-1.5">
                   INCUBATOR ECOSYSTEM · COHORT LABS
                 </span>
-                <p className="font-display font-bold text-lg sm:text-2xl text-white tracking-tight">
+                <p className="font-display font-bold text-lg sm:text-2xl text-white tracking-tight leading-snug">
                   High-velocity peer immersion & verified industry mentorship.
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 sm:gap-4 font-mono text-[10px] sm:text-xs text-white/70">
-                <span className="px-2.5 py-1 rounded bg-black/60 backdrop-blur-md border border-white/10">
+              {/* HUD Badges with guaranteed right margin & no clipping */}
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 shrink-0">
+                <span className="font-mono text-[10px] sm:text-xs px-3 py-1.5 rounded-lg bg-black/75 backdrop-blur-md border border-white/15 text-white/90 whitespace-nowrap shadow-lg">
                   ZERO TUITION
                 </span>
-                <span className="px-2.5 py-1 rounded bg-black/60 backdrop-blur-md border border-white/10">
+                <span className="font-mono text-[10px] sm:text-xs px-3 py-1.5 rounded-lg bg-black/75 backdrop-blur-md border border-white/15 text-white/90 whitespace-nowrap shadow-lg">
                   1-ON-1 GUIDANCE
                 </span>
-                <span className="px-2.5 py-1 rounded bg-[#009D9E]/20 text-[#9AEDFC] backdrop-blur-md border border-[#009D9E]/40">
+                <span className="font-mono text-[10px] sm:text-xs px-3 py-1.5 rounded-lg bg-[#009D9E]/25 text-[#9AEDFC] backdrop-blur-md border border-[#009D9E]/50 font-semibold whitespace-nowrap shadow-[0_0_15px_rgba(0,157,158,0.3)]">
                   100% MERIT
                 </span>
               </div>
@@ -145,6 +151,7 @@ export const InfrastructureSection: React.FC = () => {
               sublabel={offering.sublabel}
               description={offering.description}
               tag={offering.tag}
+              spec={offering.spec}
               delay={index * 0.08} // 80ms stagger per card
             />
           ))}

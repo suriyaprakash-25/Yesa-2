@@ -1,220 +1,273 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion';
 import { Container } from '../core/Container';
-import { DisplayHeading } from '../core/Typography';
+import {
+  ApplicationVisual,
+  InterviewVisual,
+  VolunteeringVisual,
+  PaidInternshipVisual,
+  ExperiencedVisual,
+  WorldClassLeaderVisual,
+} from './StageVisualizations';
 
-const JOURNEY_STAGES = [
+interface JourneyStage {
+  num: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  tag: string;
+}
+
+const JOURNEY_STAGES: JourneyStage[] = [
   {
     num: '01',
     title: 'APPLICATION',
-    desc: 'The beginning of the journey.',
+    subtitle: 'INTAKE PROTOCOL',
+    desc: 'The beginning of the journey. Complete the technical evaluation and define your engineering focus with zero tuition barrier.',
+    tag: 'Stage 01',
   },
   {
     num: '02',
     title: 'INTERVIEW',
-    desc: 'The opportunity to enter the YESA journey.',
+    subtitle: 'BILATERAL EVALUATION',
+    desc: 'The opportunity to enter the YESA journey. Direct alignment dialogue with senior fellows to evaluate raw potential and velocity.',
+    tag: 'Stage 02',
   },
   {
     num: '03',
     title: 'VOLUNTEERING',
-    desc: 'Observation period. Maximum 6 months. The purpose is to observe, learn, understand the environment and gradually become involved.',
+    subtitle: 'MAX 6 MONTHS OBSERVATION',
+    desc: 'Observation period capped at 6 months maximum. Observe production workflows, assimilate institutional knowledge, and gradually contribute.',
+    tag: 'Stage 03',
   },
   {
     num: '04',
     title: 'PAID INTERNSHIP',
-    desc: 'Work on real-world projects with senior members.',
+    subtitle: 'COMMERCIAL SPRINT LABS',
+    desc: 'Work on real-world production projects alongside senior industry architects. Guaranteed compensation and verified commercial output.',
+    tag: 'Stage 04',
   },
   {
     num: '05',
     title: 'EXPERIENCED',
-    desc: 'Develop enough experience to lead teams within the organization and develop leadership skills.',
+    subtitle: 'SQUAD LEADERSHIP',
+    desc: 'Lead multi-disciplinary teams within the ecosystem. Develop organizational velocity, mentor incoming cohorts, and direct technical roadmaps.',
+    tag: 'Stage 05',
   },
   {
     num: '06',
     title: 'WORLD-CLASS LEADER',
-    desc: 'The long-term aspiration of the YESA journey. By this stage, YESA expects the participant to have developed into a world-class leader.',
-  }
+    subtitle: 'ARCHITECTURAL APEX',
+    desc: 'The long-term aspiration of the YESA journey. Graduate as an autonomous, recognized leader ready to build and scale global ventures.',
+    tag: 'Stage 06',
+  },
 ];
 
-// Architectural Node with smooth interpolation
-const ArchitecturalNode = ({ idx, activeProgress }: { idx: number, activeProgress: MotionValue<number> }) => {
-  const scale = useTransform(activeProgress, [0, 1], [1, 1.4]);
+// Architectural Spine Node
+const ArchitecturalNode = ({
+  idx,
+  activeProgress,
+}: {
+  idx: number;
+  activeProgress: MotionValue<number>;
+}) => {
+  const scale = useTransform(activeProgress, [0, 1], [0.9, 1.35]);
   const borderOpacity = useTransform(activeProgress, [0, 1], [0.3, 1]);
-  const glowOpacity = useTransform(activeProgress, [0, 1], [0, 0.7]);
-  const elementsOpacity = useTransform(activeProgress, [0, 1], [0.1, 0.4]);
+  const glowOpacity = useTransform(activeProgress, [0, 1], [0, 0.8]);
 
   return (
     <motion.div style={{ scale }} className="relative w-full h-full flex items-center justify-center">
       {/* Base Node */}
-      <motion.div 
+      <motion.div
         style={{ opacity: borderOpacity }}
-        className="w-3 h-3 md:w-4 md:h-4 bg-[#08090B] border-[2px] border-[var(--accent-base)] rounded-full relative z-10" 
-      />
-      
-      {/* Glow */}
-      <motion.div 
-        style={{ opacity: glowOpacity }}
-        className="absolute w-12 h-12 md:w-20 md:h-20 bg-[var(--accent-glow)] blur-xl rounded-full"
+        className="w-4 h-4 rounded-full bg-[#090D0F] border-2 border-[#009D9E] relative z-10 shadow-[0_0_12px_rgba(0,157,158,0.8)]"
       />
 
-      {/* Evolution / Complexity Additions */}
-      {idx >= 2 && (
-        <motion.div style={{ opacity: elementsOpacity }} className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-base)] to-transparent" />
-      )}
-      {idx >= 4 && (
-        <>
-          <motion.div style={{ opacity: elementsOpacity }} className="absolute w-[250%] h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-base)] to-transparent rotate-45" />
-          <motion.div style={{ opacity: elementsOpacity }} className="absolute w-[250%] h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-base)] to-transparent -rotate-45" />
-          <motion.div style={{ opacity: elementsOpacity }} className="absolute w-10 h-10 md:w-16 md:h-16 border border-[var(--accent-base)] rounded-full" />
-        </>
-      )}
+      {/* Glow Halo */}
+      <motion.div
+        style={{ opacity: glowOpacity }}
+        className="absolute w-12 h-12 md:w-16 md:h-16 bg-[#009D9E]/30 blur-lg rounded-full"
+      />
+
+      {/* Apex Radiant Wings for Stage 06 */}
       {idx === 5 && (
-        <motion.div style={{ opacity: elementsOpacity }} className="absolute w-20 h-20 md:w-32 md:h-32 border border-[var(--accent-base)] rounded-full border-dashed" />
+        <motion.div
+          style={{ opacity: glowOpacity }}
+          className="absolute w-20 h-20 md:w-28 md:h-28 border border-[#9AEDFC]/40 rounded-full animate-[spin_10s_linear_infinite]"
+        />
       )}
     </motion.div>
   );
 };
 
-const JourneyStageContent: React.FC<{ 
-  stage: typeof JOURNEY_STAGES[0]; 
+// Distinct Visual Component Mapper
+const renderStageVisual = (idx: number, activeProgress: MotionValue<number>) => {
+  switch (idx) {
+    case 0:
+      return <ApplicationVisual activeProgress={activeProgress} />;
+    case 1:
+      return <InterviewVisual activeProgress={activeProgress} />;
+    case 2:
+      return <VolunteeringVisual activeProgress={activeProgress} />;
+    case 3:
+      return <PaidInternshipVisual activeProgress={activeProgress} />;
+    case 4:
+      return <ExperiencedVisual activeProgress={activeProgress} />;
+    case 5:
+      return <WorldClassLeaderVisual activeProgress={activeProgress} />;
+    default:
+      return null;
+  }
+};
+
+const JourneyStageContent: React.FC<{
+  stage: JourneyStage;
   idx: number;
   smoothProgress: MotionValue<number>;
   totalStages: number;
 }> = ({ stage, idx, smoothProgress, totalStages }) => {
-  // Broadened triggers to ensure smooth, continuous overlap between fading stages
-  const triggerStart = (idx - 0.8) / totalStages;
-  const triggerPeak = idx / totalStages;
-  const triggerEnd = (idx + 0.8) / totalStages;
+  // Peak activation point for this stage
+  const peak = idx / (totalStages - 1);
+  const delta = 0.16; // Clean activation window
+  const start = Math.max(0, peak - delta);
+  const end = Math.min(1, peak + delta);
 
-  // activeState drives everything and uses the spring-smoothed progress
-  const activeState = useTransform(smoothProgress, 
-    [triggerStart, triggerPeak, triggerEnd], 
-    [0, 1, 0]
+  // Active progression strictly within the window
+  const activeState = useTransform(smoothProgress, [start, peak, end], [0, 1, 0]);
+
+  // Clean exit: moving upwards on exit, fading cleanly to 0 with zero ghost collision
+  const contentOpacity = useTransform(
+    smoothProgress,
+    [start, start + delta * 0.4, peak, end - delta * 0.4, end],
+    [0, 0.8, 1, 0.8, 0]
   );
 
-  // Map opacities directly against smoothProgress to guarantee they reach 0 outside the window.
-  // We include intermediate ghost steps (e.g. 0.08) to preserve the depth effect, but force 0 at the boundaries
-  // to prevent inactive stages from stacking up permanently and creating a white overlay/blob.
-  
-  const midStart = (triggerStart + triggerPeak) / 2;
-  const midEnd = (triggerPeak + triggerEnd) / 2;
-
-  const titleOpacity = useTransform(smoothProgress, 
-    [triggerStart, midStart, triggerPeak, midEnd, triggerEnd], 
-    [0, 0.08, 1, 0.08, 0]
-  );
-  
-  const descOpacity = useTransform(smoothProgress, 
-    [triggerStart, midStart, triggerPeak, midEnd, triggerEnd], 
-    [0, 0.05, 0.8, 0.05, 0]
-  );
-  
-  const labelOpacity = useTransform(smoothProgress, 
-    [triggerStart, midStart, triggerPeak, midEnd, triggerEnd], 
-    [0, 0.3, 1, 0.3, 0]
+  const contentY = useTransform(
+    smoothProgress,
+    [start, peak, end],
+    [40, 0, -40]
   );
 
-  const y = useTransform(activeState, [0, 1], [60, 0]);
-  const labelY = useTransform(activeState, [0, 1], [15, 0]);
-  
-  // Align left for even, right for odd on desktop
+  // Alternating layout on desktop
   const isEven = idx % 2 === 0;
 
   return (
-    <div className="relative w-full h-[100vh] flex items-center justify-center pointer-events-none overflow-hidden">
-      
-      {/* Center Spine Node */}
-      <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-24 h-24 flex items-center justify-center">
+    <motion.div
+      style={{ opacity: contentOpacity }}
+      className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none"
+    >
+      {/* Center Spine Node (Desktop) / Left Node (Mobile) */}
+      <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-16 h-16 flex items-center justify-center z-20 pointer-events-auto">
         <ArchitecturalNode idx={idx} activeProgress={activeState} />
       </div>
 
-      <Container className="relative w-full flex">
-        {/* 
-          Using w-[60%] allows the text container to cross the spine by 10%.
-          This gives oversized typography room to breathe without clipping, 
-          while maintaining the asymmetric visual anchor.
-        */}
-        <div className={`w-full pl-24 md:pl-0 md:w-[60%] flex flex-col justify-center ${isEven ? 'md:pr-10 lg:pr-16' : 'md:ml-auto md:pl-10 lg:pl-16'}`}>
-          <div className={`flex flex-col ${isEven ? 'md:items-end md:text-right' : 'md:items-start md:text-left'} items-start text-left w-full`}>
-            
-            <motion.div style={{ opacity: labelOpacity, y: labelY }} className="flex items-center gap-4 mb-6">
-              <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase">
-                Stage {stage.num}
+      <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 w-full relative z-10">
+        <motion.div
+          style={{ y: contentY }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-center w-full pl-12 md:pl-0"
+        >
+          {/* Column 1: Text Narrative (or Visual if Odd on Desktop) */}
+          <div
+            className={`flex flex-col justify-center ${
+              isEven
+                ? 'md:text-right md:items-end order-1'
+                : 'md:text-left md:items-start order-1 md:order-2'
+            }`}
+          >
+            {/* Stage Eyebrow */}
+            <div className="inline-flex items-center gap-2.5 mb-4">
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#009D9E] font-semibold">
+                STAGE {stage.num}
               </span>
-              <div className="h-[1px] w-12 bg-[var(--accent-base)] opacity-50" />
-            </motion.div>
-            
-            <motion.div style={{ y, opacity: titleOpacity }} className="w-full">
-              <DisplayHeading className="mb-6 text-[clamp(2.5rem,6vw+1rem,5rem)] tracking-tight leading-[1] w-full break-words">
-                {stage.title}
-              </DisplayHeading>
-            </motion.div>
-            
-            <motion.div style={{ opacity: descOpacity }} className="w-full">
-              <p className={`text-white text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-lg ${isEven ? 'md:ml-auto' : ''}`}>
-                {stage.desc}
-              </p>
-            </motion.div>
+              <div className="w-6 h-[1px] bg-[#009D9E]/40" />
+              <span className="font-mono text-[10px] uppercase tracking-widest text-[#8A8A8A]">
+                {stage.subtitle}
+              </span>
+            </div>
 
+            {/* Headline with strict fluid clamp and word-break rule: never break mid-word */}
+            <h3 className="font-display font-black text-[clamp(2.2rem,4.5vw,4.8rem)] text-white tracking-tight leading-[0.98] mb-5 [overflow-wrap:normal] [word-break:keep-all] break-normal">
+              {stage.title}
+            </h3>
+
+            {/* Stage Narrative */}
+            <p className="text-sm md:text-base lg:text-lg text-[#8A8A8A] font-light leading-relaxed max-w-lg">
+              {stage.desc}
+            </p>
           </div>
-        </div>
+
+          {/* Column 2: Distinct Visual Mockup Treatment */}
+          <div
+            className={`flex items-center ${
+              isEven
+                ? 'md:justify-start order-2'
+                : 'md:justify-end order-2 md:order-1'
+            } pointer-events-auto`}
+          >
+            {renderStageVisual(idx, activeState)}
+          </div>
+        </motion.div>
       </Container>
-    </div>
+    </motion.div>
   );
 };
 
 export const YesaJourneySection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"]
+    offset: ['start start', 'end end'],
   });
 
-  // Extremely smooth spring to act as the master timing function for the entire section
+  // Smooth spring for cinematic pinned transitions
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 40,
-    damping: 25,
+    stiffness: 45,
+    damping: 28,
     mass: 1,
-    restDelta: 0.0001
+    restDelta: 0.0001,
   });
 
-  const pathHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+  const pathHeight = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section ref={containerRef} className="relative w-full bg-[#08090B] text-white">
-      {/* 600vh creates a deliberately slow, cinematic journey */}
+    <section id="journey" ref={containerRef} className="relative w-full bg-[#090D0F] text-white">
+      {/* 600vh total distance (~100vh per stage) prevents excessive empty scrolling */}
       <div className="h-[600vh] relative">
-        <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
-          
-          {/* Architectural Background Grid */}
-          <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-screen">
-            <div className="w-full h-full" style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '4rem 4rem' }} />
+        <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
+          {/* Subtle Grid Texture */}
+          <div className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-screen">
+            <div
+              className="w-full h-full"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
+                backgroundSize: '4rem 4rem',
+              }}
+            />
           </div>
 
           {/* Central Architectural Spine */}
-          <div className="absolute top-0 bottom-0 left-6 md:left-1/2 w-[1px] bg-white/10 md:-translate-x-1/2 z-0">
+          <div className="absolute top-0 bottom-0 left-6 md:left-1/2 w-[1px] bg-white/[0.08] md:-translate-x-1/2 z-0">
             {/* The active progression cyan path */}
-            <motion.div 
-              className="w-full bg-[var(--accent-base)] shadow-[0_0_20px_var(--accent-glow)] origin-top"
+            <motion.div
+              className="w-full bg-[#009D9E] shadow-[0_0_16px_rgba(0,157,158,0.8)] origin-top"
               style={{ height: pathHeight }}
             />
           </div>
 
-          {/* Journey Stages */}
-          <div className="absolute inset-0 flex flex-col">
+          {/* 6 Journey Stages with Distinct Visuals and Clean Non-Colliding Transitions */}
+          <div className="absolute inset-0">
             {JOURNEY_STAGES.map((stage, idx) => (
-              <div key={stage.num} className="absolute inset-0">
-                <JourneyStageContent 
-                  stage={stage} 
-                  idx={idx} 
-                  smoothProgress={smoothProgress} 
-                  totalStages={JOURNEY_STAGES.length - 1} 
-                />
-              </div>
+              <JourneyStageContent
+                key={stage.num}
+                stage={stage}
+                idx={idx}
+                smoothProgress={smoothProgress}
+                totalStages={JOURNEY_STAGES.length}
+              />
             ))}
           </div>
-
         </div>
       </div>
     </section>

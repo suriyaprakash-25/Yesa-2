@@ -135,10 +135,10 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
               {microPathSteps.map((step, idx) => (
                 <React.Fragment key={step.label}>
                   <div className="flex items-center gap-1.5">
-                    <span className="font-mono text-[10px] text-[#009D9E] opacity-80">
+                    <span className="font-mono text-[11px] font-semibold text-[#009D9E]">
                       {step.num}.
                     </span>
-                    <span className="font-mono text-xs text-white/80 tracking-tight font-medium">
+                    <span className="font-mono text-xs text-white tracking-tight font-medium">
                       {step.label}
                     </span>
                   </div>

@@ -55,10 +55,10 @@ export const HeroNavigation: React.FC<HeroNavigationProps> = ({
             <button
               key={item}
               onClick={() => onNavigateSection(item.toLowerCase())}
-              className="text-sm font-medium text-white/60 hover:text-white transition-colors uppercase tracking-widest font-mono-tag relative group"
+              className="text-[var(--text-nav)] font-medium text-white/60 hover:text-white transition-colors uppercase tracking-widest font-mono-tag relative group"
             >
               {item}
-              <span className="absolute -bottom-2 left-0 w-0 h-px bg-sky-400 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-2 left-0 w-0 h-px bg-[var(--accent-base)] transition-all duration-300 group-hover:w-full"></span>
             </button>
           ))}
         </motion.div>
@@ -69,7 +69,7 @@ export const HeroNavigation: React.FC<HeroNavigationProps> = ({
             variant="primary" 
             size="sm" 
             onClick={onOpenApply}
-            className="rounded-full px-6 py-2 uppercase tracking-widest text-xs"
+            className="rounded-full px-6 py-2 uppercase tracking-widest text-[var(--text-nav)]"
           >
             Apply
           </Button>

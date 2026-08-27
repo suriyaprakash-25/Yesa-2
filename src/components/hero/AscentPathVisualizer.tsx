@@ -28,12 +28,12 @@ export const AscentPathVisualizer: React.FC<AscentPathVisualizerProps> = ({ mous
   const offsetX = (mousePosition.x - windowCenter.x) * 0.05;
   const offsetY = (mousePosition.y - windowCenter.y) * 0.05;
 
-  // Stages
-  const stages = [
-    { name: "Volunteering", y: 400, color: "var(--stage-2-color)" },
-    { name: "Paid Internship", y: 250, color: "var(--stage-3-color)" },
-    { name: "Experienced", y: 100, color: "var(--stage-4-color)" },
-    { name: "World-Class Leader", y: -50, color: "var(--stage-5-color)" },
+  // Visual Nodes representing Choice -> Direction -> Progression
+  const nodes = [
+    { id: 1, y: 400, x: 500 },
+    { id: 2, y: 250, x: 530 },
+    { id: 3, y: 100, x: 480 },
+    { id: 4, y: -50, x: 510 },
   ];
 
   return (
@@ -55,10 +55,9 @@ export const AscentPathVisualizer: React.FC<AscentPathVisualizerProps> = ({ mous
         >
           <defs>
             <linearGradient id="ascentGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-              <stop offset="0%" stopColor="rgba(56, 189, 248, 0)" />
-              <stop offset="30%" stopColor="rgba(56, 189, 248, 0.3)" />
-              <stop offset="60%" stopColor="rgba(52, 211, 153, 0.5)" />
-              <stop offset="100%" stopColor="rgba(251, 191, 36, 0.8)" />
+              <stop offset="0%" stopColor="var(--path-origin)" />
+              <stop offset="50%" stopColor="var(--path-active)" />
+              <stop offset="100%" stopColor="var(--path-glow)" />
             </linearGradient>
             
             <filter id="glow">
@@ -72,50 +71,62 @@ export const AscentPathVisualizer: React.FC<AscentPathVisualizerProps> = ({ mous
 
           {/* Core Ascension Path */}
           <motion.path
-            d="M500,800 C500,600 550,500 500,400 C450,300 520,200 500,100 C480,0 500,-100 500,-200"
+            d="M500,800 C500,600 500,500 500,400 C500,300 550,300 530,250 C510,200 470,180 480,100 C490,20 510,0 510,-50 C510,-100 510,-150 510,-200"
             fill="none"
             stroke="url(#ascentGradient)"
-            strokeWidth="2"
+            strokeWidth="1.5"
             filter="url(#glow)"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: 1, opacity: 1 }}
             transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
           />
 
-          {/* Interactive Nodes & Grid lines */}
-          {stages.map((stage, i) => (
-            <motion.g key={stage.name}
+          {/* Branching Choice Paths (Subtle) */}
+          <motion.path
+            d="M500,400 C450,380 420,350 420,300"
+            fill="none"
+            stroke="var(--path-origin)"
+            strokeWidth="1"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 1 }}
+          />
+          <motion.path
+            d="M530,250 C580,240 600,200 600,150"
+            fill="none"
+            stroke="var(--path-origin)"
+            strokeWidth="1"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 1.5 }}
+          />
+
+          {/* Interactive Nodes */}
+          {nodes.map((node, i) => (
+            <motion.g key={node.id}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5 + (i * 0.2), duration: 1 }}
             >
-              {/* Subtle horizontal connecting line */}
-              <line 
-                x1="0" y1={stage.y + 400} 
-                x2="1000" y2={stage.y + 400} 
-                stroke="rgba(255,255,255,0.03)" 
-                strokeWidth="1"
-              />
-              
               {/* Data Node */}
               <circle 
-                cx="500" 
-                cy={stage.y + 400} 
+                cx={node.x} 
+                cy={node.y} 
                 r="3" 
-                fill={stage.color}
+                fill="var(--path-active)"
                 filter="url(#glow)"
               />
               
               {/* Ambient Ring */}
               <motion.circle 
-                cx="500" 
-                cy={stage.y + 400} 
-                r="12" 
+                cx={node.x} 
+                cy={node.y} 
+                r="16" 
                 fill="none"
-                stroke={stage.color}
+                stroke="var(--path-glow)"
                 strokeWidth="1"
                 opacity="0.3"
-                animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
+                animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0, 0.3] }}
                 transition={{ duration: 4, repeat: Infinity, delay: i }}
               />
             </motion.g>

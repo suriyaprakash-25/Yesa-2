@@ -22,8 +22,7 @@ body {
   min-height: 100vh;
   background-color: var(--color-bg-base);
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.06), transparent 70%),
-    radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.02), transparent 40%);
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.04), transparent 70%);
   background-attachment: fixed;
   overflow-x: clip;
 }
@@ -109,8 +108,8 @@ body {
   left: 0;
   width: 32px;
   height: 32px;
-  border-top: 1px solid rgba(56, 189, 248, 0.5);
-  border-left: 1px solid rgba(56, 189, 248, 0.5);
+  border-top: 1px solid var(--accent-subtle);
+  border-left: 1px solid var(--accent-subtle);
   pointer-events: none;
 }
 

@@ -89,13 +89,13 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           <div className="lg:col-span-8 flex flex-col items-start pt-12 md:pt-0">
             
             <motion.div variants={itemVariants} className="mb-6">
-              <Kicker className="text-sky-400">100% Free Incubator Program</Kicker>
+              <Kicker className="text-[var(--accent-base)]">100% Free Incubator Program</Kicker>
             </motion.div>
 
             <motion.div variants={itemVariants} className="mb-8">
               <DisplayHeading className="leading-[0.95] text-left">
                 INCUBATOR <br />
-                <span className="text-white/40 italic font-light tracking-tight">FOR FUTURE</span><br />
+                FOR FUTURE <br />
                 LEADERS.
               </DisplayHeading>
             </motion.div>
@@ -116,8 +116,8 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
                 onClick={onOpenApply}
                 className="group relative overflow-hidden"
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  Begin your journey
+                <span className="relative z-10 flex items-center gap-2 uppercase tracking-widest text-sm">
+                  APPLY TO YESA
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Button>
@@ -126,10 +126,10 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
                 onClick={onExplorePath}
                 className="group flex items-center gap-3 text-white/50 hover:text-white transition-colors"
               >
-                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors">
-                  <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[var(--accent-base)] transition-colors">
+                  <ArrowDown className="w-4 h-4 group-hover:translate-y-1 group-hover:text-[var(--accent-base)] transition-all" />
                 </div>
-                <span className="text-sm uppercase tracking-widest font-mono-tag">Explore the path</span>
+                <span className="text-[var(--text-nav)] uppercase tracking-widest font-mono-tag">EXPLORE THE JOURNEY</span>
               </button>
             </motion.div>
 
@@ -137,15 +137,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
 
           {/* Right side asymmetric balance (Empty or subtle supporting visual) */}
           <div className="hidden lg:block lg:col-span-4 relative h-full">
-            <motion.div 
-              variants={itemVariants}
-              className="absolute right-0 top-1/2 -translate-y-1/2"
-            >
-              <div className="glass-surface-elevated p-8 rounded-2xl max-w-xs text-right border-r-2 border-r-sky-400/50">
-                <p className="text-xs uppercase tracking-widest font-mono-tag text-sky-400 mb-2">Phase 01</p>
-                <p className="text-white/80 font-medium">Join & observe top lecturers globally.</p>
-              </div>
-            </motion.div>
+            {/* The abstract path visualizer naturally falls into this area */}
           </div>
 
         </motion.div>

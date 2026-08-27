@@ -23,8 +23,8 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const sizeStyles = {
-    sm: "px-3.5 py-1.5 text-xs tracking-wide",
-    md: "px-5 py-2.5 text-sm tracking-wide",
+    sm: "px-3.5 py-1.5 text-[var(--text-cta)] tracking-wide",
+    md: "px-5 py-2.5 text-[var(--text-cta)] tracking-wide",
     lg: "px-7 py-3.5 text-base tracking-wide font-medium",
   };
 
@@ -42,10 +42,10 @@ export const Button: React.FC<ButtonProps> = ({
       "bg-transparent text-[#94A3B8] hover:text-[#F3F5F7] hover:bg-white/[0.06] border border-transparent",
     
     glow: 
-      "bg-sky-500/10 text-sky-200 border border-sky-500/40 hover:bg-sky-500/20 hover:border-sky-400 shadow-[0_0_25px_-5px_rgba(56,189,248,0.35)]",
+      "bg-[var(--accent-subtle)] text-[var(--accent-hover)] border border-[var(--accent-glow)] hover:bg-[var(--accent-glow)] hover:border-[var(--accent-base)] shadow-[0_0_25px_-5px_var(--accent-glow)]",
     
     monastic: 
-      "bg-transparent text-[#CBD5E1] border-b border-white/30 hover:border-sky-400 rounded-none px-1 py-1 hover:text-white"
+      "bg-transparent text-[#CBD5E1] border-b border-white/30 hover:border-[var(--accent-base)] rounded-none px-1 py-1 hover:text-white"
   };
 
   return (
@@ -55,7 +55,7 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled || isLoading}
       className={clsx(
         "relative inline-flex items-center justify-center gap-2.5 rounded-full cursor-pointer select-none outline-none font-sans transition-colors duration-200",
-        "focus-visible:ring-2 focus-visible:ring-sky-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#08090B]",
+        "focus-visible:ring-2 focus-visible:ring-[var(--accent-base)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#08090B]",
         "disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none",
         sizeStyles[size],
         variantStyles[variant],

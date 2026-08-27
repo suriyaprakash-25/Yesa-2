@@ -22,7 +22,7 @@ body {
   min-height: 100vh;
   background-color: var(--color-bg-base);
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.04), transparent 70%);
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 157, 158, 0.05), transparent 70%);
   background-attachment: fixed;
   overflow-x: clip;
 }
@@ -87,6 +87,12 @@ body {
   line-height: var(--leading-snug);
   letter-spacing: var(--tracking-tight);
   font-weight: 500;
+}
+
+/* Strict Word Break Rules for Headlines */
+h1, h2, h3, h4, h5, h6, .hero-heading, .section-heading, .sub-heading, .font-display {
+  overflow-wrap: normal;
+  word-break: keep-all;
 }
 
 /* Subtle Grid Dot Pattern Background */

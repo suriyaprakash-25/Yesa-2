@@ -73,8 +73,7 @@ const FieldContent: React.FC<{
       </div>
 
       <Container className="relative w-full flex pointer-events-auto">
-        <div className="grid grid-cols-12 gap-6 w-full">
-          <div className="col-span-12 md:col-span-10 md:col-start-3 lg:col-span-8 lg:col-start-4 pl-24 md:pl-0 flex flex-col justify-center text-left">
+        <div className="w-full pl-20 md:pl-48 lg:pl-64 pr-6 flex flex-col justify-center text-left">
           
           <motion.div style={{ opacity: labelOpacity }} className="flex items-center gap-4 mb-4">
             <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase">
@@ -104,7 +103,6 @@ const FieldContent: React.FC<{
             </motion.div>
           </motion.div>
 
-        </div>
         </div>
       </Container>
     </div>
@@ -158,8 +156,7 @@ export const FieldSelectionSection: React.FC = () => {
             className="absolute inset-0 flex items-center pointer-events-none"
           >
             <Container className="w-full">
-              <div className="grid grid-cols-12 gap-6 w-full">
-                <div className="col-span-12 md:col-span-10 md:col-start-3 lg:col-span-8 lg:col-start-4 pl-24 md:pl-0">
+              <div className="pl-20 md:pl-48 lg:pl-64">
                 <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase mb-6 block">
                   STAGE 07 — FIELD SELECTION
                 </span>
@@ -167,7 +164,6 @@ export const FieldSelectionSection: React.FC = () => {
                   CHOOSE<br/>YOUR FIELD
                 </DisplayHeading>
               </div>
-            </div>
             </Container>
           </motion.div>
 

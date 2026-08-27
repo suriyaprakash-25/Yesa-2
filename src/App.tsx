@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HeroExperience } from './components/hero/HeroExperience';
 import { PhilosophyManifestoSection } from './components/philosophy/PhilosophyManifestoSection';
 import { InfrastructureSection } from './components/philosophy/InfrastructureSection';
@@ -7,31 +8,24 @@ import { ExperienceSection } from './components/experience/ExperienceSection';
 import { FutureVisionSection } from './components/future/FutureVisionSection';
 import { FinalCtaSection } from './components/footer/FinalCtaSection';
 import { Footer } from './components/footer/Footer';
+import { StyleGuide } from './pages/StyleGuide';
+import { GridBackground } from './components/core/GridBackground';
 
-export function App() {
-
-  // Placeholder handlers for Hero
+function MainSite() {
   const handleOpenApply = () => {
-    // Scroll to the CTA section smoothly
     const applySection = document.getElementById('apply');
-    if (applySection) {
-      applySection.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (applySection) applySection.scrollIntoView({ behavior: 'smooth' });
   };
   const handleExplorePath = () => {
-    // Scroll to the philosophy section smoothly
     const philosophySection = document.getElementById('philosophy');
-    if (philosophySection) {
-      philosophySection.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (philosophySection) philosophySection.scrollIntoView({ behavior: 'smooth' });
   };
   const handleNavigateSection = (section: string) => {
     console.log(`Navigating to ${section}`);
   };
 
   return (
-    <div className="min-h-screen bg-[#08090B] text-[#F3F5F7] flex flex-col justify-between selection:bg-sky-500/20 selection:text-sky-200 overflow-clip">
-      
+    <>
       <main className="flex-1">
         <HeroExperience 
           onOpenApply={handleOpenApply}
@@ -61,8 +55,23 @@ export function App() {
         </div>
         <Footer />
       </main>
+    </>
+  );
+}
 
-    </div>
+export function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-[var(--color-bg-base)] text-[var(--text-primary)] flex flex-col justify-between selection:bg-[var(--accent-dim)] selection:text-[var(--accent-light)] overflow-clip relative">
+        <GridBackground />
+        
+        <Routes>
+          <Route path="/" element={<MainSite />} />
+          <Route path="/style-guide" element={<StyleGuide />} />
+        </Routes>
+        
+      </div>
+    </BrowserRouter>
   );
 }
 

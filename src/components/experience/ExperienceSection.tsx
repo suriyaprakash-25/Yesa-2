@@ -53,12 +53,12 @@ const ExperienceStageContent: React.FC<{
     <div className="absolute inset-0 flex items-center pointer-events-none overflow-hidden">
       
       {/* Node placed precisely over the left-aligned spine */}
-      <div className="absolute left-6 md:left-24 lg:left-32 -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 flex items-center justify-center">
+      <div className="absolute left-6 md:left-[10vw] -translate-x-1/2 w-48 h-48 md:w-64 md:h-64 flex items-center justify-center">
         <ExperienceVisualizer progress={activeState} idx={idx} />
       </div>
 
       <Container className="relative w-full flex pointer-events-auto">
-        <div className="w-full pl-20 md:pl-48 lg:pl-64 pr-6 flex flex-col justify-center text-left">
+        <div className="w-full pl-20 md:pl-[20vw] pr-6 flex flex-col justify-center text-left">
           
           <motion.div style={{ opacity: labelOpacity }} className="flex items-center gap-4 mb-4">
             <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase">
@@ -123,7 +123,7 @@ export const ExperienceSection: React.FC = () => {
           </div>
 
           {/* Left-Aligned Architectural Spine */}
-          <div className="absolute top-0 bottom-0 left-6 md:left-24 lg:left-32 w-[1px] bg-white/10 -translate-x-1/2 z-0">
+          <div className="absolute top-0 bottom-0 left-6 md:left-[10vw] w-[1px] bg-white/10 -translate-x-1/2 z-0">
             <motion.div 
               className="w-full bg-[var(--accent-base)] shadow-[0_0_20px_var(--accent-glow)] origin-top"
               style={{ height: pathHeight }}
@@ -136,7 +136,7 @@ export const ExperienceSection: React.FC = () => {
             className="absolute inset-0 flex items-center pointer-events-none"
           >
             <Container className="w-full">
-              <div className="pl-20 md:pl-48 lg:pl-64">
+              <div className="pl-20 md:pl-[20vw]">
                 <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase mb-6 block">
                   STAGE 08 — EXPERIENCE-SHIP
                 </span>

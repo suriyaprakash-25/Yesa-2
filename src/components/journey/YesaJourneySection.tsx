@@ -128,25 +128,59 @@ const JourneyStageContent: React.FC<{
 }> = ({ stage, idx, smoothProgress, totalStages }) => {
   // Peak activation point for this stage
   const peak = idx / (totalStages - 1);
-  const delta = 0.16; // Clean activation window
+  const delta = 0.12; // Clean activation window
   const start = Math.max(0, peak - delta);
   const end = Math.min(1, peak + delta);
 
-  // Active progression strictly within the window
-  const activeState = useTransform(smoothProgress, [start, peak, end], [0, 1, 0]);
+  // Active progression strictly within the window (monotonic for boundary stages)
+  const activeStatePoints =
+    idx === 0
+      ? [0, end]
+      : idx === totalStages - 1
+      ? [start, 1]
+      : [start, peak, end];
+
+  const activeStateValues =
+    idx === 0
+      ? [1, 0]
+      : idx === totalStages - 1
+      ? [0, 1]
+      : [0, 1, 0];
+
+  const activeState = useTransform(smoothProgress, activeStatePoints, activeStateValues);
 
   // Clean exit: moving upwards on exit, fading cleanly to 0 with zero ghost collision
-  const contentOpacity = useTransform(
-    smoothProgress,
-    [start, start + delta * 0.4, peak, end - delta * 0.4, end],
-    [0, 0.8, 1, 0.8, 0]
-  );
+  const opacityPoints =
+    idx === 0
+      ? [0, end - delta * 0.4, end]
+      : idx === totalStages - 1
+      ? [start, start + delta * 0.4, 1]
+      : [start, start + delta * 0.4, peak, end - delta * 0.4, end];
 
-  const contentY = useTransform(
-    smoothProgress,
-    [start, peak, end],
-    [40, 0, -40]
-  );
+  const opacityValues =
+    idx === 0
+      ? [1, 0.8, 0]
+      : idx === totalStages - 1
+      ? [0, 0.8, 1]
+      : [0, 0.8, 1, 0.8, 0];
+
+  const contentOpacity = useTransform(smoothProgress, opacityPoints, opacityValues);
+
+  const yPoints =
+    idx === 0
+      ? [0, end]
+      : idx === totalStages - 1
+      ? [start, 1]
+      : [start, peak, end];
+
+  const yValues =
+    idx === 0
+      ? [0, -40]
+      : idx === totalStages - 1
+      ? [40, 0]
+      : [40, 0, -40];
+
+  const contentY = useTransform(smoothProgress, yPoints, yValues);
 
   // Alternating layout on desktop
   const isEven = idx % 2 === 0;

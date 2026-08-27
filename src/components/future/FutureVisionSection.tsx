@@ -79,7 +79,7 @@ export const FutureVisionSection: React.FC = () => {
                   BUILDING
                 </motion.span>
                 <div className="w-[1px] h-4 sm:h-6 bg-white/15" />
-                <motion.span style={{ opacity: word3Opacity, scale: word3Scale }} className="text-[#009D9E]">
+                <motion.span style={{ opacity: word3Opacity, scale: word3Scale }} className="text-white">
                   LEADING
                 </motion.span>
                 <div className="w-[1px] h-4 sm:h-6 bg-white/15" />

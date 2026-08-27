@@ -60,35 +60,6 @@ export const Footer: React.FC = () => {
           </button>
         </nav>
 
-        {/* Social / Network Links */}
-        <div className="flex items-center gap-5 text-xs font-mono text-[#8A8A8A]">
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#9AEDFC] transition-colors"
-          >
-            X (Twitter)
-          </a>
-          <span>·</span>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#9AEDFC] transition-colors"
-          >
-            LinkedIn
-          </a>
-          <span>·</span>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#9AEDFC] transition-colors"
-          >
-            GitHub
-          </a>
-        </div>
       </Container>
     </footer>
   );

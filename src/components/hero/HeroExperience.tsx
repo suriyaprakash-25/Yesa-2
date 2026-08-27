@@ -1,171 +1,158 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import { AscentMetaphorBackground } from './AscentMetaphorBackground';
-import { AscentProgressHUD } from './AscentProgressHUD';
-import { MagneticCTA } from './MagneticCTA';
-import { Badge } from '../core/Badge';
+import type { Variants } from 'framer-motion';
+import { ArrowDown, ArrowRight } from 'lucide-react';
 import { Container } from '../core/Container';
+import { Button } from '../core/Button';
+import { AscentPathVisualizer } from './AscentPathVisualizer';
+import { HeroNavigation } from './HeroNavigation';
+import { DisplayHeading, SubHeading, Kicker } from '../core/Typography';
 
 interface HeroExperienceProps {
-  onOpenApply: () => void;
-  onExplorePath: () => void;
+  onOpenApply?: () => void;
+  onExplorePath?: () => void;
+  onNavigateSection?: (section: string) => void;
 }
 
 export const HeroExperience: React.FC<HeroExperienceProps> = ({
   onOpenApply,
   onExplorePath,
+  onNavigateSection
 }) => {
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
-
-  // Subtle parallax and fade transformations as user scrolls
-  const heroOpacity = useTransform(scrollY, [0, 450], [1, 0.2]);
-  const heroScale = useTransform(scrollY, [0, 450], [1, 0.96]);
-  const heroTranslateY = useTransform(scrollY, [0, 450], [0, 60]);
-
-  // Subtle tilt for typography
-  const rotateX = (mousePos.y - 0.5) * -6;
-  const rotateY = (mousePos.x - 0.5) * 8;
+  
+  // Parallax effects on scroll
+  const yHeroText = useTransform(scrollY, [0, 1000], [0, -150]);
+  const opacityHero = useTransform(scrollY, [0, 500], [1, 0]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight,
-      });
+      if (!containerRef.current) return;
+      // We only want the cursor position relative to the window
+      setMousePos({ x: e.clientX, y: e.clientY });
     };
-
+    
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Animation Sequence
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+        duration: 1,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      filter: 'blur(0px)',
+      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
+
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#08090B] pt-24 pb-10">
-      
-      {/* 1. Dynamic 60fps The Ascent Progression Canvas Background */}
-      <AscentMetaphorBackground mousePos={mousePos} intensity={1.0} />
+    <section 
+      ref={containerRef}
+      className="relative min-h-screen w-full bg-[#08090B] overflow-hidden flex flex-col justify-center"
+    >
+      {/* Abstract Visualizer */}
+      <AscentPathVisualizer mousePosition={mousePos} />
 
-      {/* 2. Main Hero Editorial Typography & Statement */}
-      <motion.div
-        style={{ opacity: heroOpacity, scale: heroScale, y: heroTranslateY }}
-        className="relative z-10 my-auto flex-1 flex flex-col justify-center py-8 md:py-16"
-      >
-        <Container size="lg">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
+      {/* Navigation Layer */}
+      <HeroNavigation 
+        onOpenApply={onOpenApply || (() => {})} 
+        onNavigateSection={onNavigateSection || (() => {})} 
+      />
+
+      <Container className="relative z-10 w-full mt-20">
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          style={{ y: yHeroText, opacity: opacityHero }}
+        >
+          
+          {/* Main Editorial Copy */}
+          <div className="lg:col-span-8 flex flex-col items-start pt-12 md:pt-0">
             
-            {/* Entrance 1: Tagline Kicker Capsule */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-center justify-center gap-2.5"
-            >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse shadow-[0_0_8px_#38bdf8]" />
-                <span className="font-mono text-xs uppercase tracking-widest text-[#CBD5E1]">
-                  INCUBATOR FOR FUTURE LEADERS
-                </span>
-              </div>
-
-              <Badge variant="emerald" dot className="font-mono text-xs py-1">
-                100% FREE
-              </Badge>
+            <motion.div variants={itemVariants} className="mb-6">
+              <Kicker className="text-sky-400">100% Free Incubator Program</Kicker>
             </motion.div>
 
-            {/* Entrance 2: Monumental Editorial Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                perspective: 1000,
-                transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-                transition: 'transform 0.2s ease-out',
-              }}
-              className="space-y-4"
-            >
-              <h1 className="font-display font-extrabold tracking-[-0.04em] text-white leading-[0.94] text-[clamp(2.75rem,6.5vw+1rem,6.75rem)] select-none">
+            <motion.div variants={itemVariants} className="mb-8">
+              <DisplayHeading className="leading-[0.95] text-left">
                 INCUBATOR <br />
-                <span className="bg-gradient-to-b from-white via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent">
-                  FOR FUTURE LEADERS.
-                </span>
-              </h1>
+                <span className="text-white/40 italic font-light tracking-tight">FOR FUTURE</span><br />
+                LEADERS.
+              </DisplayHeading>
             </motion.div>
 
-            {/* Entrance 3: Core Philosophy Statement */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-3"
-            >
-              <p className="font-sans text-xl sm:text-2xl md:text-3xl text-[#94A3B8] font-light tracking-tight max-w-2xl mx-auto leading-relaxed">
-                "Choose your field. <br className="hidden sm:inline" />
-                <span className="text-white font-medium">We provide the path.</span>"
-              </p>
-
-              <p className="text-xs sm:text-sm font-sans text-[#64748B] max-w-md mx-auto leading-relaxed">
-                A 100% free incubator designed to guide ambitious individuals from initial curiosity into world-class institutional leadership.
+            <motion.div variants={itemVariants} className="mb-12 max-w-lg border-l border-white/10 pl-6">
+              <SubHeading className="text-white/80 font-normal">
+                Choose your field. <br className="hidden md:block"/> We provide the path.
+              </SubHeading>
+              <p className="mt-4 text-white/50 text-sm md:text-base leading-relaxed">
+                Volunteering → Paid Internship → Experienced → World-Class Leader.
               </p>
             </motion.div>
 
-            {/* Entrance 4: Actions (Magnetic Primary CTA + Secondary Exploration Cue) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
-            >
-              <MagneticCTA onClick={onOpenApply}>
-                Begin your journey
-              </MagneticCTA>
-
-              <button
-                onClick={onExplorePath}
-                className="group inline-flex items-center gap-2 px-5 py-3 rounded-full text-xs font-mono uppercase tracking-wider text-[#94A3B8] hover:text-white transition-colors cursor-pointer"
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-6">
+              <Button 
+                variant="primary" 
+                size="lg"
+                onClick={onOpenApply}
+                className="group relative overflow-hidden"
               >
-                <span>Explore the path</span>
-                <ChevronDown className="w-3.5 h-3.5 text-sky-400 group-hover:translate-y-0.5 transition-transform" />
+                <span className="relative z-10 flex items-center gap-2">
+                  Begin your journey
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Button>
+
+              <button 
+                onClick={onExplorePath}
+                className="group flex items-center gap-3 text-white/50 hover:text-white transition-colors"
+              >
+                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors">
+                  <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+                </div>
+                <span className="text-sm uppercase tracking-widest font-mono-tag">Explore the path</span>
               </button>
             </motion.div>
 
           </div>
-        </Container>
-      </motion.div>
 
-      {/* 3. Entrance 5: Bottom Progression HUD Ladder */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 w-full pt-4"
-      >
-        <AscentProgressHUD onSelectMilestone={() => onOpenApply()} />
-      </motion.div>
-
-      {/* 4. Scroll Indicator Connector */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.7 }}
-        className="relative z-10 flex flex-col items-center justify-center pt-6 pb-2 text-center"
-      >
-        <button
-          onClick={onExplorePath}
-          className="flex flex-col items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#5D6673] hover:text-white transition-colors cursor-pointer group"
-        >
-          <span>ASCEND</span>
-          <div className="w-4 h-7 rounded-full border border-white/20 flex items-start justify-center p-1 group-hover:border-sky-400 transition-colors">
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
-              className="w-1 h-1.5 rounded-full bg-sky-400"
-            />
+          {/* Right side asymmetric balance (Empty or subtle supporting visual) */}
+          <div className="hidden lg:block lg:col-span-4 relative h-full">
+            <motion.div 
+              variants={itemVariants}
+              className="absolute right-0 top-1/2 -translate-y-1/2"
+            >
+              <div className="glass-surface-elevated p-8 rounded-2xl max-w-xs text-right border-r-2 border-r-sky-400/50">
+                <p className="text-xs uppercase tracking-widest font-mono-tag text-sky-400 mb-2">Phase 01</p>
+                <p className="text-white/80 font-medium">Join & observe top lecturers globally.</p>
+              </div>
+            </motion.div>
           </div>
-        </button>
-      </motion.div>
 
-    </div>
+        </motion.div>
+      </Container>
+      
+      {/* Ambient Floor Gradient */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#08090B] to-transparent z-0"></div>
+    </section>
   );
 };

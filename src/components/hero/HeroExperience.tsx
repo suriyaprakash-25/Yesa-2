@@ -44,9 +44,9 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-        duration: 1,
+        staggerChildren: 0.3,
+        delayChildren: 1.5,
+        duration: 1.2,
         ease: [0.16, 1, 0.3, 1]
       }
     }
@@ -58,7 +58,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       opacity: 1, 
       y: 0, 
       filter: 'blur(0px)',
-      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
@@ -76,7 +76,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
         onNavigateSection={onNavigateSection || (() => {})} 
       />
 
-      <Container className="relative z-10 w-full mt-20">
+      <Container className="relative z-10 w-full">
         <motion.div 
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
           variants={containerVariants}
@@ -86,7 +86,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
         >
           
           {/* Main Editorial Copy */}
-          <div className="lg:col-span-8 flex flex-col items-start pt-12 md:pt-0">
+          <div className="lg:col-span-8 flex flex-col items-start py-24 md:py-0 pr-4 md:pr-12">
             
             <motion.div variants={itemVariants} className="mb-6">
               <Kicker className="text-[var(--accent-base)]">100% Free Incubator Program</Kicker>

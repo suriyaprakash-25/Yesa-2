@@ -74,31 +74,40 @@ export const AscentPathVisualizer: React.FC<AscentPathVisualizerProps> = ({ mous
             d="M500,800 C500,600 500,500 500,400 C500,300 550,300 530,250 C510,200 470,180 480,100 C490,20 510,0 510,-50 C510,-100 510,-150 510,-200"
             fill="none"
             stroke="url(#ascentGradient)"
-            strokeWidth="1.5"
+            strokeWidth="2.5"
             filter="url(#glow)"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+            transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           />
 
-          {/* Branching Choice Paths (Subtle) */}
+          {/* Architectural structural lines (subtle grid/depth) */}
           <motion.path
-            d="M500,400 C450,380 420,350 420,300"
+            d="M500,400 L420,400 L420,300"
             fill="none"
             stroke="var(--path-origin)"
-            strokeWidth="1"
+            strokeWidth="1.5"
             initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.3 }}
+            animate={{ pathLength: 1, opacity: 0.6 }}
             transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 1 }}
           />
           <motion.path
-            d="M530,250 C580,240 600,200 600,150"
+            d="M530,250 L600,250 L600,150"
             fill="none"
             stroke="var(--path-origin)"
-            strokeWidth="1"
+            strokeWidth="1.5"
             initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.3 }}
+            animate={{ pathLength: 1, opacity: 0.6 }}
             transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 1.5 }}
+          />
+          <motion.path
+            d="M480,100 L430,100 L430,0"
+            fill="none"
+            stroke="var(--path-origin)"
+            strokeWidth="1.5"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.4 }}
+            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 1.8 }}
           />
 
           {/* Interactive Nodes */}

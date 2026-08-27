@@ -69,7 +69,7 @@ export const HeroNavigation: React.FC<HeroNavigationProps> = ({
             variant="primary" 
             size="sm" 
             onClick={onOpenApply}
-            className="rounded-full px-6 py-2 uppercase tracking-widest text-[var(--text-nav)]"
+            className="rounded-full px-6 py-2 uppercase tracking-widest text-[length:var(--text-nav)] text-[#08090B]"
           >
             Apply
           </Button>

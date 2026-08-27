@@ -17,9 +17,9 @@ export const DisplayHeading: React.FC<TypographyProps> = ({
     <Component 
       className={clsx(
         "font-display font-bold tracking-[-0.04em] text-white leading-[1.04]",
-        "text-[var(--text-hero)]",
         className
       )}
+      style={{ fontSize: 'var(--text-hero)', ...props.style }}
       {...props}
     >
       {children}
@@ -37,9 +37,9 @@ export const SectionTitle: React.FC<TypographyProps> = ({
     <Component 
       className={clsx(
         "font-display font-semibold tracking-[-0.03em] text-[#F3F5F7] leading-[1.12]",
-        "text-[var(--text-section)]",
         className
       )}
+      style={{ fontSize: 'var(--text-section)', ...props.style }}
       {...props}
     >
       {children}
@@ -57,9 +57,9 @@ export const SubHeading: React.FC<TypographyProps> = ({
     <Component 
       className={clsx(
         "font-display font-medium tracking-[-0.02em] text-[#E2E8F0] leading-snug",
-        "text-[var(--text-h2)]",
         className
       )}
+      style={{ fontSize: 'var(--text-h2)', ...props.style }}
       {...props}
     >
       {children}

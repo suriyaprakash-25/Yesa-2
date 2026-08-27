@@ -1,109 +1,147 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion';
 import { Container } from '../core/Container';
-import { DisplayHeading, SubHeading } from '../core/Typography';
-import { Button } from '../core/Button';
-import { ArrowRight } from 'lucide-react';
+import { DisplayHeading } from '../core/Typography';
 
 const JOURNEY_STAGES = [
   {
     num: '01',
     title: 'APPLICATION',
     desc: 'The beginning of the journey.',
-    color: 'var(--stage-1-color)',
-    glow: 'var(--stage-1-glow)'
   },
   {
     num: '02',
     title: 'INTERVIEW',
     desc: 'The opportunity to enter the YESA journey.',
-    color: 'var(--stage-2-color)',
-    glow: 'var(--stage-2-glow)'
   },
   {
     num: '03',
     title: 'VOLUNTEERING',
     desc: 'Observation period. Maximum 6 months. The purpose is to observe, learn, understand the environment and gradually become involved.',
-    color: 'var(--stage-3-color)',
-    glow: 'var(--stage-3-glow)'
   },
   {
     num: '04',
     title: 'PAID INTERNSHIP',
     desc: 'Work on real-world projects with senior members.',
-    color: 'var(--stage-4-color)',
-    glow: 'var(--stage-4-glow)'
   },
   {
     num: '05',
     title: 'EXPERIENCED',
     desc: 'Develop enough experience to lead teams within the organization and develop leadership skills.',
-    color: 'var(--stage-4-color)',
-    glow: 'var(--stage-4-glow)'
   },
   {
     num: '06',
     title: 'WORLD-CLASS LEADER',
     desc: 'The long-term aspiration of the YESA journey. By this stage, YESA expects the participant to have developed into a world-class leader.',
-    color: 'var(--stage-5-color)',
-    glow: 'var(--stage-5-glow)'
   }
 ];
 
-// Sub-components to respect React hook rules
+// Architectural Node with smooth interpolation
+const ArchitecturalNode = ({ idx, activeProgress }: { idx: number, activeProgress: MotionValue<number> }) => {
+  const scale = useTransform(activeProgress, [0, 1], [1, 1.4]);
+  const borderOpacity = useTransform(activeProgress, [0, 1], [0.3, 1]);
+  const glowOpacity = useTransform(activeProgress, [0, 1], [0, 0.7]);
+  const elementsOpacity = useTransform(activeProgress, [0, 1], [0.1, 0.4]);
 
-const JourneyStageNode: React.FC<{ stage: typeof JOURNEY_STAGES[0], nodeTrigger: number, scrollYProgress: MotionValue<number>, idx: number }> = ({ stage, nodeTrigger, scrollYProgress, idx }) => {
-  const t1 = Math.max(0, nodeTrigger - 0.06);
-  const t2 = Math.max(t1 + 0.02, nodeTrigger);
-  const t3 = Math.min(1, Math.max(t2 + 0.02, nodeTrigger + 0.06));
-
-  const scale = useTransform(scrollYProgress, [t1, t2, t3], [0.5, 1.5, 0.8]);
-  const opacity = useTransform(scrollYProgress, [t1, t2], [0, 1]);
-  
   return (
-    <motion.div
-      className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center"
-      style={{ top: `${nodeTrigger * 100}%`, scale, opacity }}
-    >
-      <div className="w-4 h-4 rounded-full border-2 border-[#08090B] relative z-10"
-           style={{ backgroundColor: stage.color, boxShadow: `0 0 20px ${stage.glow}` }}
+    <motion.div style={{ scale }} className="relative w-full h-full flex items-center justify-center">
+      {/* Base Node */}
+      <motion.div 
+        style={{ opacity: borderOpacity }}
+        className="w-3 h-3 md:w-4 md:h-4 bg-[#08090B] border-[2px] border-[var(--accent-base)] rounded-full relative z-10" 
       />
-      <div 
-        className="absolute w-12 h-12 rounded-full border border-current opacity-30 pointer-events-none animate-pulse-ring"
-        style={{ color: stage.color, animationDelay: `${idx * 0.2}s` }}
+      
+      {/* Glow */}
+      <motion.div 
+        style={{ opacity: glowOpacity }}
+        className="absolute w-12 h-12 md:w-20 md:h-20 bg-[var(--accent-glow)] blur-xl rounded-full"
       />
+
+      {/* Evolution / Complexity Additions */}
+      {idx >= 2 && (
+        <motion.div style={{ opacity: elementsOpacity }} className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-base)] to-transparent" />
+      )}
+      {idx >= 4 && (
+        <>
+          <motion.div style={{ opacity: elementsOpacity }} className="absolute w-[250%] h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-base)] to-transparent rotate-45" />
+          <motion.div style={{ opacity: elementsOpacity }} className="absolute w-[250%] h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-base)] to-transparent -rotate-45" />
+          <motion.div style={{ opacity: elementsOpacity }} className="absolute w-10 h-10 md:w-16 md:h-16 border border-[var(--accent-base)] rounded-full" />
+        </>
+      )}
+      {idx === 5 && (
+        <motion.div style={{ opacity: elementsOpacity }} className="absolute w-20 h-20 md:w-32 md:h-32 border border-[var(--accent-base)] rounded-full border-dashed" />
+      )}
     </motion.div>
   );
 };
 
-const JourneyStageContent: React.FC<{ stage: typeof JOURNEY_STAGES[0], nodeTrigger: number, scrollYProgress: MotionValue<number> }> = ({ stage, nodeTrigger, scrollYProgress }) => {
-  const t1 = Math.max(0, nodeTrigger - 0.06);
-  const t2 = Math.max(t1 + 0.02, nodeTrigger);
-  const t3 = Math.min(1, Math.max(t2 + 0.02, nodeTrigger + 0.06));
+const JourneyStageContent: React.FC<{ 
+  stage: typeof JOURNEY_STAGES[0]; 
+  idx: number;
+  smoothProgress: MotionValue<number>;
+  totalStages: number;
+}> = ({ stage, idx, smoothProgress, totalStages }) => {
+  // Broadened triggers to ensure smooth, continuous overlap between fading stages
+  const triggerStart = (idx - 0.7) / totalStages;
+  const triggerPeak = idx / totalStages;
+  const triggerEnd = (idx + 0.7) / totalStages;
 
-  const opacity = useTransform(scrollYProgress, [t1, t2, t3], [0, 1, 0]);
-  const y = useTransform(scrollYProgress, [t1, t2, t3], [50, 0, -50]);
-  const scale = useTransform(scrollYProgress, [t1, t2, t3], [0.95, 1, 1.05]);
+  // activeState drives everything and uses the spring-smoothed progress
+  const activeState = useTransform(smoothProgress, 
+    [triggerStart, triggerPeak, triggerEnd], 
+    [0, 1, 0]
+  );
+
+  // Hierarchy separated by element
+  const y = useTransform(activeState, [0, 1], [40, 0]);
+  const titleOpacity = useTransform(activeState, [0, 1], [0.08, 1]);
+  const descOpacity = useTransform(activeState, [0, 1], [0.05, 0.8]);
+  const labelOpacity = useTransform(activeState, [0, 1], [0.3, 1]);
+  const labelY = useTransform(activeState, [0, 1], [10, 0]);
+  
+  // Align left for even, right for odd on desktop
+  const isEven = idx % 2 === 0;
 
   return (
-    <motion.div
-      style={{ opacity, y, scale }}
-      className="absolute inset-0 flex flex-col justify-center max-w-2xl pointer-events-none"
-    >
-      <div className="mb-4">
-        <span className="font-mono-tag tracking-[0.2em] text-2xl md:text-3xl" style={{ color: stage.color }}>
-          {stage.num}
-        </span>
+    <div className="relative w-full h-[100vh] flex items-center justify-center pointer-events-none overflow-hidden">
+      
+      {/* Center Spine Node */}
+      <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-24 h-24 flex items-center justify-center">
+        <ArchitecturalNode idx={idx} activeProgress={activeState} />
       </div>
-      
-      <DisplayHeading className="mb-6 tracking-tight leading-none text-4xl md:text-6xl lg:text-7xl">
-        {stage.title}
-      </DisplayHeading>
-      
-      <p className="text-lg md:text-xl font-light leading-relaxed max-w-xl opacity-70">
-        {stage.desc}
-      </p>
-    </motion.div>
+
+      <Container className="relative w-full flex">
+        {/* 
+          Using w-[60%] allows the text container to cross the spine by 10%.
+          This gives oversized typography room to breathe without clipping, 
+          while maintaining the asymmetric visual anchor.
+        */}
+        <div className={`w-full pl-24 md:pl-0 md:w-[60%] flex flex-col justify-center ${isEven ? 'md:pr-10 lg:pr-16' : 'md:ml-auto md:pl-10 lg:pl-16'}`}>
+          <div className={`flex flex-col ${isEven ? 'md:items-end md:text-right' : 'md:items-start md:text-left'} items-start text-left w-full`}>
+            
+            <motion.div style={{ opacity: labelOpacity, y: labelY }} className="flex items-center gap-4 mb-6">
+              <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase">
+                Stage {stage.num}
+              </span>
+              <div className="h-[1px] w-12 bg-[var(--accent-base)] opacity-50" />
+            </motion.div>
+            
+            <motion.div style={{ y, opacity: titleOpacity }} className="w-full">
+              <DisplayHeading className="mb-6 text-[clamp(2.5rem,6vw+1rem,5rem)] tracking-tight leading-[1] w-full break-words">
+                {stage.title}
+              </DisplayHeading>
+            </motion.div>
+            
+            <motion.div style={{ opacity: descOpacity }} className="w-full">
+              <p className={`text-white text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-lg ${isEven ? 'md:ml-auto' : ''}`}>
+                {stage.desc}
+              </p>
+            </motion.div>
+
+          </div>
+        </div>
+      </Container>
+    </div>
   );
 };
 
@@ -115,109 +153,52 @@ export const YesaJourneySection: React.FC = () => {
     offset: ["start start", "end end"]
   });
 
+  // Extremely smooth spring to act as the master timing function for the entire section
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
+    stiffness: 40,
+    damping: 25,
+    mass: 1,
+    restDelta: 0.0001
   });
 
-  const backgroundColor = useTransform(scrollYProgress, [0.85, 0.95], ["#08090B", "#F3F5F7"]);
-  const textColor = useTransform(scrollYProgress, [0.85, 0.95], ["#F3F5F7", "#08090B"]);
-  const pathColor = useTransform(scrollYProgress, [0.85, 0.95], ["rgba(255,255,255,0.2)", "rgba(0,0,0,0.1)"]);
-  const activePathColor = useTransform(scrollYProgress, [0.85, 0.95], ["#38BDF8", "#08090B"]);
-
-  const endTransitionOpacity = useTransform(scrollYProgress, [0.93, 0.98], [0, 1]);
-  const endTransitionY = useTransform(scrollYProgress, [0.93, 0.98], [50, 0]);
-  const gridOpacity = useTransform(scrollYProgress, [0.8, 0.9], [0, 1]);
+  const pathHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <motion.section 
-      ref={containerRef}
-      style={{ backgroundColor, color: textColor }}
-      className="relative w-full transition-colors duration-200"
-    >
-      <div className="h-[700vh] relative">
-        <div className="sticky top-0 h-screen w-full flex overflow-hidden">
+    <section ref={containerRef} className="relative w-full bg-[#08090B] text-white">
+      {/* 600vh creates a deliberately slow, cinematic journey */}
+      <div className="h-[600vh] relative">
+        <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
           
-          <motion.div 
-            className="absolute inset-0 pointer-events-none"
-            style={{ 
-              opacity: gridOpacity,
-              backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)',
-              backgroundSize: '40px 40px'
-            }}
-          />
+          {/* Architectural Background Grid */}
+          <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-screen">
+            <div className="w-full h-full" style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '4rem 4rem' }} />
+          </div>
 
-          <Container className="relative z-10 w-full h-full flex flex-col md:flex-row items-center">
-            
-            <div className="w-full md:w-1/3 h-full flex items-center justify-center relative py-20">
-              <div className="relative w-full h-full max-w-[200px] flex justify-center">
-                
-                <motion.div 
-                  className="absolute top-0 bottom-0 w-px"
-                  style={{ backgroundColor: pathColor }}
-                />
-                
-                <motion.div 
-                  className="absolute top-0 w-1 origin-top shadow-[0_0_15px_rgba(56,189,248,0.5)]"
-                  style={{ 
-                    backgroundColor: activePathColor,
-                    height: '100%',
-                    scaleY: smoothProgress 
-                  }}
-                />
+          {/* Central Architectural Spine */}
+          <div className="absolute top-0 bottom-0 left-6 md:left-1/2 w-[1px] bg-white/10 md:-translate-x-1/2 z-0">
+            {/* The active progression cyan path */}
+            <motion.div 
+              className="w-full bg-[var(--accent-base)] shadow-[0_0_20px_var(--accent-glow)] origin-top"
+              style={{ height: pathHeight }}
+            />
+          </div>
 
-                {JOURNEY_STAGES.map((stage, idx) => {
-                  const nodeTrigger = 0.1 + (idx * 0.16);
-                  return (
-                    <JourneyStageNode 
-                      key={stage.num} 
-                      stage={stage} 
-                      nodeTrigger={nodeTrigger} 
-                      scrollYProgress={scrollYProgress} 
-                      idx={idx} 
-                    />
-                  );
-                })}
+          {/* Journey Stages */}
+          <div className="absolute inset-0 flex flex-col">
+            {JOURNEY_STAGES.map((stage, idx) => (
+              <div key={stage.num} className="absolute inset-0">
+                <JourneyStageContent 
+                  stage={stage} 
+                  idx={idx} 
+                  smoothProgress={smoothProgress} 
+                  totalStages={JOURNEY_STAGES.length - 1} 
+                />
               </div>
-            </div>
+            ))}
+          </div>
 
-            <div className="w-full md:w-2/3 h-full relative flex items-center justify-center lg:justify-start px-6 lg:pl-20">
-              
-              {JOURNEY_STAGES.map((stage, idx) => {
-                const nodeTrigger = 0.1 + (idx * 0.16);
-                return (
-                  <JourneyStageContent 
-                    key={stage.num} 
-                    stage={stage} 
-                    nodeTrigger={nodeTrigger} 
-                    scrollYProgress={scrollYProgress} 
-                  />
-                );
-              })}
-
-              <motion.div
-                className="absolute inset-0 flex flex-col justify-center items-center text-center pointer-events-none"
-                style={{
-                  opacity: endTransitionOpacity,
-                  y: endTransitionY
-                }}
-              >
-                <SubHeading className="mb-8">Where do you want to begin?</SubHeading>
-                <div className="pointer-events-auto">
-                  <Button variant="primary" size="lg" className="group">
-                    <span className="flex items-center gap-2">
-                      Choose Your Field
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </Button>
-                </div>
-              </motion.div>
-
-            </div>
-          </Container>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };

@@ -62,14 +62,14 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({ type, title, descrip
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="group glass-surface p-8 rounded-2xl hover:glass-surface-elevated transition-all duration-500 cursor-default"
+      className="group glass-surface p-10 md:p-12 rounded-none border-l-2 border-l-transparent hover:border-l-[var(--accent-base)] hover:bg-white/[0.02] transition-all duration-500 cursor-default"
     >
       {renderAbstractGraphic()}
       
-      <h3 className="font-display font-medium text-lg text-white mb-3 group-hover:text-sky-300 transition-colors">
+      <h3 className="font-display font-medium text-xl md:text-2xl text-white mb-4 group-hover:text-[var(--accent-hover)] transition-colors tracking-tight">
         {title}
       </h3>
-      <p className="text-sm text-white/50 leading-relaxed font-sans group-hover:text-white/70 transition-colors">
+      <p className="text-[var(--text-supporting)] text-white/50 leading-relaxed font-sans group-hover:text-white/70 transition-colors">
         {description}
       </p>
     </motion.div>

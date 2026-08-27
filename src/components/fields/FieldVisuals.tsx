@@ -10,9 +10,9 @@ export const AgentDevelopmentVisual: React.FC = () => {
       <div className="flex items-center justify-between font-mono text-[9px] text-[#8A8A8A] relative z-10">
         <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
-          AGENT_CORE_ROUTING
+          AGENT_TOPOLOGY
         </span>
-        <span>LATENCY: 12ms</span>
+        <span className="text-white/40">DISCIPLINE 01</span>
       </div>
 
       {/* Node Topology */}
@@ -25,7 +25,7 @@ export const AgentDevelopmentVisual: React.FC = () => {
             strokeWidth="1.25"
             strokeOpacity="0.4"
           />
-          {/* Animated data pulses */}
+          {/* Illustrative data nodes */}
           <circle cx="90" cy="18" r="3" fill="#9AEDFC" />
           <circle cx="170" cy="18" r="3" fill="#9AEDFC" />
           <circle cx="130" cy="52" r="3.5" fill="#009D9E" />
@@ -37,7 +37,7 @@ export const AgentDevelopmentVisual: React.FC = () => {
       {/* Bottom Status */}
       <div className="flex items-center justify-between font-mono text-[9px] text-white/50 pt-2 border-t border-white/[0.04] relative z-10">
         <span>TOPOLOGY: MULTI-AGENT</span>
-        <span className="text-[#9AEDFC]">AUTONOMOUS PIPELINE</span>
+        <span className="text-[#9AEDFC]">SYSTEMS ARCHITECTURE</span>
       </div>
     </div>
   );
@@ -53,9 +53,9 @@ export const DesignVisual: React.FC = () => {
       <div className="flex items-center justify-between font-mono text-[9px] text-[#8A8A8A] relative z-10">
         <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
-          GRID_SYSTEM_PRECISION
+          GRID_ARCHITECTURE
         </span>
-        <span>RATIO: 1.618</span>
+        <span className="text-white/40">DISCIPLINE 02</span>
       </div>
 
       {/* Geometric Design Matrix */}
@@ -73,8 +73,8 @@ export const DesignVisual: React.FC = () => {
 
       {/* Bottom Status */}
       <div className="flex items-center justify-between font-mono text-[9px] text-white/50 pt-2 border-t border-white/[0.04] relative z-10">
-        <span>CANVAS: TOKENS & SYSTEM</span>
-        <span className="text-[#9AEDFC]">PIXEL ALIGNED</span>
+        <span>CANVAS: DESIGN SYSTEMS</span>
+        <span className="text-[#9AEDFC]">INTERFACE PRECISION</span>
       </div>
     </div>
   );
@@ -92,7 +92,7 @@ export const ProductVisual: React.FC = () => {
           <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
           ROADMAP_ORCHESTRATION
         </span>
-        <span>SPRINT: 04/12</span>
+        <span className="text-white/40">DISCIPLINE 03</span>
       </div>
 
       {/* Product Module Pipeline */}
@@ -110,15 +110,15 @@ export const ProductVisual: React.FC = () => {
           <span className="text-[#009D9E] text-xs font-mono">→</span>
           <div className="flex-1 p-2 rounded-lg bg-white/[0.03] border border-white/[0.06] text-center">
             <span className="font-mono text-[8px] text-[#8A8A8A] block">SCALE</span>
-            <span className="font-mono text-[9px] text-white">Impact</span>
+            <span className="font-mono text-[9px] text-white">Deliver</span>
           </div>
         </div>
       </div>
 
       {/* Bottom Status */}
       <div className="flex items-center justify-between font-mono text-[9px] text-white/50 pt-2 border-t border-white/[0.04] relative z-10">
-        <span>ALIGNMENT: STRATEGY & CODE</span>
-        <span className="text-[#9AEDFC]">CONTINUOUS DEPLOY</span>
+        <span>ALIGNMENT: STRATEGY & ROADMAP</span>
+        <span className="text-[#9AEDFC]">END-TO-END EXECUTION</span>
       </div>
     </div>
   );
@@ -134,15 +134,15 @@ export const SalesMarketingVisual: React.FC = () => {
       <div className="flex items-center justify-between font-mono text-[9px] text-[#8A8A8A] relative z-10">
         <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
-          NETWORK_DISTRIBUTION
+          DISTRIBUTION_NETWORK
         </span>
-        <span>VELOCITY: 4.8x</span>
+        <span className="text-white/40">DISCIPLINE 04</span>
       </div>
 
       {/* Growth & Distribution Vectors */}
       <div className="relative py-2 flex items-center justify-center">
         <svg viewBox="0 0 240 70" className="w-full h-16" fill="none">
-          {/* Radial Growth Rays */}
+          {/* Growth and Communication Rays */}
           <path
             d="M20,55 Q80,50 120,35 T220,12"
             stroke="#009D9E"
@@ -162,8 +162,8 @@ export const SalesMarketingVisual: React.FC = () => {
 
       {/* Bottom Status */}
       <div className="flex items-center justify-between font-mono text-[9px] text-white/50 pt-2 border-t border-white/[0.04] relative z-10">
-        <span>CHANNELS: ENTERPRISE & GLOBAL</span>
-        <span className="text-[#9AEDFC]">VERIFIED EXPANSION</span>
+        <span>CHANNELS: GLOBAL DISTRIBUTION</span>
+        <span className="text-[#9AEDFC]">GROWTH PIPELINE</span>
       </div>
     </div>
   );

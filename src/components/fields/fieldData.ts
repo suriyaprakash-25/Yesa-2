@@ -5,7 +5,7 @@ export interface Discipline {
   title: string;
   shortDesc: string;
   spec: string;
-  outcome: string;
+  badge: string;
 }
 
 export const YESA_DISCIPLINES: Discipline[] = [
@@ -15,9 +15,9 @@ export const YESA_DISCIPLINES: Discipline[] = [
     tag: 'DISCIPLINE 01',
     title: 'AGENT DEVELOPMENT',
     shortDesc:
-      'Architect autonomous systems, multi-agent frameworks, and intelligent infrastructure built for scalable production deployment.',
-    spec: 'Autonomous Systems & Multi-Agent Topologies',
-    outcome: 'Verified Systems Architect',
+      'Autonomous systems, multi-agent frameworks, and intelligent infrastructure built for scalable production deployment.',
+    spec: 'Autonomous Systems & Multi-Agent Architecture',
+    badge: 'ENGINEERING TRACK',
   },
   {
     id: 'design',
@@ -25,9 +25,9 @@ export const YESA_DISCIPLINES: Discipline[] = [
     tag: 'DISCIPLINE 02',
     title: 'DESIGN',
     shortDesc:
-      'Craft structured visual systems, high-velocity user interfaces, and unified design architectures with extreme aesthetic and functional precision.',
-    spec: 'Design Systems & Interface Engineering',
-    outcome: 'Verified Product Designer',
+      'Structured visual systems, high-velocity user interfaces, and unified design architectures with extreme aesthetic and functional precision.',
+    spec: 'Design Systems & Interface Architecture',
+    badge: 'PRODUCT DESIGN TRACK',
   },
   {
     id: 'product',
@@ -35,9 +35,9 @@ export const YESA_DISCIPLINES: Discipline[] = [
     tag: 'DISCIPLINE 03',
     title: 'PRODUCT',
     shortDesc:
-      'Lead product strategy, align systems architecture with market needs, and orchestrate end-to-end execution across technical roadmaps.',
-    spec: 'Technical Strategy & Roadmap Orchestration',
-    outcome: 'Verified Product Leader',
+      'Product strategy, aligning systems architecture with real user needs, and orchestrating end-to-end execution across technical roadmaps.',
+    spec: 'Technical Strategy & Roadmap Execution',
+    badge: 'MANAGEMENT TRACK',
   },
   {
     id: 'sales-marketing',
@@ -45,8 +45,8 @@ export const YESA_DISCIPLINES: Discipline[] = [
     tag: 'DISCIPLINE 04',
     title: 'SALES & MARKETING',
     shortDesc:
-      'Scale global distribution networks, architect high-impact communication systems, and build enterprise growth pipelines with measurable velocity.',
-    spec: 'Global Distribution & Enterprise Growth',
-    outcome: 'Verified Growth Leader',
+      'Global distribution networks, high-impact communication systems, and enterprise growth pipelines built for scale.',
+    spec: 'Global Distribution & Strategic Growth',
+    badge: 'DISTRIBUTION TRACK',
   },
 ];

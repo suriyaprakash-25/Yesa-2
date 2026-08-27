@@ -67,76 +67,85 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
         </div>
 
         {/* Desktop Interactive Discipline Map (lg+) */}
-        <div className="hidden lg:grid lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+        <div className="hidden lg:grid lg:grid-cols-12 gap-8 xl:gap-12 items-start relative">
           {/* Left Column: Interactive Discipline List */}
-          <div className="lg:col-span-5 flex flex-col space-y-4" role="tablist" aria-label="YESA Disciplines">
+          <div className="lg:col-span-5 flex flex-col space-y-4 relative" role="tablist" aria-label="YESA Disciplines">
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.06] mb-2">
               <span className="font-mono text-xs text-[#8A8A8A] uppercase tracking-[0.2em]">
                 DISCIPLINE SELECTOR
               </span>
-              <span className="font-mono text-[11px] text-[#009D9E]">04 SPECIALIZED TRACKS</span>
+              <span className="font-mono text-[11px] text-[#009D9E]">04 DOMAINS</span>
             </div>
 
             {YESA_DISCIPLINES.map((discipline) => {
               const isActive = discipline.id === activeId;
               return (
-                <button
-                  key={discipline.id}
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-controls={`panel-${discipline.id}`}
-                  tabIndex={0}
-                  onClick={() => setActiveId(discipline.id)}
-                  onMouseEnter={() => setActiveId(discipline.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      setActiveId(discipline.id);
-                    }
-                  }}
-                  className={`group relative w-full text-left p-5 rounded-2xl transition-all duration-300 cursor-pointer flex items-center justify-between ${
-                    isActive
-                      ? 'bg-white/[0.04] border border-[#009D9E]/50 shadow-[0_4px_24px_rgba(0,157,158,0.15)]'
-                      : 'bg-transparent border border-transparent hover:bg-white/[0.02] hover:border-white/[0.04]'
-                  }`}
-                >
-                  {/* Left Side: Number & Name */}
-                  <div className="flex items-center gap-4">
-                    <span
-                      className={`font-mono text-sm sm:text-base font-bold transition-colors ${
-                        isActive ? 'text-[#009D9E]' : 'text-[#8A8A8A]/60 group-hover:text-white/60'
-                      }`}
-                    >
-                      {discipline.num}
-                    </span>
-
-                    <span
-                      className={`font-display font-black text-xl sm:text-2xl tracking-tight transition-all duration-300 ${
-                        isActive
-                          ? 'text-white translate-x-1'
-                          : 'text-[#8A8A8A] opacity-40 group-hover:opacity-80'
-                      }`}
-                    >
-                      {discipline.title}
-                    </span>
-                  </div>
-
-                  {/* Active Indicator & Interactive Arrow */}
-                  <div className="flex items-center gap-2">
-                    {isActive && (
-                      <motion.div
-                        layoutId="active-field-indicator"
-                        className="flex items-center gap-2"
-                        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                <div key={discipline.id} className="relative">
+                  <button
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls={`panel-${discipline.id}`}
+                    tabIndex={0}
+                    onClick={() => setActiveId(discipline.id)}
+                    onMouseEnter={() => setActiveId(discipline.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setActiveId(discipline.id);
+                      }
+                    }}
+                    className={`group relative w-full text-left p-5 rounded-2xl transition-all duration-300 cursor-pointer flex items-center justify-between z-10 ${
+                      isActive
+                        ? 'bg-white/[0.04] border border-[#009D9E]/50 shadow-[0_4px_24px_rgba(0,157,158,0.15)]'
+                        : 'bg-transparent border border-transparent hover:bg-white/[0.02] hover:border-white/[0.04]'
+                    }`}
+                  >
+                    {/* Left Side: Number & Name */}
+                    <div className="flex items-center gap-4">
+                      <span
+                        className={`font-mono text-sm sm:text-base font-bold transition-colors ${
+                          isActive ? 'text-[#009D9E]' : 'text-[#8A8A8A]/60 group-hover:text-white/60'
+                        }`}
                       >
-                        <span className="font-mono text-[10px] uppercase text-[#9AEDFC] font-semibold tracking-wider hidden xl:inline">
-                          ACTIVE
-                        </span>
-                        <div className="w-2 h-2 rounded-full bg-[#009D9E] shadow-[0_0_10px_#009D9E]" />
-                      </motion.div>
-                    )}
-                  </div>
-                </button>
+                        {discipline.num}
+                      </span>
+
+                      <span
+                        className={`font-display font-black text-xl sm:text-2xl tracking-tight transition-all duration-300 ${
+                          isActive
+                            ? 'text-white translate-x-1'
+                            : 'text-[#8A8A8A] opacity-40 group-hover:opacity-80'
+                        }`}
+                      >
+                        {discipline.title}
+                      </span>
+                    </div>
+
+                    {/* Active Indicator Node */}
+                    <div className="flex items-center gap-2">
+                      {isActive && (
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-[10px] uppercase text-[#9AEDFC] font-semibold tracking-wider hidden xl:inline">
+                            SELECTED
+                          </span>
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#009D9E] border border-[#9AEDFC] shadow-[0_0_10px_#009D9E]" />
+                        </div>
+                      )}
+                    </div>
+                  </button>
+
+                  {/* Architectural Connecting Bridge Line (Discipline Map Line connecting to detail panel) */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="discipline-map-bridge"
+                      className="hidden lg:flex items-center absolute -right-8 xl:-right-12 top-1/2 -translate-y-1/2 w-8 xl:w-12 pointer-events-none z-20"
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    >
+                      <div className="h-[2px] w-full bg-gradient-to-r from-[#009D9E] to-[#9AEDFC] shadow-[0_0_8px_rgba(0,157,158,0.8)]" />
+                      <div className="w-2 h-2 rounded-full bg-[#9AEDFC] shadow-[0_0_8px_#9AEDFC] -ml-1 shrink-0" />
+                    </motion.div>
+                  )}
+                </div>
               );
             })}
           </div>
@@ -170,7 +179,7 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
                         </span>
                       </div>
                       <span className="font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full bg-[#009D9E]/15 border border-[#009D9E]/30 text-[#9AEDFC] font-medium">
-                        {activeDiscipline.outcome}
+                        {activeDiscipline.badge}
                       </span>
                     </div>
 
@@ -193,7 +202,7 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
                   <div className="pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
                     <span className="font-mono text-xs text-[#8A8A8A] flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E]" />
-                      Full Pathway Customization Enabled
+                      Direct Pathway Alignment
                     </span>
 
                     <button
@@ -250,7 +259,7 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
                   {activeDiscipline.tag}
                 </span>
                 <span className="font-mono text-[10px] text-[#9AEDFC] px-2 py-0.5 rounded bg-[#009D9E]/15 border border-[#009D9E]/30">
-                  {activeDiscipline.outcome}
+                  {activeDiscipline.badge}
                 </span>
               </div>
               <h3 className="font-display font-bold text-2xl text-white">

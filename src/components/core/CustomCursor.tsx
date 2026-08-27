@@ -30,7 +30,7 @@ export const CustomCursor: React.FC = () => {
       const target = e.target as HTMLElement | null;
       if (target) {
         const isInteractive = Boolean(
-          target.closest('a, button, [role="button"], input, textarea, select, label, .cursor-pointer, [data-cursor-interactive]')
+          target.closest('a, button, [role="button"], [role="tab"], input, textarea, select, label, .cursor-pointer, [data-cursor-interactive]')
         );
         setIsHovered(isInteractive);
       }
@@ -60,24 +60,33 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[99999] rounded-full -translate-x-1/2 -translate-y-1/2"
+      className="fixed top-0 left-0 pointer-events-none z-[99999] rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
       style={{
         x: springX,
         y: springY,
-        mixBlendMode: 'difference',
       }}
       animate={{
-        width: isHovered ? 44 : isClicked ? 7 : 9,
-        height: isHovered ? 44 : isClicked ? 7 : 9,
-        backgroundColor: '#FFFFFF',
+        width: isHovered ? 40 : isClicked ? 6 : 8,
+        height: isHovered ? 40 : isClicked ? 6 : 8,
+        backgroundColor: isHovered ? 'transparent' : '#009D9E',
+        borderColor: isHovered ? '#9AEDFC' : 'transparent',
+        borderWidth: isHovered ? '1.5px' : '0px',
+        boxShadow: isHovered
+          ? '0 0 16px rgba(0, 157, 158, 0.4), inset 0 0 8px rgba(0, 157, 158, 0.2)'
+          : '0 0 10px rgba(0, 157, 158, 0.8)',
         opacity: isVisible ? 1 : 0,
       }}
       transition={{
         type: 'spring',
         stiffness: 450,
         damping: 28,
-        mass: 0.15,
+        mass: 0.12,
       }}
-    />
+    >
+      {/* Inner subtle center dot when hovered */}
+      {isHovered && (
+        <div className="w-1 h-1 rounded-full bg-[#9AEDFC] shadow-[0_0_6px_#9AEDFC]" />
+      )}
+    </motion.div>
   );
 };

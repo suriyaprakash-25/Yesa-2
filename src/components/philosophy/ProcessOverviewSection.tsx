@@ -174,7 +174,7 @@ export const ProcessOverviewSection: React.FC = () => {
         />
       </div>
 
-      <Container className="relative z-10 w-full">
+      <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6">
           <div>
@@ -196,18 +196,18 @@ export const ProcessOverviewSection: React.FC = () => {
         </div>
 
         {/* Desktop Horizontal Connected Roadmap */}
-        <div className="hidden lg:block relative my-12">
-          {/* Base Connection Track */}
-          <div className="absolute top-7 left-8 right-8 h-[1px] bg-white/[0.08] z-0" />
+        <div className="hidden lg:block relative my-12 w-full">
+          {/* Base Connection Track connecting Node 1 to Node 6 */}
+          <div className="absolute top-7 left-[8.333%] right-[8.333%] h-[1px] bg-white/[0.08] z-0" />
           
           {/* Active Progress Filling Line */}
           <motion.div
-            className="absolute top-7 left-8 h-[2px] bg-[#009D9E] shadow-[0_0_12px_rgba(0,157,158,0.8)] origin-left z-0"
-            style={{ width: lineWidth, maxWidth: 'calc(100% - 4rem)' }}
+            className="absolute top-7 left-[8.333%] h-[2px] bg-[#009D9E] shadow-[0_0_12px_rgba(0,157,158,0.8)] origin-left z-0"
+            style={{ width: useTransform(smoothProgress, [0, 1], ['0%', '83.333%']) }}
           />
 
           {/* 6 Stage Nodes Grid */}
-          <div className="grid grid-cols-6 gap-3.5 relative z-10">
+          <div className="grid grid-cols-6 gap-4 xl:gap-5 w-full relative z-10">
             {STAGES.map((stage, idx) => {
               const threshold = idx / (STAGES.length - 1);
               return (
@@ -304,7 +304,7 @@ const RoadmapNode: React.FC<RoadmapNodeProps> = ({ stage, threshold, progress })
   );
 
   return (
-    <div className="flex flex-col items-center text-center group cursor-pointer">
+    <div className="flex flex-col items-center text-center group cursor-pointer w-full">
       {/* Node Dot */}
       <div className="relative mb-5 flex items-center justify-center">
         <motion.div

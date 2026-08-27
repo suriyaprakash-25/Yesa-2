@@ -94,16 +94,16 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       <div className="absolute top-28 right-8 w-12 h-12 border-t border-r border-white/[0.08] pointer-events-none hidden lg:block" />
 
       {/* Main Content Area */}
-      <Container className="relative z-10 w-full flex-1 flex flex-col justify-center">
+      <Container className="relative z-10 w-full flex-1 flex flex-col items-center justify-center">
         <motion.div
-          className="max-w-4xl flex flex-col items-start"
+          className="max-w-5xl w-full flex flex-col items-center text-center mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate="show"
           style={{ y: yHeroText, opacity: opacityHero }}
         >
           {/* Eyebrow label */}
-          <motion.div variants={itemVariants} className="mb-6">
+          <motion.div variants={itemVariants} className="mb-6 mx-auto">
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009D9E] opacity-75"></span>
@@ -116,22 +116,22 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           </motion.div>
 
           {/* Headline: "Incubator for Future Leaders." */}
-          <motion.div variants={itemVariants} className="mb-6 w-full">
-            <h1 className="font-display font-black text-white text-[clamp(2.6rem,7.5vw,6.8rem)] tracking-[-0.04em] leading-[0.98] text-left [overflow-wrap:normal] [word-break:keep-all]">
+          <motion.div variants={itemVariants} className="mb-6 w-full text-center">
+            <h1 className="font-display font-black text-white text-[clamp(2.8rem,7.5vw,6.8rem)] tracking-[-0.04em] leading-[0.98] text-center [overflow-wrap:normal] [word-break:keep-all] mx-auto">
               Incubator for Future Leaders.
             </h1>
           </motion.div>
 
           {/* Subhead */}
-          <motion.div variants={itemVariants} className="mb-8 max-w-xl">
+          <motion.div variants={itemVariants} className="mb-8 max-w-2xl mx-auto text-center">
             <p className="text-lg sm:text-xl md:text-2xl text-[#8A8A8A] font-light tracking-tight leading-snug">
               Choose your field. <span className="text-white">We provide the path.</span>
             </p>
           </motion.div>
 
           {/* Micro-path line: Connected steps with SVG arrow connectors */}
-          <motion.div variants={itemVariants} className="mb-10 w-full">
-            <div className="inline-flex flex-wrap items-center gap-2 sm:gap-3 py-2.5 px-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+          <motion.div variants={itemVariants} className="mb-10 w-full flex justify-center">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 py-2.5 px-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
               {microPathSteps.map((step, idx) => (
                 <React.Fragment key={step.label}>
                   <div className="flex items-center gap-1.5">
@@ -166,7 +166,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           {/* Two CTAs */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto mx-auto"
           >
             {/* Primary CTA */}
             <button
@@ -180,7 +180,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             {/* Secondary CTA */}
             <button
               onClick={handleExplore}
-              className="group flex items-center justify-center sm:justify-start gap-2.5 px-4 py-3 text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
+              className="group flex items-center justify-center gap-2.5 px-4 py-3 text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
             >
               <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#009D9E] group-hover:text-[#009D9E] transition-all">
                 <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />

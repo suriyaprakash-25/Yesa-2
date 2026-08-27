@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HeroExperience } from './components/hero/HeroExperience';
 import { PhilosophyManifestoSection } from './components/philosophy/PhilosophyManifestoSection';
+import { ProcessOverviewSection } from './components/philosophy/ProcessOverviewSection';
 import { InfrastructureSection } from './components/philosophy/InfrastructureSection';
 import { YesaJourneySection } from './components/journey/YesaJourneySection';
 import { FieldSelectionSection } from './components/fields/FieldSelectionSection';
@@ -34,6 +35,9 @@ function MainSite() {
         />
         <div id="philosophy">
           <PhilosophyManifestoSection />
+        </div>
+        <div id="process-overview">
+          <ProcessOverviewSection />
         </div>
         <div id="journey">
           <YesaJourneySection />

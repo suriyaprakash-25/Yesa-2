@@ -1,184 +1,281 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Container } from '../core/Container';
-import { DisplayHeading } from '../core/Typography';
-import { ArrowRight } from 'lucide-react';
-import { Button } from '../core/Button';
+import { YESA_DISCIPLINES, type Discipline } from './fieldData';
+import { DisciplineVisual } from './FieldVisuals';
 
-const ABSTRACT_FIELDS = [
-  { id: 'alpha', num: '01', title: 'FIELD ALPHA', desc: 'Select this discipline to master the structural path.' },
-  { id: 'beta', num: '02', title: 'FIELD BETA', desc: 'Select this discipline to master the structural path.' },
-  { id: 'gamma', num: '03', title: 'FIELD GAMMA', desc: 'Select this discipline to master the structural path.' },
-  { id: 'delta', num: '04', title: 'FIELD DELTA', desc: 'Select this discipline to master the structural path.' }
-];
+interface FieldSelectionSectionProps {
+  onSelectField?: (fieldId: string) => void;
+}
 
-const FieldNode = ({ activeProgress }: { activeProgress: MotionValue<number> }) => {
-  const scale = useTransform(activeProgress, [0, 1], [1, 1.5]);
-  const borderOpacity = useTransform(activeProgress, [0, 1], [0.3, 1]);
-  const glowOpacity = useTransform(activeProgress, [0, 1], [0, 0.6]);
-  
-  // A subtle horizontal line extending towards the text
-  const lineScaleX = useTransform(activeProgress, [0, 1], [0, 1]);
-  const lineOpacity = useTransform(activeProgress, [0, 1], [0, 0.3]);
+export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ onSelectField }) => {
+  const [activeId, setActiveId] = useState<string>(YESA_DISCIPLINES[0].id);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  return (
-    <motion.div style={{ scale }} className="relative w-full h-full flex items-center justify-center">
-      {/* Node */}
-      <motion.div 
-        style={{ opacity: borderOpacity }}
-        className="w-3 h-3 md:w-4 md:h-4 bg-[#08090B] border-[2px] border-[var(--accent-base)] rounded-full relative z-10" 
-      />
-      {/* Glow */}
-      <motion.div 
-        style={{ opacity: glowOpacity }}
-        className="absolute w-12 h-12 md:w-20 md:h-20 bg-[var(--accent-glow)] blur-xl rounded-full"
-      />
-      {/* Horizontal Technical Line */}
-      <motion.div 
-        style={{ scaleX: lineScaleX, opacity: lineOpacity }}
-        className="absolute left-1/2 top-1/2 w-[100px] md:w-[200px] h-[1px] bg-[var(--accent-base)] origin-left"
-      />
-    </motion.div>
-  );
-};
+  const activeDiscipline: Discipline =
+    YESA_DISCIPLINES.find((d) => d.id === activeId) || YESA_DISCIPLINES[0];
 
-const FieldContent: React.FC<{ 
-  field: typeof ABSTRACT_FIELDS[0]; 
-  idx: number;
-  smoothProgress: MotionValue<number>;
-}> = ({ field, idx, smoothProgress }) => {
-  // Map index 0->3 to progress 0.25 -> 1.0 (reserving 0.0 for the title)
-  const peak = (idx + 1) * 0.25;
-  const start = peak - 0.25;
-  const end = peak + 0.25;
-
-  const midStart = (start + peak) / 2;
-  const midEnd = (peak + end) / 2;
-
-  // Active state drives the vertical movement
-  const activeState = useTransform(smoothProgress, [start, peak, end], [0, 1, 0]);
-  const y = useTransform(activeState, [0, 1], [60, 0]);
-
-  // Opacities mapped to explicitly reach 0 outside the window
-  const titleOpacity = useTransform(smoothProgress, [start, midStart, peak, midEnd, end], [0, 0.05, 1, 0.05, 0]);
-  const descOpacity = useTransform(smoothProgress, [start, midStart, peak, midEnd, end], [0, 0.02, 0.8, 0.02, 0]);
-  const labelOpacity = useTransform(smoothProgress, [start, midStart, peak, midEnd, end], [0, 0.1, 1, 0.1, 0]);
+  const handleSelect = (field: Discipline) => {
+    setSelectedId(field.id);
+    if (onSelectField) {
+      onSelectField(field.id);
+    } else {
+      const target = document.getElementById('experience') || document.getElementById('apply');
+      if (target) {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+      }
+    }
+  };
 
   return (
-    <div className="absolute inset-0 flex items-center pointer-events-none overflow-hidden">
-      
-      {/* Node placed precisely over the left-aligned spine */}
-      <div className="absolute left-6 md:left-24 lg:left-32 -translate-x-1/2 w-24 h-24 flex items-center justify-center">
-        <FieldNode activeProgress={activeState} />
+    <section
+      id="fields"
+      className="relative w-full bg-[#090D0F] pt-28 pb-28 md:pt-36 md:pb-36 border-t border-white/[0.06] overflow-hidden scroll-mt-24"
+    >
+      {/* Background Subtle Grid Texture */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
+            backgroundSize: '4rem 4rem',
+          }}
+        />
       </div>
 
-      <Container className="relative w-full flex pointer-events-auto">
-        <div className="w-full pl-20 md:pl-48 lg:pl-64 pr-6 flex flex-col justify-center text-left">
-          
-          <motion.div style={{ opacity: labelOpacity }} className="flex items-center gap-4 mb-4">
-            <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase">
-              Field {field.num}
+      <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-12 md:mb-16 text-left">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#009D9E] font-semibold">
+              STAGE 07 — FIELD SELECTION
             </span>
-            <div className="h-[1px] w-12 bg-[var(--accent-base)] opacity-50" />
-          </motion.div>
-          
-          <motion.div style={{ y, opacity: titleOpacity }} className="w-full">
-            <DisplayHeading className="mb-6 text-[clamp(2.5rem,6vw+1rem,6rem)] tracking-tight leading-[1] w-full break-words">
-              {field.title}
-            </DisplayHeading>
-          </motion.div>
-          
-          <motion.div style={{ opacity: descOpacity }} className="w-full flex flex-col md:flex-row md:items-center gap-6">
-            <p className="text-white text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-lg">
-              {field.desc}
-            </p>
-            {/* CTA Button appears when field is active */}
-            <motion.div style={{ opacity: activeState }} className="pointer-events-auto">
-              <Button variant="primary" size="sm" className="group">
-                <span className="flex items-center gap-2">
-                  Select
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Button>
-            </motion.div>
-          </motion.div>
+          </div>
 
+          <h2 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[0.95] [overflow-wrap:normal] [word-break:keep-all]">
+            CHOOSE<br />YOUR FIELD.
+          </h2>
+          <p className="text-sm md:text-base text-[#8A8A8A] font-light mt-4 max-w-xl leading-relaxed">
+            Select your discipline. Your entire YESA path — from initial volunteering to world-class
+            leadership — adapts to your chosen domain.
+          </p>
+        </div>
+
+        {/* Desktop Interactive Discipline Map (lg+) */}
+        <div className="hidden lg:grid lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+          {/* Left Column: Interactive Discipline List */}
+          <div className="lg:col-span-5 flex flex-col space-y-4" role="tablist" aria-label="YESA Disciplines">
+            <div className="flex items-center justify-between pb-3 border-b border-white/[0.06] mb-2">
+              <span className="font-mono text-xs text-[#8A8A8A] uppercase tracking-[0.2em]">
+                DISCIPLINE SELECTOR
+              </span>
+              <span className="font-mono text-[11px] text-[#009D9E]">04 SPECIALIZED TRACKS</span>
+            </div>
+
+            {YESA_DISCIPLINES.map((discipline) => {
+              const isActive = discipline.id === activeId;
+              return (
+                <button
+                  key={discipline.id}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`panel-${discipline.id}`}
+                  tabIndex={0}
+                  onClick={() => setActiveId(discipline.id)}
+                  onMouseEnter={() => setActiveId(discipline.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveId(discipline.id);
+                    }
+                  }}
+                  className={`group relative w-full text-left p-5 rounded-2xl transition-all duration-300 cursor-pointer flex items-center justify-between ${
+                    isActive
+                      ? 'bg-white/[0.04] border border-[#009D9E]/50 shadow-[0_4px_24px_rgba(0,157,158,0.15)]'
+                      : 'bg-transparent border border-transparent hover:bg-white/[0.02] hover:border-white/[0.04]'
+                  }`}
+                >
+                  {/* Left Side: Number & Name */}
+                  <div className="flex items-center gap-4">
+                    <span
+                      className={`font-mono text-sm sm:text-base font-bold transition-colors ${
+                        isActive ? 'text-[#009D9E]' : 'text-[#8A8A8A]/60 group-hover:text-white/60'
+                      }`}
+                    >
+                      {discipline.num}
+                    </span>
+
+                    <span
+                      className={`font-display font-black text-xl sm:text-2xl tracking-tight transition-all duration-300 ${
+                        isActive
+                          ? 'text-white translate-x-1'
+                          : 'text-[#8A8A8A] opacity-40 group-hover:opacity-80'
+                      }`}
+                    >
+                      {discipline.title}
+                    </span>
+                  </div>
+
+                  {/* Active Indicator & Interactive Arrow */}
+                  <div className="flex items-center gap-2">
+                    {isActive && (
+                      <motion.div
+                        layoutId="active-field-indicator"
+                        className="flex items-center gap-2"
+                        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                      >
+                        <span className="font-mono text-[10px] uppercase text-[#9AEDFC] font-semibold tracking-wider hidden xl:inline">
+                          ACTIVE
+                        </span>
+                        <div className="w-2 h-2 rounded-full bg-[#009D9E] shadow-[0_0_10px_#009D9E]" />
+                      </motion.div>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right Column: Unified Detail Panel (Smooth Cross-Fade) */}
+          <div className="lg:col-span-7">
+            <div className="relative p-8 sm:p-10 rounded-2xl bg-white/[0.02] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] min-h-[480px] flex flex-col justify-between overflow-hidden">
+              {/* Corner Architectural Bracket */}
+              <div className="absolute top-5 right-5 w-6 h-6 border-t border-r border-[#009D9E]/50 pointer-events-none" />
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeDiscipline.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  id={`panel-${activeDiscipline.id}`}
+                  className="space-y-6 flex-1 flex flex-col justify-between"
+                >
+                  {/* Panel Top: Category Tag & Large Heading */}
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs font-bold text-[#009D9E] tracking-wider">
+                          {activeDiscipline.tag}
+                        </span>
+                        <div className="w-4 h-[1px] bg-[#009D9E]/40" />
+                        <span className="font-mono text-[10px] uppercase tracking-widest text-[#8A8A8A]">
+                          {activeDiscipline.spec}
+                        </span>
+                      </div>
+                      <span className="font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full bg-[#009D9E]/15 border border-[#009D9E]/30 text-[#9AEDFC] font-medium">
+                        {activeDiscipline.outcome}
+                      </span>
+                    </div>
+
+                    <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-white tracking-tight leading-tight">
+                      {activeDiscipline.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm md:text-base text-[#8A8A8A] font-light leading-relaxed">
+                    {activeDiscipline.shortDesc}
+                  </p>
+
+                  {/* Middle Architectural Visual Identity */}
+                  <div className="w-full">
+                    <DisciplineVisual id={activeDiscipline.id} />
+                  </div>
+
+                  {/* Bottom Action Row */}
+                  <div className="pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <span className="font-mono text-xs text-[#8A8A8A] flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E]" />
+                      Full Pathway Customization Enabled
+                    </span>
+
+                    <button
+                      onClick={() => handleSelect(activeDiscipline)}
+                      className={`group relative inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                        selectedId === activeDiscipline.id
+                          ? 'bg-[#9AEDFC] text-[#090D0F] shadow-[0_0_25px_rgba(0,157,158,0.7)]'
+                          : 'bg-[#009D9E] hover:bg-[#9AEDFC] text-[#090D0F] hover:scale-[1.03] shadow-[0_0_20px_rgba(0,157,158,0.3)]'
+                      }`}
+                    >
+                      {selectedId === activeDiscipline.id ? (
+                        <>
+                          <CheckCircle2 className="w-4 h-4 text-[#090D0F]" />
+                          <span>DISCIPLINE LOCKED</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>SELECT THIS DISCIPLINE</span>
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Swipeable Carousel (< lg) */}
+        <div className="lg:hidden">
+          {/* Quick Selection Tabs */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-4 no-scrollbar">
+            {YESA_DISCIPLINES.map((d) => (
+              <button
+                key={d.id}
+                onClick={() => setActiveId(d.id)}
+                className={`px-3.5 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider whitespace-nowrap transition-all ${
+                  activeId === d.id
+                    ? 'bg-[#009D9E] text-[#090D0F] font-bold shadow-[0_0_12px_rgba(0,157,158,0.4)]'
+                    : 'bg-white/[0.03] text-[#8A8A8A] border border-white/[0.06]'
+                }`}
+              >
+                {d.num}. {d.title}
+              </button>
+            ))}
+          </div>
+
+          {/* Active Detail Card on Mobile */}
+          <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col space-y-5">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-mono text-xs font-bold text-[#009D9E]">
+                  {activeDiscipline.tag}
+                </span>
+                <span className="font-mono text-[10px] text-[#9AEDFC] px-2 py-0.5 rounded bg-[#009D9E]/15 border border-[#009D9E]/30">
+                  {activeDiscipline.outcome}
+                </span>
+              </div>
+              <h3 className="font-display font-bold text-2xl text-white">
+                {activeDiscipline.title}
+              </h3>
+            </div>
+
+            <p className="text-xs text-[#8A8A8A] font-light leading-relaxed">
+              {activeDiscipline.shortDesc}
+            </p>
+
+            <div className="w-full">
+              <DisciplineVisual id={activeDiscipline.id} />
+            </div>
+
+            <button
+              onClick={() => handleSelect(activeDiscipline)}
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-mono text-xs font-bold uppercase tracking-wider bg-[#009D9E] text-[#090D0F] hover:bg-[#9AEDFC] transition-all cursor-pointer shadow-[0_0_15px_rgba(0,157,158,0.3)]"
+            >
+              <span>SELECT THIS DISCIPLINE</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </Container>
-    </div>
-  );
-};
-
-export const FieldSelectionSection: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 40,
-    damping: 25,
-    mass: 1,
-    restDelta: 0.0001
-  });
-
-  // Path grows from top to bottom
-  const pathHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
-  
-  // Title fades out as we start scrolling to the first field
-  const titleOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
-  const titleY = useTransform(smoothProgress, [0, 0.15], [0, -50]);
-
-  return (
-    <section ref={containerRef} className="relative w-full bg-[#090D0F] text-white">
-      {/* 500vh ensures cinematic scrolling (1 viewport for title + 4 fields) */}
-      <div className="h-[500vh] relative">
-        <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
-          
-          {/* Subtle Grid Continuation */}
-          <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-screen">
-            <div className="w-full h-full" style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '4rem 4rem' }} />
-          </div>
-
-          {/* Left-Aligned Architectural Spine */}
-          <div className="absolute top-0 bottom-0 left-6 md:left-24 lg:left-32 w-[1px] bg-white/10 -translate-x-1/2 z-0">
-            <motion.div 
-              className="w-full bg-[var(--accent-base)] shadow-[0_0_20px_var(--accent-glow)] origin-top"
-              style={{ height: pathHeight }}
-            />
-          </div>
-
-          {/* Intro Title */}
-          <motion.div 
-            style={{ opacity: titleOpacity, y: titleY }}
-            className="absolute inset-0 flex items-center pointer-events-none"
-          >
-            <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 w-full">
-              <div className="pl-20 md:pl-48 lg:pl-64">
-                <span className="font-mono-tag text-xs md:text-sm tracking-[0.2em] text-[var(--accent-base)] uppercase mb-6 block">
-                  STAGE 07 — FIELD SELECTION
-                </span>
-                <DisplayHeading className="text-[clamp(3rem,8vw+1rem,8rem)] tracking-tight leading-[0.9]">
-                  CHOOSE<br/>YOUR FIELD
-                </DisplayHeading>
-              </div>
-            </Container>
-          </motion.div>
-
-          {/* The Fields */}
-          {ABSTRACT_FIELDS.map((field, idx) => (
-            <FieldContent 
-              key={field.id}
-              field={field} 
-              idx={idx} 
-              smoothProgress={smoothProgress} 
-            />
-          ))}
-
-        </div>
-      </div>
     </section>
   );
 };

@@ -94,7 +94,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       <div className="absolute top-28 right-8 w-12 h-12 border-t border-r border-white/[0.08] pointer-events-none hidden lg:block" />
 
       {/* Main Content Area */}
-      <Container className="relative z-10 w-full flex-1 flex flex-col items-center justify-center">
+      <Container size="full" className="relative z-10 w-full max-w-[1440px] px-6 sm:px-10 lg:px-16 flex-1 flex flex-col items-center justify-center my-auto">
         <motion.div
           className="max-w-5xl w-full flex flex-col items-center text-center mx-auto"
           variants={containerVariants}
@@ -103,8 +103,8 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           style={{ y: yHeroText, opacity: opacityHero }}
         >
           {/* Eyebrow label */}
-          <motion.div variants={itemVariants} className="mb-6 mx-auto">
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
+          <motion.div variants={itemVariants} className="mb-8 mx-auto">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009D9E] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#009D9E]"></span>
@@ -115,36 +115,36 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             </div>
           </motion.div>
 
-          {/* Headline: "Incubator for Future Leaders." */}
-          <motion.div variants={itemVariants} className="mb-6 w-full text-center">
-            <h1 className="font-display font-black text-white text-[clamp(2.8rem,7.5vw,6.8rem)] tracking-[-0.04em] leading-[0.98] text-center [overflow-wrap:normal] [word-break:keep-all] mx-auto">
-              Incubator for Future Leaders.
+          {/* Headline: "Incubator for Future Leaders." with balanced symmetric line wrap */}
+          <motion.div variants={itemVariants} className="mb-8 w-full text-center">
+            <h1 className="font-display font-black text-white text-[clamp(2.8rem,7vw,6.4rem)] tracking-[-0.04em] leading-[1.0] text-center [overflow-wrap:normal] [word-break:keep-all] mx-auto max-w-4xl">
+              Incubator for<br className="hidden sm:inline" /> Future Leaders.
             </h1>
           </motion.div>
 
-          {/* Subhead */}
-          <motion.div variants={itemVariants} className="mb-8 max-w-2xl mx-auto text-center">
-            <p className="text-lg sm:text-xl md:text-2xl text-[#8A8A8A] font-light tracking-tight leading-snug">
-              Choose your field. <span className="text-white">We provide the path.</span>
+          {/* Subhead (Line 1 of 3) */}
+          <motion.div variants={itemVariants} className="mb-8 md:mb-10 max-w-2xl mx-auto text-center">
+            <p className="text-lg sm:text-xl md:text-2xl text-[#8A8A8A] font-light tracking-tight leading-relaxed">
+              Choose your field. <span className="text-white font-normal">We provide the path.</span>
             </p>
           </motion.div>
 
-          {/* Micro-path line: Connected steps with SVG arrow connectors */}
-          <motion.div variants={itemVariants} className="mb-10 w-full flex justify-center">
-            <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 py-2.5 px-4 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-sm">
+          {/* Micro-path line (Line 2 of 3): Connected steps with SVG arrow connectors */}
+          <motion.div variants={itemVariants} className="mb-10 md:mb-12 w-full flex justify-center">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 py-3 px-5 sm:px-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
               {microPathSteps.map((step, idx) => (
                 <React.Fragment key={step.label}>
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-mono text-[11px] font-semibold text-[#009D9E]">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="font-mono text-[11px] sm:text-xs font-semibold text-[#009D9E]">
                       {step.num}.
                     </span>
-                    <span className="font-mono text-xs text-white tracking-tight font-medium">
+                    <span className="font-mono text-xs sm:text-sm text-white tracking-tight font-medium">
                       {step.label}
                     </span>
                   </div>
                   {idx < microPathSteps.length - 1 && (
                     <svg
-                      className="w-3.5 h-3.5 text-[#009D9E]/60 shrink-0 mx-0.5"
+                      className="w-3.5 h-3.5 text-[#009D9E]/60 shrink-0 mx-1 sm:mx-1.5"
                       viewBox="0 0 16 16"
                       fill="none"
                       aria-hidden="true"
@@ -163,15 +163,15 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             </div>
           </motion.div>
 
-          {/* Two CTAs */}
+          {/* Two CTAs (Line 3 of 3) */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto mx-auto"
+            className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 w-full sm:w-auto mx-auto pt-2"
           >
             {/* Primary CTA */}
             <button
               onClick={handleApply}
-              className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] hover:scale-[1.04] hover:shadow-[0_0_35px_rgba(0,157,158,0.5)] active:scale-95 transition-all duration-200 cursor-pointer shadow-[0_0_20px_rgba(0,157,158,0.25)]"
+              className="group relative inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] hover:scale-[1.04] hover:shadow-[0_0_35px_rgba(0,157,158,0.5)] active:scale-95 transition-all duration-200 cursor-pointer shadow-[0_0_20px_rgba(0,157,158,0.25)]"
             >
               <span>Apply to YESA</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -180,7 +180,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             {/* Secondary CTA */}
             <button
               onClick={handleExplore}
-              className="group flex items-center justify-center gap-2.5 px-4 py-3 text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
+              className="group flex items-center justify-center gap-3 px-5 py-3.5 text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
             >
               <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#009D9E] group-hover:text-[#009D9E] transition-all">
                 <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />

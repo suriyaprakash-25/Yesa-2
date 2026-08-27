@@ -160,7 +160,7 @@ export const ProcessOverviewSection: React.FC = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full bg-[#090D0F] py-24 md:py-32 border-t border-white/[0.06] overflow-hidden"
+      className="relative w-full bg-[#090D0F] pt-16 pb-4 md:pt-20 md:pb-6 border-t border-white/[0.06] overflow-hidden"
     >
       {/* Background Architectural Grid Accent */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">
@@ -176,7 +176,7 @@ export const ProcessOverviewSection: React.FC = () => {
 
       <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-6">
           <div>
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
@@ -196,7 +196,7 @@ export const ProcessOverviewSection: React.FC = () => {
         </div>
 
         {/* Desktop Horizontal Connected Roadmap */}
-        <div className="hidden lg:block relative my-12 w-full">
+        <div className="hidden lg:block relative my-8 w-full">
           {/* Base Connection Track connecting Node 1 to Node 6 */}
           <div className="absolute top-7 left-[8.333%] right-[8.333%] h-[1px] bg-white/[0.08] z-0" />
           
@@ -223,7 +223,7 @@ export const ProcessOverviewSection: React.FC = () => {
         </div>
 
         {/* Mobile / Tablet Vertical Connected Roadmap */}
-        <div className="lg:hidden relative pl-8 sm:pl-12 my-8 space-y-6">
+        <div className="lg:hidden relative pl-8 sm:pl-12 my-6 space-y-5">
           {/* Vertical Architectural Line */}
           <div className="absolute left-3.5 sm:left-5 top-4 bottom-4 w-[1px] bg-white/[0.08]" />
           <motion.div
@@ -266,7 +266,7 @@ export const ProcessOverviewSection: React.FC = () => {
         </div>
 
         {/* Bottom Connective Action */}
-        <div className="mt-16 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-6 pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="font-mono text-xs text-[#8A8A8A] uppercase tracking-widest">
             Detailed breakdown follows below
           </span>

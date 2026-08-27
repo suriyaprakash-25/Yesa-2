@@ -39,7 +39,7 @@ function MainSite() {
         <div id="process-overview">
           <ProcessOverviewSection />
         </div>
-        <div id="journey">
+        <div>
           <YesaJourneySection />
         </div>
         <div id="infrastructure">

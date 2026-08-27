@@ -171,7 +171,8 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             {/* Primary CTA */}
             <button
               onClick={handleApply}
-              className="group relative inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] hover:scale-[1.04] hover:shadow-[0_0_35px_rgba(0,157,158,0.5)] active:scale-95 transition-all duration-200 cursor-pointer shadow-[0_0_20px_rgba(0,157,158,0.25)]"
+              className="group relative inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] hover:scale-[1.04] hover:shadow-[0_0_35px_rgba(0,157,158,0.5)] active:scale-95 transition-all duration-200 cursor-pointer shadow-[0_0_20px_rgba(0,157,158,0.25)] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-4"
+              aria-label="Apply to the YESA incubator program"
             >
               <span>Apply to YESA</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -180,7 +181,8 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             {/* Secondary CTA */}
             <button
               onClick={handleExplore}
-              className="group flex items-center justify-center gap-3 px-5 py-3.5 text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
+              className="group flex items-center justify-center gap-3 px-5 py-3.5 text-[#8A8A8A] hover:text-white transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-4 rounded-full"
+              aria-label="Scroll down to explore the YESA journey"
             >
               <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#009D9E] group-hover:text-[#009D9E] transition-all">
                 <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />

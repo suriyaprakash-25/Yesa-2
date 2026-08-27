@@ -1,31 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export const GridBackground: React.FC = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    let ticking = false;
+
+    const updateOpacity = () => {
+      if (divRef.current) {
+        const scrollY = window.scrollY;
+        const opacity = 0.02 + Math.abs(Math.sin(scrollY / 1000)) * 0.03;
+        divRef.current.style.opacity = String(opacity);
+      }
+      ticking = false;
     };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateOpacity);
+        ticking = true;
+      }
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Map scroll position to a subtle opacity fluctuation (e.g. between 0.02 and 0.05)
-  // Simple sine wave based on scroll
-  const opacity = 0.02 + Math.abs(Math.sin(scrollY / 1000)) * 0.03;
-
   return (
-    <div 
+    <div
+      ref={divRef}
       className="fixed inset-0 pointer-events-none z-0 mix-blend-screen"
       style={{
-        opacity,
+        opacity: 0.02,
         backgroundSize: '60px 60px',
         backgroundImage: `
           linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
           linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px)
         `,
-        transition: 'opacity 0.2s ease-out'
+        transition: 'opacity 0.15s ease-out',
+        willChange: 'opacity',
       }}
     />
   );

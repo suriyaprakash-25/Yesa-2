@@ -101,6 +101,8 @@ export const InfrastructureSection: React.FC = () => {
             <img
               src={collaborationImg}
               alt="YESA Fellows collaborating in an architectural incubator studio"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center filter brightness-90 contrast-105"
             />
             {/* Cinematic Gradient Overlays */}

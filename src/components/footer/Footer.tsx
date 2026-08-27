@@ -30,25 +30,25 @@ export const Footer: React.FC = () => {
         <nav className="flex flex-wrap justify-center items-center gap-6 md:gap-8" aria-label="Footer Navigation">
           <button
             onClick={() => scrollTo('journey')}
-            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
+            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-2 rounded"
           >
             Journey
           </button>
           <button
             onClick={() => scrollTo('fields')}
-            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
+            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-2 rounded"
           >
             Fields
           </button>
           <button
             onClick={() => scrollTo('experience')}
-            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
+            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-2 rounded"
           >
             Experience
           </button>
           <button
             onClick={() => scrollTo('future')}
-            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
+            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-2 rounded"
           >
             Future
           </button>

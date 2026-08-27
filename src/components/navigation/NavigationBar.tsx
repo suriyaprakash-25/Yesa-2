@@ -88,7 +88,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
         {/* Brand Logo "YESA" Left */}
         <button
           onClick={scrollToTop}
-          className="flex items-center gap-2.5 group cursor-pointer focus:outline-none"
+          className="flex items-center gap-2.5 group cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-4 rounded-lg"
         >
           <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
             <span className="text-[#090D0F] font-display font-black text-xs tracking-tighter">Y.</span>
@@ -138,7 +138,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] transition-colors cursor-pointer"
+            className="md:hidden p-2 rounded-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-2"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

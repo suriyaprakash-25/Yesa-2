@@ -15,8 +15,24 @@ interface Particle {
 
 export const HeroInteractiveField: React.FC<HeroInteractiveFieldProps> = ({ mousePosition }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const mouseRef = useRef(mousePosition);
+  const prefersReducedMotion = useRef(false);
+
+  // Keep mouse ref in sync without re-running the effect
+  useEffect(() => {
+    mouseRef.current = mousePosition;
+  }, [mousePosition]);
 
   useEffect(() => {
+    // Check reduced motion preference
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    prefersReducedMotion.current = mq.matches;
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      prefersReducedMotion.current = e.matches;
+    };
+    mq.addEventListener('change', handleChange);
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -49,15 +65,28 @@ export const HeroInteractiveField: React.FC<HeroInteractiveFieldProps> = ({ mous
       });
     }
 
-    let smoothMouseX = mousePosition.x;
-    let smoothMouseY = mousePosition.y;
+    let smoothMouseX = mouseRef.current.x;
+    let smoothMouseY = mouseRef.current.y;
 
     const render = () => {
+      // If reduced motion, render a static frame (particles but no animation)
+      if (prefersReducedMotion.current) {
+        ctx.clearRect(0, 0, width, height);
+        for (const p of particles) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 157, 158, ${p.baseAlpha * 0.5})`;
+          ctx.fill();
+        }
+        // Don't continue the animation loop
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
-      // Smooth mouse coordinates interpolation
-      smoothMouseX += (mousePosition.x - smoothMouseX) * 0.05;
-      smoothMouseY += (mousePosition.y - smoothMouseY) * 0.05;
+      // Smooth mouse coordinates interpolation from the ref
+      smoothMouseX += (mouseRef.current.x - smoothMouseX) * 0.05;
+      smoothMouseY += (mouseRef.current.y - smoothMouseY) * 0.05;
 
       // Draw subtle ambient radial glow around mouse
       const mouseGrad = ctx.createRadialGradient(
@@ -146,15 +175,17 @@ export const HeroInteractiveField: React.FC<HeroInteractiveFieldProps> = ({ mous
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      mq.removeEventListener('change', handleChange);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [mousePosition]);
+  }, []); // Stable — reads mouseRef.current inside the loop
 
   return (
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
       <canvas
         ref={canvasRef}
         className="w-full h-full block opacity-80 mix-blend-screen"
+        aria-hidden="true"
       />
     </div>
   );

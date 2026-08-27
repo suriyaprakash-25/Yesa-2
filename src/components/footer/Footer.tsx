@@ -10,52 +10,85 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full bg-[#08090B] border-t border-white/5 py-8 md:py-12 relative z-20">
-      <Container className="flex flex-col md:flex-row items-center justify-between gap-6">
-        
-        {/* Left: Minimal Branding */}
-        <div className="flex items-center gap-4">
-          <span className="font-display font-bold text-xl text-white tracking-wide">YESA</span>
-          <div className="w-px h-4 bg-white/20" />
-          <span className="font-mono-tag text-white/40 uppercase tracking-widest text-xs">
-            © {new Date().getFullYear()}
+    <footer className="w-full bg-[#090D0F] border-t border-white/[0.08] py-12 md:py-16 relative z-20">
+      <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 flex flex-col md:flex-row items-center justify-between gap-8">
+        {/* Left: Brand & Tagline */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+          <div className="flex items-center gap-3">
+            <span className="font-display font-black text-2xl text-white tracking-tight">YESA</span>
+            <div className="w-[1px] h-4 bg-white/20" />
+            <span className="font-mono text-xs text-[#8A8A8A]">
+              © {new Date().getFullYear()}
+            </span>
+          </div>
+          <span className="font-mono text-xs text-[#8A8A8A] hidden sm:inline">
+            · Incubator for Future Leaders · 100% Free
           </span>
         </div>
 
-        {/* Right: Navigation */}
-        <nav className="flex flex-wrap justify-center gap-6 md:gap-8">
-          <button 
+        {/* Center/Right: Navigation Links */}
+        <nav className="flex flex-wrap justify-center items-center gap-6 md:gap-8" aria-label="Footer Navigation">
+          <button
             onClick={() => scrollTo('journey')}
-            className="font-mono text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors"
+            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
           >
             Journey
           </button>
-          <button 
+          <button
             onClick={() => scrollTo('fields')}
-            className="font-mono text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors"
+            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
           >
             Fields
           </button>
-          <button 
+          <button
             onClick={() => scrollTo('experience')}
-            className="font-mono text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors"
+            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
           >
             Experience
           </button>
-          <button 
+          <button
             onClick={() => scrollTo('future')}
-            className="font-mono text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors"
+            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer"
           >
             Future
           </button>
-          <button 
+          <button
             onClick={() => scrollTo('apply')}
-            className="font-mono text-xs uppercase tracking-widest text-sky-400 hover:text-sky-300 transition-colors ml-4 md:ml-8"
+            className="font-mono text-xs uppercase tracking-widest text-[#009D9E] hover:text-[#9AEDFC] font-semibold transition-colors cursor-pointer"
           >
             Apply
           </button>
         </nav>
 
+        {/* Social / Network Links */}
+        <div className="flex items-center gap-5 text-xs font-mono text-[#8A8A8A]">
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[#9AEDFC] transition-colors"
+          >
+            X (Twitter)
+          </a>
+          <span>·</span>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[#9AEDFC] transition-colors"
+          >
+            LinkedIn
+          </a>
+          <span>·</span>
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[#9AEDFC] transition-colors"
+          >
+            GitHub
+          </a>
+        </div>
       </Container>
     </footer>
   );

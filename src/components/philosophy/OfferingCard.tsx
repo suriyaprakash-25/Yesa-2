@@ -198,37 +198,37 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({
       {/* ========================================================= */}
       <div className="relative z-10">
         {/* Top Header: Number, Category & Status Badge */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold text-[#009D9E] tracking-wider">
+        <div className="flex items-center justify-between mb-4 sm:mb-5">
+          <div className="flex items-center gap-2.5">
+            <span className="font-mono text-sm sm:text-base font-bold text-[#009D9E] tracking-wider">
               {num}
             </span>
-            <div className="w-3 h-[1px] bg-[#009D9E]/40" />
-            <span className="font-mono text-[10px] uppercase tracking-widest text-[#8A8A8A]">
+            <div className="w-3.5 h-[1px] bg-[#009D9E]/40" />
+            <span className="font-mono text-xs uppercase tracking-[0.18em] text-[#8A8A8A] font-medium">
               {sublabel}
             </span>
           </div>
 
-          <span className="font-mono text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/[0.04] text-[#9AEDFC] border border-white/[0.08] group-hover:border-[#009D9E]/40 transition-colors font-medium">
+          <span className="font-mono text-[11px] sm:text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-white/[0.04] text-[#9AEDFC] border border-white/[0.08] group-hover:border-[#009D9E]/40 transition-colors font-semibold">
             {tag}
           </span>
         </div>
 
-        {/* Card Title (Prominent, clean typography without boxed icon) */}
-        <h4 className="font-display font-black text-xl sm:text-2xl text-white tracking-tight group-hover:text-[#9AEDFC] transition-colors leading-tight mb-3">
+        {/* Card Title (Larger, prominent typography) */}
+        <h4 className="font-display font-black text-2xl sm:text-[1.75rem] text-white tracking-tight group-hover:text-[#9AEDFC] transition-colors leading-tight mb-3.5">
           {title}
         </h4>
 
         {/* Supporting Micro-Spec Feature Pill */}
-        <div className="py-1.5 px-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06] mb-4 flex items-center gap-2">
+        <div className="py-2 px-3 rounded-xl bg-white/[0.03] border border-white/[0.06] mb-4 sm:mb-5 flex items-center gap-2.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E]" />
-          <span className="font-mono text-[10px] text-[#9AEDFC] tracking-tight font-medium">
+          <span className="font-mono text-xs sm:text-[13px] text-[#9AEDFC] tracking-tight font-medium">
             {spec}
           </span>
         </div>
 
         {/* Narrative Description */}
-        <p className="text-xs sm:text-[13px] text-[#8A8A8A] font-light leading-relaxed group-hover:text-white/90 transition-colors">
+        <p className="text-sm sm:text-[15px] text-[#8A8A8A] font-normal leading-relaxed group-hover:text-white/90 transition-colors">
           {description}
         </p>
       </div>
@@ -236,7 +236,7 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({
       {/* ========================================================= */}
       {/* Bottom Technical Status Line (Genuinely distinct per card)*/}
       {/* ========================================================= */}
-      <div className="pt-3.5 mt-5 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-mono relative z-10">
+      <div className="pt-4 mt-6 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono relative z-10">
         <span className="text-[#8A8A8A] uppercase tracking-wider">
           {footerSpec.label}
         </span>

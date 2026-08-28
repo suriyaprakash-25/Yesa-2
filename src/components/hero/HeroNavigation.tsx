@@ -51,13 +51,18 @@ export const HeroNavigation: React.FC<HeroNavigationProps> = ({
 
         {/* Desktop Links */}
         <motion.div variants={itemVariants} className="hidden md:flex items-center gap-8">
-          {['Journey', 'Fields', 'Experience', 'Future'].map((item) => (
+          {[
+            { label: 'Journey', id: 'journey' },
+            { label: 'What We Do', id: 'what-we-do' },
+            { label: 'Fields', id: 'fields' },
+            { label: 'Future', id: 'future' },
+          ].map((item) => (
             <button
-              key={item}
-              onClick={() => onNavigateSection(item.toLowerCase())}
+              key={item.id}
+              onClick={() => onNavigateSection(item.id)}
               className="text-[var(--text-nav)] font-medium text-white/60 hover:text-white transition-colors uppercase tracking-widest font-mono-tag relative group"
             >
-              {item}
+              {item.label}
               <span className="absolute -bottom-2 left-0 w-0 h-px bg-[var(--accent-base)] transition-all duration-300 group-hover:w-full"></span>
             </button>
           ))}

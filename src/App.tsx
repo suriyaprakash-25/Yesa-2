@@ -6,7 +6,6 @@ import { ProcessOverviewSection } from './components/philosophy/ProcessOverviewS
 import { InfrastructureSection } from './components/philosophy/InfrastructureSection';
 import { YesaJourneySection } from './components/journey/YesaJourneySection';
 import { FieldSelectionSection } from './components/fields/FieldSelectionSection';
-import { ExperienceSection } from './components/experience/ExperienceSection';
 import { FutureVisionSection } from './components/future/FutureVisionSection';
 import { FinalCtaSection } from './components/footer/FinalCtaSection';
 import { Footer } from './components/footer/Footer';
@@ -59,14 +58,11 @@ function MainSite() {
         <div>
           <YesaJourneySection />
         </div>
-        <div id="infrastructure">
+        <div id="what-we-do">
           <InfrastructureSection />
         </div>
         <div id="fields">
           <FieldSelectionSection />
-        </div>
-        <div id="experience">
-          <ExperienceSection />
         </div>
         <div id="future">
           <FutureVisionSection />

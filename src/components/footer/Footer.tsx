@@ -56,16 +56,16 @@ export const Footer: React.FC = () => {
             Journey
           </button>
           <button
+            onClick={() => scrollTo('what-we-do')}
+            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-2 rounded"
+          >
+            What We Do
+          </button>
+          <button
             onClick={() => scrollTo('fields')}
             className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-2 rounded"
           >
             Fields
-          </button>
-          <button
-            onClick={() => scrollTo('experience')}
-            className="font-mono text-xs uppercase tracking-widest text-[#8A8A8A] hover:text-white transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-2 rounded"
-          >
-            Experience
           </button>
           <button
             onClick={() => scrollTo('future')}

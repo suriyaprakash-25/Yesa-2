@@ -60,7 +60,7 @@ export const InfrastructureSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative w-full bg-[#090D0F] pt-32 pb-32 md:pt-44 md:pb-44 border-t border-white/[0.06] overflow-hidden scroll-mt-24">
+    <section id="what-we-do" className="relative w-full bg-[#090D0F] pt-32 pb-32 md:pt-44 md:pb-44 border-t border-white/[0.06] overflow-hidden scroll-mt-24">
       {/* Background Subtle Grid Texture */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">
         <div

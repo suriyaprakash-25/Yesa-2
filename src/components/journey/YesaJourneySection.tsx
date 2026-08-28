@@ -80,20 +80,20 @@ const ArchitecturalNode = ({
       {/* Base Node */}
       <motion.div
         style={{ opacity: borderOpacity }}
-        className="w-4 h-4 rounded-full bg-[#090D0F] border-2 border-[#009D9E] relative z-10 shadow-[0_0_12px_rgba(0,157,158,0.8)]"
+        className="w-4 h-4 rounded-full bg-[var(--color-surface-elevated)] border-2 border-[var(--accent-base)] relative z-10 shadow-[var(--shadow-glow-accent)]"
       />
 
       {/* Glow Halo */}
       <motion.div
         style={{ opacity: glowOpacity }}
-        className="absolute w-12 h-12 md:w-16 md:h-16 bg-[#009D9E]/30 blur-lg rounded-full"
+        className="absolute w-12 h-12 md:w-16 md:h-16 bg-[var(--accent-dim)] blur-md rounded-full pointer-events-none"
       />
 
       {/* Apex Radiant Wings for Stage 06 */}
       {idx === 5 && (
         <motion.div
           style={{ opacity: glowOpacity }}
-          className="absolute w-20 h-20 md:w-28 md:h-28 border border-[#9AEDFC]/40 rounded-full animate-[spin_10s_linear_infinite]"
+          className="absolute w-20 h-20 md:w-28 md:h-28 border border-[var(--accent-base)]/40 rounded-full animate-[spin_10s_linear_infinite]"
         />
       )}
     </motion.div>
@@ -126,13 +126,11 @@ const JourneyStageContent: React.FC<{
   smoothProgress: MotionValue<number>;
   totalStages: number;
 }> = ({ stage, idx, smoothProgress, totalStages }) => {
-  // Peak activation point for this stage
   const peak = idx / (totalStages - 1);
-  const delta = 0.12; // Clean activation window
+  const delta = 0.12;
   const start = Math.max(0, peak - delta);
   const end = Math.min(1, peak + delta);
 
-  // Active progression strictly within the window (monotonic for boundary stages)
   const activeStatePoints =
     idx === 0
       ? [0, end]
@@ -149,7 +147,6 @@ const JourneyStageContent: React.FC<{
 
   const activeState = useTransform(smoothProgress, activeStatePoints, activeStateValues);
 
-  // Clean exit: moving upwards on exit, fading cleanly to 0 with zero ghost collision
   const opacityPoints =
     idx === 0
       ? [0, end - delta * 0.4, end]
@@ -181,8 +178,6 @@ const JourneyStageContent: React.FC<{
       : [40, 0, -40];
 
   const contentY = useTransform(smoothProgress, yPoints, yValues);
-
-  // Alternating layout on desktop
   const isEven = idx % 2 === 0;
 
   return (
@@ -200,7 +195,7 @@ const JourneyStageContent: React.FC<{
           style={{ y: contentY }}
           className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 md:gap-16 lg:gap-24 items-center w-full pl-6 sm:pl-12 md:pl-0"
         >
-          {/* Column 1: Text Narrative (or Visual if Odd on Desktop) */}
+          {/* Column 1: Text Narrative */}
           <div
             className={`flex flex-col justify-center ${
               isEven
@@ -210,22 +205,22 @@ const JourneyStageContent: React.FC<{
           >
             {/* Stage Eyebrow */}
             <div className="inline-flex items-center gap-2 mb-2 sm:mb-4">
-              <span className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#009D9E] font-semibold">
+              <span className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-semibold">
                 STAGE {stage.num}
               </span>
-              <div className="w-4 sm:w-6 h-[1px] bg-[#009D9E]/40" />
-              <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-[#8A8A8A]">
+              <div className="w-4 sm:w-6 h-[1px] bg-[var(--accent-base)]/40" />
+              <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-[var(--text-secondary)]">
                 {stage.subtitle}
               </span>
             </div>
 
-            {/* Headline with strict fluid clamp and word-break rule: never break mid-word */}
-            <h3 className="font-display font-black text-[clamp(1.65rem,5.2vw,4.8rem)] text-white tracking-tight leading-[0.98] mb-3 sm:mb-5 [overflow-wrap:normal] [word-break:keep-all] break-normal">
+            {/* Headline */}
+            <h3 className="font-display font-black text-[clamp(1.65rem,5.2vw,4.8rem)] text-[var(--text-primary)] tracking-tight leading-[0.98] mb-3 sm:mb-5 [overflow-wrap:normal] [word-break:keep-all] break-normal">
               {stage.title}
             </h3>
 
             {/* Stage Narrative */}
-            <p className="text-xs sm:text-base lg:text-lg text-[#8A8A8A] font-light leading-relaxed max-w-lg">
+            <p className="text-xs sm:text-base lg:text-lg text-[var(--text-secondary)] font-light leading-relaxed max-w-lg">
               {stage.desc}
             </p>
           </div>
@@ -254,61 +249,47 @@ export const YesaJourneySection: React.FC = () => {
     offset: ['start start', 'end end'],
   });
 
-  // Smooth spring for cinematic pinned transitions
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 45,
-    damping: 28,
-    mass: 1,
-    restDelta: 0.0001,
+    stiffness: 75,
+    damping: 26,
+    mass: 0.6,
   });
 
-  const pathHeight = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
+  const spineHeight = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section id="journey" ref={containerRef} className="relative w-full bg-[#090D0F] text-white">
-      {/* 420vh total distance (~70vh per stage) ensures tight, responsive pacing */}
-      <div className="h-[420vh] relative">
-        <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
-
-          {/* Central Architectural Spine */}
-          <div className="absolute top-0 bottom-0 left-6 md:left-1/2 w-[1px] bg-white/[0.08] md:-translate-x-1/2 z-0">
-            {/* The active progression cyan path with liquid mercury ball */}
+    <section id="journey" ref={containerRef} className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] transition-colors duration-300">
+      {/* Pinned 600vh scroll tracks 6 stages evenly */}
+      <div className="h-[600vh] relative">
+        <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+          {/* Continuous Architectural Spine */}
+          <div className="absolute top-0 bottom-0 left-8 sm:left-14 md:left-1/2 w-[1.5px] bg-[var(--border-subtle)] md:-translate-x-1/2 z-10">
             <motion.div
-              className="w-full bg-gradient-to-b from-[#009D9E]/30 via-[#009D9E] to-[#9AEDFC] shadow-[0_0_10px_rgba(0,157,158,0.5)] origin-top relative"
-              style={{ height: pathHeight }}
+              style={{ height: spineHeight }}
+              className="w-full bg-gradient-to-b from-[var(--accent-base)]/40 via-[var(--accent-base)] to-[var(--accent-light)] shadow-[var(--shadow-glow-accent)] origin-top relative"
             >
-              {/* Liquid Mercury Glowing Ball at the moving tip of the central line */}
+              {/* Mercury Liquid Droplet Tip */}
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 flex items-center justify-center pointer-events-none z-30">
-                {/* Reduced subtle ambient aura */}
-                <div className="absolute w-6 h-6 rounded-full bg-[#009D9E]/25 blur-[3px]" />
-
-                {/* Mercury Liquid Droplet Shell (Metallic Chrome & Cyan Reflective Core) */}
-                <div className="relative w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gradient-to-tr from-[#00484A] via-[#9AEDFC] to-[#FFFFFF] p-[1px] shadow-[0_0_10px_rgba(154,237,252,0.7),0_0_4px_rgba(0,157,158,0.4)] border border-white/80">
-                  <div className="w-full h-full rounded-full bg-gradient-to-br from-[#FFFFFF] via-[#009D9E] to-[#041A1C] relative overflow-hidden flex items-center justify-center">
-                    {/* Specular Liquid Reflection Highlight */}
-                    <div className="absolute top-0.5 left-0.5 w-1.2 h-0.8 rounded-full bg-white/95 blur-[0.2px]" />
-                    <div className="w-1 h-1 rounded-full bg-white shadow-[0_0_3px_#FFFFFF]" />
+                <div className="absolute w-5 h-5 rounded-full bg-[var(--accent-base)]/25 blur-xs" />
+                <div className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-tr from-[var(--accent-base)] via-[var(--accent-light)] to-white p-[1px] shadow-sm border border-white/80">
+                  <div className="w-full h-full rounded-full bg-[var(--accent-base)] relative overflow-hidden flex items-center justify-center">
+                    <div className="w-1 h-1 rounded-full bg-white shadow-sm" />
                   </div>
                 </div>
-
-                {/* Subtle Trailing Fluid Droplet */}
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#009D9E]/70 blur-[0.3px]" />
               </div>
             </motion.div>
           </div>
 
-          {/* 6 Journey Stages with Distinct Visuals and Clean Non-Colliding Transitions */}
-          <div className="absolute inset-0">
-            {JOURNEY_STAGES.map((stage, idx) => (
-              <JourneyStageContent
-                key={stage.num}
-                stage={stage}
-                idx={idx}
-                smoothProgress={smoothProgress}
-                totalStages={JOURNEY_STAGES.length}
-              />
-            ))}
-          </div>
+          {/* Render 6 Stages */}
+          {JOURNEY_STAGES.map((stage, idx) => (
+            <JourneyStageContent
+              key={stage.num}
+              stage={stage}
+              idx={idx}
+              smoothProgress={smoothProgress}
+              totalStages={JOURNEY_STAGES.length}
+            />
+          ))}
         </div>
       </div>
     </section>

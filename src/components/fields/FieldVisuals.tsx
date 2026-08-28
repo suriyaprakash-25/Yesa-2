@@ -8,7 +8,7 @@ import salesMarketingImg from '../../assets/roadmap/04-sales-marketing.jpg';
 
 export const AgentDevelopmentVisual: React.FC = () => {
   return (
-    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[#090D0F] border border-white/[0.08] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-inner">
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-sm">
       {/* High-Resolution Background Image */}
       <img
         src={agentDevImg}
@@ -17,22 +17,22 @@ export const AgentDevelopmentVisual: React.FC = () => {
         loading="lazy"
       />
 
-      {/* Dark Vignette & Edge Shadow Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#090D0F]/90 via-[#090D0F]/30 to-[#090D0F]/70 pointer-events-none" />
+      {/* Vignette & Edge Shadow Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-card)]/90 via-[var(--color-surface-card)]/30 to-[var(--color-surface-card)]/70 pointer-events-none transition-colors duration-300" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[#8A8A8A] relative z-10 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md">
-        <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+        <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           AGENT_TOPOLOGY
         </span>
-        <span className="text-white/70 font-medium">DISCIPLINE 01</span>
+        <span className="text-[var(--text-primary)] font-medium">DISCIPLINE 01</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-white/80 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md relative z-10">
-        <span className="text-[#8A8A8A]">TOPOLOGY: MULTI-AGENT</span>
-        <span className="text-[#9AEDFC] font-semibold">SYSTEMS ARCHITECTURE</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+        <span className="text-[var(--text-secondary)]">TOPOLOGY: MULTI-AGENT</span>
+        <span className="text-[var(--accent-base)] font-bold">SYSTEMS ARCHITECTURE</span>
       </div>
     </div>
   );
@@ -40,7 +40,7 @@ export const AgentDevelopmentVisual: React.FC = () => {
 
 export const DesignVisual: React.FC = () => {
   return (
-    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[#090D0F] border border-white/[0.08] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-inner">
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-sm">
       {/* High-Resolution Background Image */}
       <img
         src={designImg}
@@ -49,22 +49,22 @@ export const DesignVisual: React.FC = () => {
         loading="lazy"
       />
 
-      {/* Dark Vignette & Edge Shadow Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#090D0F]/90 via-[#090D0F]/30 to-[#090D0F]/70 pointer-events-none" />
+      {/* Vignette & Edge Shadow Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-card)]/90 via-[var(--color-surface-card)]/30 to-[var(--color-surface-card)]/70 pointer-events-none transition-colors duration-300" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[#8A8A8A] relative z-10 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md">
-        <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+        <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           GRID_ARCHITECTURE
         </span>
-        <span className="text-white/70 font-medium">DISCIPLINE 02</span>
+        <span className="text-[var(--text-primary)] font-medium">DISCIPLINE 02</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-white/80 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md relative z-10">
-        <span className="text-[#8A8A8A]">CANVAS: DESIGN SYSTEMS</span>
-        <span className="text-[#9AEDFC] font-semibold">INTERFACE PRECISION</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+        <span className="text-[var(--text-secondary)]">CANVAS: DESIGN SYSTEMS</span>
+        <span className="text-[var(--accent-base)] font-bold">INTERFACE PRECISION</span>
       </div>
     </div>
   );
@@ -72,7 +72,7 @@ export const DesignVisual: React.FC = () => {
 
 export const ProductVisual: React.FC = () => {
   return (
-    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[#090D0F] border border-white/[0.08] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-inner">
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-sm">
       {/* High-Resolution Background Image */}
       <img
         src={productImg}
@@ -81,22 +81,22 @@ export const ProductVisual: React.FC = () => {
         loading="lazy"
       />
 
-      {/* Dark Vignette & Edge Shadow Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#090D0F]/90 via-[#090D0F]/30 to-[#090D0F]/70 pointer-events-none" />
+      {/* Vignette & Edge Shadow Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-card)]/90 via-[var(--color-surface-card)]/30 to-[var(--color-surface-card)]/70 pointer-events-none transition-colors duration-300" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[#8A8A8A] relative z-10 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md">
-        <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+        <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           ROADMAP_ORCHESTRATION
         </span>
-        <span className="text-white/70 font-medium">DISCIPLINE 03</span>
+        <span className="text-[var(--text-primary)] font-medium">DISCIPLINE 03</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-white/80 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md relative z-10">
-        <span className="text-[#8A8A8A]">ALIGNMENT: STRATEGY & ROADMAP</span>
-        <span className="text-[#9AEDFC] font-semibold">END-TO-END EXECUTION</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+        <span className="text-[var(--text-secondary)]">ALIGNMENT: STRATEGY & ROADMAP</span>
+        <span className="text-[var(--accent-base)] font-bold">END-TO-END EXECUTION</span>
       </div>
     </div>
   );
@@ -104,7 +104,7 @@ export const ProductVisual: React.FC = () => {
 
 export const SalesMarketingVisual: React.FC = () => {
   return (
-    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[#090D0F] border border-white/[0.08] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-inner">
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-sm">
       {/* High-Resolution Background Image */}
       <img
         src={salesMarketingImg}
@@ -113,22 +113,22 @@ export const SalesMarketingVisual: React.FC = () => {
         loading="lazy"
       />
 
-      {/* Dark Vignette & Edge Shadow Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#090D0F]/90 via-[#090D0F]/30 to-[#090D0F]/70 pointer-events-none" />
+      {/* Vignette & Edge Shadow Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-card)]/90 via-[var(--color-surface-card)]/30 to-[var(--color-surface-card)]/70 pointer-events-none transition-colors duration-300" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[#8A8A8A] relative z-10 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md">
-        <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
-          DISTRIBUTION_NETWORK
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+        <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
+          GLOBAL_DISTRIBUTION
         </span>
-        <span className="text-white/70 font-medium">DISCIPLINE 04</span>
+        <span className="text-[var(--text-primary)] font-medium">DISCIPLINE 04</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-white/80 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md relative z-10">
-        <span className="text-[#8A8A8A]">CHANNELS: GLOBAL DISTRIBUTION</span>
-        <span className="text-[#9AEDFC] font-semibold">GROWTH PIPELINE</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+        <span className="text-[var(--text-secondary)]">GROWTH: ENTERPRISE SPRINT</span>
+        <span className="text-[var(--accent-base)] font-bold">REVENUE ARCHITECTURE</span>
       </div>
     </div>
   );

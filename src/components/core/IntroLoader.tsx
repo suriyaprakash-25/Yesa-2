@@ -36,10 +36,10 @@ export const IntroLoader: React.FC = () => {
             filter: 'blur(12px)',
             transition: { duration: 0.28, ease: [0.16, 1, 0.3, 1] } 
           }}
-          className="fixed inset-0 z-[99998] flex flex-col items-center justify-center bg-[#090D0F] select-none pointer-events-auto"
+          className="fixed inset-0 z-[99998] flex flex-col items-center justify-center bg-[var(--color-bg-base)] select-none pointer-events-auto transition-colors duration-300"
         >
           {/* Subtle ambient glow behind logo */}
-          <div className="absolute w-72 h-72 bg-[#009D9E]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute w-72 h-72 bg-[var(--accent-dim)] rounded-full blur-3xl pointer-events-none" />
 
           {/* Letter Stagger Reveal */}
           <div className="relative flex items-center gap-1 sm:gap-2 overflow-hidden mb-4">
@@ -53,33 +53,30 @@ export const IntroLoader: React.FC = () => {
                   delay: 0.1 + i * 0.08,
                   ease: [0.16, 1, 0.3, 1]
                 }}
-                className="font-display font-black text-5xl sm:text-7xl md:text-8xl tracking-tight text-white inline-block"
+                className="font-display font-black text-5xl sm:text-7xl md:text-8xl tracking-tight text-[var(--text-primary)] inline-block"
               >
                 {letter}
               </motion.span>
             ))}
           </div>
 
-          {/* Subtle Technical Tagline */}
+          {/* Minimal Baseline Rule */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-2"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
-            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#8A8A8A]">
-              Incubator for Future Leaders
-            </span>
-          </motion.div>
-
-          {/* Micro loading line */}
-          <motion.div 
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: 140, opacity: 1 }}
-            transition={{ duration: 0.65, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="h-[1px] bg-gradient-to-r from-transparent via-[#009D9E] to-transparent mt-6"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="w-16 h-[1.5px] bg-[var(--accent-base)] origin-center"
           />
+
+          {/* Minimal Mono Tagline */}
+          <motion.span
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--text-secondary)] mt-3"
+          >
+            Incubator for Future Leaders
+          </motion.span>
         </motion.div>
       )}
     </AnimatePresence>

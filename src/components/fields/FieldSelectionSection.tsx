@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import { Container } from '../core/Container';
 import { YESA_DISCIPLINES, type Discipline } from './fieldData';
 import { DisciplineVisual } from './FieldVisuals';
@@ -10,58 +9,52 @@ interface FieldSelectionSectionProps {
   onSelectField?: (fieldId: string) => void;
 }
 
-export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ onSelectField }) => {
+export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({
+  onSelectField,
+}) => {
   const [activeId, setActiveId] = useState<string>(YESA_DISCIPLINES[0].id);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const navigate = useNavigate();
 
-  const activeDiscipline: Discipline =
+  const activeDiscipline =
     YESA_DISCIPLINES.find((d) => d.id === activeId) || YESA_DISCIPLINES[0];
 
-  const handleSelect = (field: Discipline) => {
-    setSelectedId(field.id);
+  const handleSelect = (discipline: Discipline) => {
+    setSelectedId(discipline.id);
     if (onSelectField) {
-      onSelectField(field.id);
-    } else {
-      setTimeout(() => {
-        navigate(`/apply?discipline=${encodeURIComponent(field.id)}`);
-      }, 250);
+      onSelectField(discipline.id);
     }
   };
 
   return (
     <section
       id="fields"
-      className="relative w-full bg-[#090D0F] pt-14 pb-14 md:pt-18 md:pb-18 border-t border-white/[0.06] overflow-hidden scroll-mt-20"
+      className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] pt-16 pb-16 md:pt-22 md:pb-22 border-t border-[var(--border-subtle)] overflow-hidden scroll-mt-20 transition-colors duration-300"
     >
       <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
         {/* Section Header */}
-        <div className="max-w-3xl mb-6 md:mb-8 text-left">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#009D9E] font-semibold">
+        <div className="max-w-3xl mb-8 md:mb-12 text-left">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--border-subtle)] mb-4 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[var(--accent-base)]" />
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent-base)] font-semibold">
               CHOOSE YOUR FIELD
             </span>
           </div>
 
-          <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white tracking-tight leading-[1.05] [overflow-wrap:normal] [word-break:keep-all]">
+          <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[var(--text-primary)] tracking-tight leading-[1.05] [overflow-wrap:normal] [word-break:keep-all]">
             Specialized tracks built for exceptional talent.
           </h2>
-          <p className="text-sm md:text-base text-[#8A8A8A] font-light mt-4 max-w-xl leading-relaxed">
-            Select your discipline. Your entire YESA path — from initial volunteering to world-class
-            leadership — adapts to your chosen domain.
-          </p>
         </div>
 
-        {/* Desktop Interactive Discipline Map (lg+) */}
+        {/* Desktop Split Layout (>= lg) */}
         <div className="hidden lg:grid lg:grid-cols-12 gap-8 xl:gap-12 items-start relative">
-          {/* Left Column: Interactive Discipline List */}
-          <div className="lg:col-span-5 flex flex-col space-y-4 relative" role="tablist" aria-label="YESA Disciplines">
-            <div className="flex items-center justify-between pb-3 border-b border-white/[0.06] mb-2">
-              <span className="font-mono text-xs text-[#8A8A8A] uppercase tracking-[0.2em]">
+          
+          {/* Left Column: Interactive Tab Rail */}
+          <div className="lg:col-span-5 flex flex-col space-y-2 relative">
+            <div className="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)] mb-2">
+              <span className="font-mono text-xs text-[var(--text-secondary)] uppercase tracking-[0.2em]">
                 DISCIPLINE SELECTOR
               </span>
-              <span className="font-mono text-[11px] text-[#009D9E]">04 DOMAINS</span>
+              <span className="font-mono text-[11px] text-[var(--accent-base)] font-bold">04 DOMAINS</span>
             </div>
 
             {YESA_DISCIPLINES.map((discipline) => {
@@ -83,15 +76,15 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
                     }}
                     className={`group relative w-full text-left p-5 rounded-2xl transition-all duration-300 cursor-pointer flex items-center justify-between z-10 ${
                       isActive
-                        ? 'bg-white/[0.04] border border-[#009D9E]/50 shadow-[0_4px_24px_rgba(0,157,158,0.15)]'
-                        : 'bg-transparent border border-transparent hover:bg-white/[0.02] hover:border-white/[0.04]'
+                        ? 'bg-[var(--color-surface-card)] border border-[var(--accent-base)]/50 shadow-[var(--shadow-subtle)]'
+                        : 'bg-transparent border border-transparent hover:bg-[var(--color-surface-card)]/50 hover:border-[var(--border-subtle)]'
                     }`}
                   >
                     {/* Left Side: Number & Name */}
                     <div className="flex items-center gap-4">
                       <span
                         className={`font-mono text-sm sm:text-base font-bold transition-colors ${
-                          isActive ? 'text-[#009D9E]' : 'text-[#8A8A8A]/60 group-hover:text-white/60'
+                          isActive ? 'text-[var(--accent-base)]' : 'text-[var(--text-secondary)]/70 group-hover:text-[var(--text-primary)]'
                         }`}
                       >
                         {discipline.num}
@@ -100,8 +93,8 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
                       <span
                         className={`font-display font-black text-xl sm:text-2xl tracking-tight transition-all duration-300 ${
                           isActive
-                            ? 'text-white translate-x-1'
-                            : 'text-[#8A8A8A] opacity-40 group-hover:opacity-80'
+                            ? 'text-[var(--text-primary)] translate-x-1'
+                            : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'
                         }`}
                       >
                         {discipline.title}
@@ -112,24 +105,24 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
                     <div className="flex items-center gap-2">
                       {isActive && (
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-[10px] uppercase text-[#9AEDFC] font-semibold tracking-wider hidden xl:inline">
+                          <span className="font-mono text-[10px] uppercase text-[var(--accent-base)] font-bold tracking-wider hidden xl:inline">
                             SELECTED
                           </span>
-                          <div className="w-2.5 h-2.5 rounded-full bg-[#009D9E] border border-[#9AEDFC] shadow-[0_0_10px_#009D9E]" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-[var(--accent-base)] border border-[var(--accent-light)] shadow-[var(--shadow-glow-accent)]" />
                         </div>
                       )}
                     </div>
                   </button>
 
-                  {/* Architectural Connecting Bridge Line (Discipline Map Line connecting to detail panel) */}
+                  {/* Architectural Connecting Bridge Line */}
                   {isActive && (
                     <motion.div
                       layoutId="discipline-map-bridge"
                       className="hidden lg:flex items-center absolute -right-8 xl:-right-12 top-1/2 -translate-y-1/2 w-8 xl:w-12 pointer-events-none z-20"
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     >
-                      <div className="h-[2px] w-full bg-gradient-to-r from-[#009D9E] to-[#9AEDFC] shadow-[0_0_8px_rgba(0,157,158,0.8)]" />
-                      <div className="w-2 h-2 rounded-full bg-[#9AEDFC] shadow-[0_0_8px_#9AEDFC] -ml-1 shrink-0" />
+                      <div className="h-[2px] w-full bg-gradient-to-r from-[var(--accent-base)] to-[var(--accent-light)] shadow-[var(--shadow-glow-accent)]" />
+                      <div className="w-2 h-2 rounded-full bg-[var(--accent-base)] -ml-1 shrink-0 shadow-sm" />
                     </motion.div>
                   )}
                 </div>
@@ -137,11 +130,11 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
             })}
           </div>
 
-          {/* Right Column: Unified Detail Panel (Smooth Cross-Fade) */}
+          {/* Right Column: Unified Detail Panel */}
           <div className="lg:col-span-7">
-            <div className="relative p-8 sm:p-10 rounded-2xl bg-white/[0.02] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] min-h-[480px] flex flex-col justify-between overflow-hidden">
+            <div className="relative p-8 sm:p-10 rounded-2xl bg-[var(--color-surface-card)] border border-[var(--border-subtle)] shadow-[var(--shadow-elevated)] min-h-[480px] flex flex-col justify-between overflow-hidden">
               {/* Corner Architectural Bracket */}
-              <div className="absolute top-5 right-5 w-6 h-6 border-t border-r border-[#009D9E]/50 pointer-events-none" />
+              <div className="absolute top-5 right-5 w-6 h-6 border-t border-r border-[var(--accent-base)]/50 pointer-events-none" />
 
               <AnimatePresence mode="wait">
                 <motion.div
@@ -153,30 +146,30 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
                   id={`panel-${activeDiscipline.id}`}
                   className="space-y-6 flex-1 flex flex-col justify-between"
                 >
-                  {/* Panel Top: Category Tag & Large Heading */}
+                  {/* Panel Top */}
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-xs font-bold text-[#009D9E] tracking-wider">
+                        <span className="font-mono text-xs font-bold text-[var(--accent-base)] tracking-wider">
                           {activeDiscipline.tag}
                         </span>
-                        <div className="w-4 h-[1px] bg-[#009D9E]/40" />
-                        <span className="font-mono text-[10px] uppercase tracking-widest text-[#8A8A8A]">
+                        <div className="w-4 h-[1px] bg-[var(--accent-base)]/40" />
+                        <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-secondary)]">
                           {activeDiscipline.spec}
                         </span>
                       </div>
-                      <span className="font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full bg-[#009D9E]/15 border border-[#009D9E]/30 text-[#9AEDFC] font-medium">
+                      <span className="font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full bg-[var(--accent-dim)] border border-[var(--accent-glow)] text-[var(--accent-base)] font-bold">
                         {activeDiscipline.badge}
                       </span>
                     </div>
 
-                    <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-white tracking-tight leading-tight">
+                    <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-[var(--text-primary)] tracking-tight leading-tight">
                       {activeDiscipline.title}
                     </h3>
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm md:text-base text-[#8A8A8A] font-light leading-relaxed">
+                  <p className="text-sm md:text-base text-[var(--text-secondary)] font-light leading-relaxed">
                     {activeDiscipline.shortDesc}
                   </p>
 
@@ -186,9 +179,9 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
                   </div>
 
                   {/* Bottom Action Row */}
-                  <div className="pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <span className="font-mono text-xs text-[#8A8A8A] flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E]" />
+                  <div className="pt-4 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <span className="font-mono text-xs text-[var(--text-secondary)] flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)]" />
                       Direct Pathway Alignment
                     </span>
 
@@ -196,13 +189,13 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
                       onClick={() => handleSelect(activeDiscipline)}
                       className={`group relative inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                         selectedId === activeDiscipline.id
-                          ? 'bg-[#9AEDFC] text-[#090D0F] shadow-[0_0_25px_rgba(0,157,158,0.7)]'
-                          : 'bg-[#009D9E] hover:bg-[#9AEDFC] text-[#090D0F] hover:scale-[1.03] shadow-[0_0_20px_rgba(0,157,158,0.3)]'
+                          ? 'bg-[var(--accent-base)] text-[var(--color-bg-base)] shadow-md'
+                          : 'bg-[var(--accent-base)] hover:bg-[var(--accent-light)] text-[var(--color-bg-base)] hover:scale-[1.03] shadow-sm hover:shadow-[var(--shadow-glow-accent)]'
                       }`}
                     >
                       {selectedId === activeDiscipline.id ? (
                         <>
-                          <CheckCircle2 className="w-4 h-4 text-[#090D0F]" />
+                          <CheckCircle2 className="w-4 h-4 text-white" />
                           <span>DISCIPLINE LOCKED</span>
                         </>
                       ) : (
@@ -219,9 +212,8 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
           </div>
         </div>
 
-        {/* Mobile Swipeable Carousel (< lg) */}
+        {/* Mobile Selection Tabs (< lg) */}
         <div className="lg:hidden">
-          {/* Quick Selection Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-4 no-scrollbar">
             {YESA_DISCIPLINES.map((d) => (
               <button
@@ -229,8 +221,8 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
                 onClick={() => setActiveId(d.id)}
                 className={`px-3.5 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider whitespace-nowrap transition-all ${
                   activeId === d.id
-                    ? 'bg-[#009D9E] text-[#090D0F] font-bold shadow-[0_0_12px_rgba(0,157,158,0.4)]'
-                    : 'bg-white/[0.03] text-[#8A8A8A] border border-white/[0.06]'
+                    ? 'bg-[var(--accent-base)] text-[var(--color-bg-base)] font-bold shadow-sm'
+                    : 'bg-[var(--color-surface-card)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'
                 }`}
               >
                 {d.num}. {d.title}
@@ -239,22 +231,22 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
           </div>
 
           {/* Active Detail Card on Mobile */}
-          <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col space-y-5">
+          <div className="p-6 rounded-2xl bg-[var(--color-surface-card)] border border-[var(--border-subtle)] shadow-[var(--shadow-elevated)] flex flex-col space-y-5">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="font-mono text-xs font-bold text-[#009D9E]">
+                <span className="font-mono text-xs font-bold text-[var(--accent-base)]">
                   {activeDiscipline.tag}
                 </span>
-                <span className="font-mono text-[10px] text-[#9AEDFC] px-2 py-0.5 rounded bg-[#009D9E]/15 border border-[#009D9E]/30">
+                <span className="font-mono text-[10px] text-[var(--accent-base)] px-2 py-0.5 rounded bg-[var(--accent-dim)] border border-[var(--accent-glow)] font-semibold">
                   {activeDiscipline.badge}
                 </span>
               </div>
-              <h3 className="font-display font-bold text-2xl text-white">
+              <h3 className="font-display font-bold text-2xl text-[var(--text-primary)]">
                 {activeDiscipline.title}
               </h3>
             </div>
 
-            <p className="text-xs text-[#8A8A8A] font-light leading-relaxed">
+            <p className="text-xs text-[var(--text-secondary)] font-light leading-relaxed">
               {activeDiscipline.shortDesc}
             </p>
 
@@ -264,7 +256,7 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
 
             <button
               onClick={() => handleSelect(activeDiscipline)}
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-mono text-xs font-bold uppercase tracking-wider bg-[#009D9E] text-[#090D0F] hover:bg-[#9AEDFC] transition-all cursor-pointer shadow-[0_0_15px_rgba(0,157,158,0.3)]"
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-mono text-xs font-bold uppercase tracking-wider bg-[var(--accent-base)] text-[var(--color-bg-base)] hover:bg-[var(--accent-light)] transition-all cursor-pointer shadow-md"
             >
               <span>SELECT THIS DISCIPLINE</span>
               <ArrowRight className="w-4 h-4" />

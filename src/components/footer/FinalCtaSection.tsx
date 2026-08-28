@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Container } from '../core/Container';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface FinalCtaSectionProps {
   onOpenApply?: () => void;
@@ -45,11 +45,10 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--border-subtle)] mb-6 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[var(--accent-base)]" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent-base)] font-semibold">
-              THE BEGINNING
-            </span>
+          <div className="flex items-center justify-center gap-3 mb-6 font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold">
+            <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
+            <span>THE BEGINNING</span>
+            <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
           </div>
 
           <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl text-[var(--text-primary)] tracking-tight leading-[1.0] mb-6 [overflow-wrap:normal] [word-break:keep-all]">

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 // Import Roadmap Stage Images
 import applicationImg from '../../assets/roadmap/application img.png';
@@ -133,11 +133,9 @@ export const ProcessOverviewSection: React.FC = () => {
           <div className="max-w-[1600px] w-full mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 z-20 shrink-0">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--border-subtle)] mb-3 shadow-sm">
-                  <Sparkles className="w-3.5 h-3.5 text-[var(--accent-base)]" />
-                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent-base)] font-semibold">
-                    SYSTEM ARCHITECTURE
-                  </span>
+                <div className="flex items-center gap-3 mb-3 font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold">
+                  <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
+                  <span>SYSTEM ARCHITECTURE</span>
                 </div>
                 <h3 className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-[var(--text-primary)] tracking-tight leading-none [overflow-wrap:normal] [word-break:keep-all]">
                   The 6-Stage Roadmap.

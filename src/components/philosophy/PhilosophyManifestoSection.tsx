@@ -84,11 +84,10 @@ export const PhilosophyManifestoSection: React.FC = () => {
               }}
               className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-4"
             >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--accent-base)]/40 mb-6 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent-base)] font-semibold">
-                  THE FORMULA
-                </span>
+              <div className="flex items-center gap-3 mb-6 font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold">
+                <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
+                <span>THE FORMULA</span>
+                <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
               </div>
               <h2 className="font-editorial font-medium md:font-semibold text-[var(--text-primary)] tracking-[-0.025em] text-[clamp(3rem,8vw+1.2rem,7rem)] leading-[1.04] [overflow-wrap:normal] [word-break:keep-all]">
                 YOU NEED<br />

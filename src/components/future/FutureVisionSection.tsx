@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Container } from '../core/Container';
 import { BranchingPathVisualizer } from './BranchingPathVisualizer';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export const FutureVisionSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -56,11 +56,10 @@ export const FutureVisionSection: React.FC = () => {
               style={{ opacity: stackOpacity, y: stackY }}
               className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-4"
             >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--border-subtle)] mb-8 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#009D9E] font-semibold">
-                  FUTURE PROGRESSION
-                </span>
+              <div className="flex items-center gap-3 mb-8 font-mono text-xs uppercase tracking-[0.25em] text-[#009D9E] font-bold">
+                <span className="w-5 h-[1.5px] bg-[#009D9E]" />
+                <span>FUTURE PROGRESSION</span>
+                <span className="w-5 h-[1.5px] bg-[#009D9E]" />
               </div>
 
               <div className="flex flex-col items-center gap-4 sm:gap-6 font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight uppercase">
@@ -95,11 +94,10 @@ export const FutureVisionSection: React.FC = () => {
                 style={{ opacity: headerOpacity, y: headerY }}
                 className="text-center mb-2 z-10"
               >
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--border-subtle)] mb-2.5 shadow-sm">
-                  <Sparkles className="w-3.5 h-3.5 text-[var(--accent-base)]" />
-                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent-base)] font-semibold">
-                    IN THE FUTURE
-                  </span>
+                <div className="flex items-center justify-center gap-3 mb-2.5 font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold">
+                  <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
+                  <span>IN THE FUTURE</span>
+                  <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
                 </div>
                 <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[var(--text-primary)] tracking-tight">
                   Two Pathways for Future Leaders.

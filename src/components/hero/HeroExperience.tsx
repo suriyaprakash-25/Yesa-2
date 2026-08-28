@@ -118,16 +118,11 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           animate="show"
           style={{ y: yHeroText, opacity: opacityHero }}
         >
-          {/* 1. Eyebrow label */}
+          {/* 1. Eyebrow label — Human architectural kicker */}
           <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--border-subtle)] backdrop-blur-md shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-base)] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent-base)]"></span>
-              </span>
-              <span className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-[var(--text-secondary)] font-medium">
-                100% FREE INCUBATOR PROGRAM
-              </span>
+            <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold">
+              <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
+              <span>100% FREE INCUBATOR PROGRAM</span>
             </div>
           </motion.div>
 

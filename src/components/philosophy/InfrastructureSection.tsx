@@ -64,11 +64,9 @@ export const InfrastructureSection: React.FC = () => {
       <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
         {/* Section Header */}
         <div className="max-w-3xl mb-8 md:mb-10 text-left">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--border-subtle)] mb-4 shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent-base)] font-semibold">
-              WHAT WE DO
-            </span>
+          <div className="flex items-center gap-3 mb-4 font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold">
+            <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
+            <span>WHAT WE DO</span>
           </div>
 
           <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[var(--text-primary)] tracking-tight leading-[1.05] [overflow-wrap:normal] [word-break:keep-all]">

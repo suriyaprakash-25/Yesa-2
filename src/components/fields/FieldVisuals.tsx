@@ -1,43 +1,38 @@
 import React from 'react';
 
+// Import Discipline High-Resolution Visual Assets
+import agentDevImg from '../../assets/roadmap/01-agent-development.jpg';
+import designImg from '../../assets/roadmap/02-design.jpg';
+import productImg from '../../assets/roadmap/03-product.jpg';
+import salesMarketingImg from '../../assets/roadmap/04-sales-marketing.jpg';
+
 export const AgentDevelopmentVisual: React.FC = () => {
   return (
-    <div className="w-full h-44 rounded-2xl bg-white/[0.02] border border-white/[0.06] p-4 flex flex-col justify-between relative overflow-hidden">
-      {/* Background Accent Grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,157,158,0.12),transparent_70%)] pointer-events-none" />
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[#090D0F] border border-white/[0.08] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-inner">
+      {/* High-Resolution Background Image */}
+      <img
+        src={agentDevImg}
+        alt="YESA Agent Development Discipline"
+        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
+        loading="lazy"
+      />
+
+      {/* Dark Vignette & Edge Shadow Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#090D0F]/90 via-[#090D0F]/30 to-[#090D0F]/70 pointer-events-none" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[9px] text-[#8A8A8A] relative z-10">
+      <div className="flex items-center justify-between font-mono text-[10px] text-[#8A8A8A] relative z-10 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md">
         <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
           AGENT_TOPOLOGY
         </span>
-        <span className="text-white/40">DISCIPLINE 01</span>
-      </div>
-
-      {/* Node Topology */}
-      <div className="relative py-2 flex items-center justify-center">
-        <svg viewBox="0 0 260 70" className="w-full h-16" fill="none">
-          {/* Connecting Vectors */}
-          <path
-            d="M30,35 L90,18 L170,18 L230,35 M90,18 L130,52 L170,18 M30,35 L130,52 L230,35"
-            stroke="#009D9E"
-            strokeWidth="1.25"
-            strokeOpacity="0.4"
-          />
-          {/* Illustrative data nodes */}
-          <circle cx="90" cy="18" r="3" fill="#9AEDFC" />
-          <circle cx="170" cy="18" r="3" fill="#9AEDFC" />
-          <circle cx="130" cy="52" r="3.5" fill="#009D9E" />
-          <circle cx="30" cy="35" r="4" fill="#090D0F" stroke="#009D9E" strokeWidth="2" />
-          <circle cx="230" cy="35" r="4" fill="#090D0F" stroke="#009D9E" strokeWidth="2" />
-        </svg>
+        <span className="text-white/70 font-medium">DISCIPLINE 01</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[9px] text-white/50 pt-2 border-t border-white/[0.04] relative z-10">
-        <span>TOPOLOGY: MULTI-AGENT</span>
-        <span className="text-[#9AEDFC]">SYSTEMS ARCHITECTURE</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-white/80 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md relative z-10">
+        <span className="text-[#8A8A8A]">TOPOLOGY: MULTI-AGENT</span>
+        <span className="text-[#9AEDFC] font-semibold">SYSTEMS ARCHITECTURE</span>
       </div>
     </div>
   );
@@ -45,36 +40,31 @@ export const AgentDevelopmentVisual: React.FC = () => {
 
 export const DesignVisual: React.FC = () => {
   return (
-    <div className="w-full h-44 rounded-2xl bg-white/[0.02] border border-white/[0.06] p-4 flex flex-col justify-between relative overflow-hidden">
-      {/* Background Accent Grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(0,157,158,0.12),transparent_70%)] pointer-events-none" />
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[#090D0F] border border-white/[0.08] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-inner">
+      {/* High-Resolution Background Image */}
+      <img
+        src={designImg}
+        alt="YESA Design Discipline"
+        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
+        loading="lazy"
+      />
+
+      {/* Dark Vignette & Edge Shadow Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#090D0F]/90 via-[#090D0F]/30 to-[#090D0F]/70 pointer-events-none" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[9px] text-[#8A8A8A] relative z-10">
+      <div className="flex items-center justify-between font-mono text-[10px] text-[#8A8A8A] relative z-10 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md">
         <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
           GRID_ARCHITECTURE
         </span>
-        <span className="text-white/40">DISCIPLINE 02</span>
-      </div>
-
-      {/* Geometric Design Matrix */}
-      <div className="relative py-2 flex items-center justify-center">
-        <svg viewBox="0 0 240 70" className="w-full h-16" fill="none">
-          {/* Design Layout Axis */}
-          <rect x="20" y="10" width="80" height="50" rx="4" stroke="#009D9E" strokeWidth="1.25" strokeOpacity="0.4" />
-          <rect x="110" y="10" width="50" height="50" rx="4" stroke="#9AEDFC" strokeWidth="1.25" strokeOpacity="0.6" />
-          <rect x="170" y="10" width="50" height="22" rx="4" stroke="white" strokeWidth="1" strokeOpacity="0.3" />
-          <rect x="170" y="38" width="50" height="22" rx="4" stroke="#009D9E" strokeWidth="1" strokeOpacity="0.5" />
-          {/* Alignment guide lines */}
-          <line x1="10" y1="35" x2="230" y2="35" stroke="#009D9E" strokeWidth="1" strokeDasharray="3 3" strokeOpacity="0.3" />
-        </svg>
+        <span className="text-white/70 font-medium">DISCIPLINE 02</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[9px] text-white/50 pt-2 border-t border-white/[0.04] relative z-10">
-        <span>CANVAS: DESIGN SYSTEMS</span>
-        <span className="text-[#9AEDFC]">INTERFACE PRECISION</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-white/80 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md relative z-10">
+        <span className="text-[#8A8A8A]">CANVAS: DESIGN SYSTEMS</span>
+        <span className="text-[#9AEDFC] font-semibold">INTERFACE PRECISION</span>
       </div>
     </div>
   );
@@ -82,43 +72,31 @@ export const DesignVisual: React.FC = () => {
 
 export const ProductVisual: React.FC = () => {
   return (
-    <div className="w-full h-44 rounded-2xl bg-white/[0.02] border border-white/[0.06] p-4 flex flex-col justify-between relative overflow-hidden">
-      {/* Background Accent Grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,157,158,0.12),transparent_70%)] pointer-events-none" />
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[#090D0F] border border-white/[0.08] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-inner">
+      {/* High-Resolution Background Image */}
+      <img
+        src={productImg}
+        alt="YESA Product Discipline"
+        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
+        loading="lazy"
+      />
+
+      {/* Dark Vignette & Edge Shadow Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#090D0F]/90 via-[#090D0F]/30 to-[#090D0F]/70 pointer-events-none" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[9px] text-[#8A8A8A] relative z-10">
+      <div className="flex items-center justify-between font-mono text-[10px] text-[#8A8A8A] relative z-10 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md">
         <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
           ROADMAP_ORCHESTRATION
         </span>
-        <span className="text-white/40">DISCIPLINE 03</span>
-      </div>
-
-      {/* Product Module Pipeline */}
-      <div className="relative py-2 flex items-center justify-center">
-        <div className="flex items-center gap-2.5 w-full max-w-[220px]">
-          <div className="flex-1 p-2 rounded-lg bg-white/[0.03] border border-[#009D9E]/40 text-center">
-            <span className="font-mono text-[8px] text-[#8A8A8A] block">DISCOVERY</span>
-            <span className="font-mono text-[9px] text-white font-semibold">Specs</span>
-          </div>
-          <span className="text-[#009D9E] text-xs font-mono">→</span>
-          <div className="flex-1 p-2 rounded-lg bg-[#009D9E]/10 border border-[#009D9E] text-center shadow-[0_0_10px_rgba(0,157,158,0.3)]">
-            <span className="font-mono text-[8px] text-[#9AEDFC] block">EXECUTE</span>
-            <span className="font-mono text-[9px] text-white font-bold">Build</span>
-          </div>
-          <span className="text-[#009D9E] text-xs font-mono">→</span>
-          <div className="flex-1 p-2 rounded-lg bg-white/[0.03] border border-white/[0.06] text-center">
-            <span className="font-mono text-[8px] text-[#8A8A8A] block">SCALE</span>
-            <span className="font-mono text-[9px] text-white">Deliver</span>
-          </div>
-        </div>
+        <span className="text-white/70 font-medium">DISCIPLINE 03</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[9px] text-white/50 pt-2 border-t border-white/[0.04] relative z-10">
-        <span>ALIGNMENT: STRATEGY & ROADMAP</span>
-        <span className="text-[#9AEDFC]">END-TO-END EXECUTION</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-white/80 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md relative z-10">
+        <span className="text-[#8A8A8A]">ALIGNMENT: STRATEGY & ROADMAP</span>
+        <span className="text-[#9AEDFC] font-semibold">END-TO-END EXECUTION</span>
       </div>
     </div>
   );
@@ -126,44 +104,31 @@ export const ProductVisual: React.FC = () => {
 
 export const SalesMarketingVisual: React.FC = () => {
   return (
-    <div className="w-full h-44 rounded-2xl bg-white/[0.02] border border-white/[0.06] p-4 flex flex-col justify-between relative overflow-hidden">
-      {/* Background Accent Grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_60%,rgba(0,157,158,0.12),transparent_70%)] pointer-events-none" />
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[#090D0F] border border-white/[0.08] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-inner">
+      {/* High-Resolution Background Image */}
+      <img
+        src={salesMarketingImg}
+        alt="YESA Sales & Marketing Discipline"
+        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
+        loading="lazy"
+      />
+
+      {/* Dark Vignette & Edge Shadow Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#090D0F]/90 via-[#090D0F]/30 to-[#090D0F]/70 pointer-events-none" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[9px] text-[#8A8A8A] relative z-10">
+      <div className="flex items-center justify-between font-mono text-[10px] text-[#8A8A8A] relative z-10 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md">
         <span className="text-[#009D9E] font-semibold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
           DISTRIBUTION_NETWORK
         </span>
-        <span className="text-white/40">DISCIPLINE 04</span>
-      </div>
-
-      {/* Growth & Distribution Vectors */}
-      <div className="relative py-2 flex items-center justify-center">
-        <svg viewBox="0 0 240 70" className="w-full h-16" fill="none">
-          {/* Growth and Communication Rays */}
-          <path
-            d="M20,55 Q80,50 120,35 T220,12"
-            stroke="#009D9E"
-            strokeWidth="1.75"
-          />
-          <path
-            d="M20,55 Q70,40 140,25 T220,28"
-            stroke="#9AEDFC"
-            strokeWidth="1.25"
-            strokeDasharray="3 3"
-          />
-          <circle cx="220" cy="12" r="3.5" fill="#9AEDFC" />
-          <circle cx="120" cy="35" r="2.5" fill="#009D9E" />
-          <circle cx="20" cy="55" r="3" fill="#FFFFFF" />
-        </svg>
+        <span className="text-white/70 font-medium">DISCIPLINE 04</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[9px] text-white/50 pt-2 border-t border-white/[0.04] relative z-10">
-        <span>CHANNELS: GLOBAL DISTRIBUTION</span>
-        <span className="text-[#9AEDFC]">GROWTH PIPELINE</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-white/80 px-3 py-1.5 rounded-lg bg-[#090D0F]/80 border border-white/[0.08] backdrop-blur-md relative z-10">
+        <span className="text-[#8A8A8A]">CHANNELS: GLOBAL DISTRIBUTION</span>
+        <span className="text-[#9AEDFC] font-semibold">GROWTH PIPELINE</span>
       </div>
     </div>
   );

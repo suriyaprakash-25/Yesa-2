@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, useSearchParams } from 'react-router-dom';
 import { HeroExperience } from './components/hero/HeroExperience';
 import { PhilosophyManifestoSection } from './components/philosophy/PhilosophyManifestoSection';
 import { ProcessOverviewSection } from './components/philosophy/ProcessOverviewSection';
@@ -10,16 +11,32 @@ import { FutureVisionSection } from './components/future/FutureVisionSection';
 import { FinalCtaSection } from './components/footer/FinalCtaSection';
 import { Footer } from './components/footer/Footer';
 import { StyleGuide } from './pages/StyleGuide';
+import { ApplyPage } from './pages/ApplyPage';
 import { GridBackground } from './components/core/GridBackground';
 import { CustomCursor } from './components/core/CustomCursor';
 import { IntroLoader } from './components/core/IntroLoader';
 import { NavigationBar } from './components/navigation/NavigationBar';
 
 function MainSite() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const section = searchParams.get('section');
+    if (section) {
+      setTimeout(() => {
+        const el = document.getElementById(section);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [searchParams]);
+
   const handleOpenApply = () => {
-    const applySection = document.getElementById('apply');
-    if (applySection) applySection.scrollIntoView({ behavior: 'smooth' });
+    navigate('/apply');
   };
+
   const handleExplorePath = () => {
     const philosophySection = document.getElementById('philosophy') || document.getElementById('journey');
     if (philosophySection) philosophySection.scrollIntoView({ behavior: 'smooth' });
@@ -55,7 +72,7 @@ function MainSite() {
           <FutureVisionSection />
         </div>
         <div id="apply">
-          <FinalCtaSection />
+          <FinalCtaSection onOpenApply={handleOpenApply} />
         </div>
         <Footer />
       </main>
@@ -73,6 +90,7 @@ export function App() {
         
         <Routes>
           <Route path="/" element={<MainSite />} />
+          <Route path="/apply" element={<ApplyPage />} />
           <Route path="/style-guide" element={<StyleGuide />} />
         </Routes>
       </div>

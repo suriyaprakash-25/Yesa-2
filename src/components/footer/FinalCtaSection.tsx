@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Container } from '../core/Container';
 import { ArrowRight, Sparkles } from 'lucide-react';
@@ -8,11 +9,13 @@ interface FinalCtaSectionProps {
 }
 
 export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply }) => {
+  const navigate = useNavigate();
+
   const handleApply = () => {
     if (onOpenApply) {
       onOpenApply();
     } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      navigate('/apply');
     }
   };
 

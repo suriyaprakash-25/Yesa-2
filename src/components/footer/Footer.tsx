@@ -1,11 +1,24 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Container } from '../core/Container';
 
 export const Footer: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    if (id === 'apply') {
+      navigate('/apply');
+      return;
+    }
+
+    if (location.pathname !== '/') {
+      navigate(`/?section=${id}`);
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -15,7 +28,15 @@ export const Footer: React.FC = () => {
         {/* Left: Brand & Tagline */}
         <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
           <div className="flex items-center gap-3">
-            <span className="font-display font-black text-2xl text-white tracking-tight">YESA</span>
+            <button
+              onClick={() => {
+                if (location.pathname !== '/') navigate('/');
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="font-display font-black text-2xl text-white tracking-tight cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] rounded"
+            >
+              YESA
+            </button>
             <div className="w-[1px] h-4 bg-white/20" />
             <span className="font-mono text-xs text-[#8A8A8A]">
               © {new Date().getFullYear()}
@@ -54,12 +75,11 @@ export const Footer: React.FC = () => {
           </button>
           <button
             onClick={() => scrollTo('apply')}
-            className="font-mono text-xs uppercase tracking-widest text-[#009D9E] hover:text-[#9AEDFC] font-semibold transition-colors cursor-pointer"
+            className="font-mono text-xs uppercase tracking-widest text-[#009D9E] hover:text-[#9AEDFC] font-semibold transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-2 rounded"
           >
             Apply
           </button>
         </nav>
-
       </Container>
     </footer>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { ArrowRight, ArrowDown } from 'lucide-react';
@@ -32,12 +33,13 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const navigate = useNavigate();
+
   const handleApply = () => {
     if (onOpenApply) {
       onOpenApply();
     } else {
-      const applyEl = document.getElementById('apply');
-      if (applyEl) applyEl.scrollIntoView({ behavior: 'smooth' });
+      navigate('/apply');
     }
   };
 

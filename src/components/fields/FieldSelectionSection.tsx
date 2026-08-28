@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Container } from '../core/Container';
@@ -12,6 +13,7 @@ interface FieldSelectionSectionProps {
 export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ onSelectField }) => {
   const [activeId, setActiveId] = useState<string>(YESA_DISCIPLINES[0].id);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const activeDiscipline: Discipline =
     YESA_DISCIPLINES.find((d) => d.id === activeId) || YESA_DISCIPLINES[0];
@@ -21,12 +23,9 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
     if (onSelectField) {
       onSelectField(field.id);
     } else {
-      const target = document.getElementById('experience') || document.getElementById('apply');
-      if (target) {
-        setTimeout(() => {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
-      }
+      setTimeout(() => {
+        navigate(`/apply?discipline=${encodeURIComponent(field.id)}`);
+      }, 250);
     }
   };
 

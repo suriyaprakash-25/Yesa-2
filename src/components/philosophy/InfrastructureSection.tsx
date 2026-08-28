@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Container } from '../core/Container';
 import { OfferingCard } from './OfferingCard';
 import type { OfferingType } from './OfferingCard';
-import collaborationImg from '../../assets/yesa_collaboration.jpg';
+import collaborationImg from '../../assets/yesa_collaboration.webp';
 
 interface OfferingItem {
   type: OfferingType;

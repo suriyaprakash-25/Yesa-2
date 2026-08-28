@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
@@ -23,44 +24,59 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
   const [activeSection, setActiveSection] = useState<string>('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setIsScrolled(scrollY > 30);
 
-      // Scrollspy calculation
-      const sections = NAV_ITEMS.map(item => document.getElementById(item.id));
-      const scrollPosition = scrollY + window.innerHeight * 0.35;
+      // Scrollspy calculation only on home route
+      if (location.pathname === '/') {
+        const sections = NAV_ITEMS.map((item) => document.getElementById(item.id));
+        const scrollPosition = scrollY + window.innerHeight * 0.35;
 
-      let currentActive = '';
-      for (const section of sections) {
-        if (section) {
-          const top = section.offsetTop;
-          const height = section.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            currentActive = section.id;
-            break;
+        let currentActive = '';
+        for (const section of sections) {
+          if (section) {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+              currentActive = section.id;
+              break;
+            }
           }
         }
+        setActiveSection(currentActive);
+      } else {
+        setActiveSection('');
       }
-      setActiveSection(currentActive);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname !== '/') {
+      navigate(`/?section=${id}`);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleApplyClick = () => {
@@ -68,23 +84,21 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
     if (onOpenApply) {
       onOpenApply();
     } else {
-      const applySection = document.getElementById('apply');
-      if (applySection) {
-        applySection.scrollIntoView({ behavior: 'smooth' });
-      }
+      navigate('/apply');
     }
   };
+
+  const isApplyRoute = location.pathname === '/apply';
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'py-3.5 bg-[#090D0F]/80 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.6)]'
+        isScrolled || isApplyRoute
+          ? 'py-3.5 bg-[#090D0F]/85 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.6)]'
           : 'py-6 bg-transparent border-b border-transparent'
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
-        
         {/* Brand Logo "YESA" Left */}
         <button
           onClick={scrollToTop}
@@ -129,7 +143,11 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
         <div className="flex items-center gap-3">
           <button
             onClick={handleApplyClick}
-            className="group relative inline-flex items-center justify-center gap-1.5 px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] hover:scale-105 hover:shadow-[0_0_20px_rgba(0,157,158,0.4)] active:scale-95 transition-all duration-200 cursor-pointer"
+            className={`group relative inline-flex items-center justify-center gap-1.5 px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+              isApplyRoute
+                ? 'bg-[#9AEDFC] text-[#090D0F] shadow-[0_0_20px_rgba(0,157,158,0.6)]'
+                : 'text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] hover:scale-105 hover:shadow-[0_0_20px_rgba(0,157,158,0.4)] active:scale-95'
+            }`}
           >
             <span>Apply</span>
             <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -144,7 +162,6 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-
       </div>
 
       {/* Mobile Drawer */}
@@ -175,6 +192,13 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
                   </button>
                 );
               })}
+              {/* Mobile Apply Button */}
+              <button
+                onClick={handleApplyClick}
+                className="mt-2 w-full py-3 px-4 rounded-xl font-mono text-xs font-bold uppercase tracking-wider text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] text-center transition-colors"
+              >
+                Apply to YESA
+              </button>
             </div>
           </motion.div>
         )}

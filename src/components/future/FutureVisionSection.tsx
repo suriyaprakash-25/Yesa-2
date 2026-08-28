@@ -18,17 +18,17 @@ export const FutureVisionSection: React.FC = () => {
     mass: 0.6,
   });
 
-  // Step 1: Word stack progressive lighting (0.0 -> 0.28) with high baseline contrast (no foggy fading)
-  const word1Opacity = useTransform(smoothProgress, [0, 0.08, 0.22], [1, 0.65, 0.45]);
+  // Step 1: Word stack progressive lighting (0.0 -> 0.28) with bright baseline clarity
+  const word1Opacity = useTransform(smoothProgress, [0, 0.08, 0.22], [1, 0.75, 0.6]);
   const word1Scale = useTransform(smoothProgress, [0, 0.08, 0.22], [1.08, 1, 0.96]);
 
-  const word2Opacity = useTransform(smoothProgress, [0.06, 0.14, 0.24], [0.55, 1, 0.55]);
+  const word2Opacity = useTransform(smoothProgress, [0.06, 0.14, 0.24], [0.65, 1, 0.65]);
   const word2Scale = useTransform(smoothProgress, [0.06, 0.14, 0.24], [0.96, 1.08, 0.96]);
 
-  const word3Opacity = useTransform(smoothProgress, [0.12, 0.20, 0.28], [0.55, 1, 0.55]);
+  const word3Opacity = useTransform(smoothProgress, [0.12, 0.20, 0.28], [0.65, 1, 0.65]);
   const word3Scale = useTransform(smoothProgress, [0.12, 0.20, 0.28], [0.96, 1.08, 0.96]);
 
-  const word4Opacity = useTransform(smoothProgress, [0.18, 0.26, 0.32], [0.55, 1, 1]);
+  const word4Opacity = useTransform(smoothProgress, [0.18, 0.26, 0.32], [0.65, 1, 1]);
   const word4Scale = useTransform(smoothProgress, [0.18, 0.26, 0.32], [0.96, 1.12, 1.12]);
 
   // Word Stack fades out cleanly by 0.32
@@ -57,28 +57,31 @@ export const FutureVisionSection: React.FC = () => {
               className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-4"
             >
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--border-subtle)] mb-8 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent-base)] font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#009D9E] font-semibold">
                   FUTURE PROGRESSION
                 </span>
               </div>
 
               <div className="flex flex-col items-center gap-4 sm:gap-6 font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight uppercase">
-                <motion.span style={{ opacity: word1Opacity, scale: word1Scale }} className="text-[var(--text-secondary)]">
+                <motion.span style={{ opacity: word1Opacity, scale: word1Scale }} className="text-[#8896A6] dark:text-[#94A3B8]">
                   LEARNING
                 </motion.span>
                 <div className="w-[1px] h-4 sm:h-6 bg-[var(--border-medium)]" />
-                <motion.span style={{ opacity: word2Opacity, scale: word2Scale }} className="text-[var(--accent-base)] dark:text-[#009D9E]">
+                <motion.span
+                  style={{ opacity: word2Opacity, scale: word2Scale }}
+                  className="text-[#009D9E] dark:text-[#00C2C4] drop-shadow-[0_0_16px_rgba(0,157,158,0.2)]"
+                >
                   BUILDING
                 </motion.span>
                 <div className="w-[1px] h-4 sm:h-6 bg-[var(--border-medium)]" />
-                <motion.span style={{ opacity: word3Opacity, scale: word3Scale }} className="text-[var(--text-primary)]">
+                <motion.span style={{ opacity: word3Opacity, scale: word3Scale }} className="text-[#8896A6] dark:text-[#94A3B8]">
                   LEADING
                 </motion.span>
                 <div className="w-[1px] h-4 sm:h-6 bg-[var(--border-medium)]" />
                 <motion.span
                   style={{ opacity: word4Opacity, scale: word4Scale }}
-                  className="text-[var(--text-primary)]"
+                  className="text-[#8896A6] dark:text-[#94A3B8]"
                 >
                   CREATING
                 </motion.span>

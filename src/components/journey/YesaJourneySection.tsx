@@ -266,8 +266,8 @@ export const YesaJourneySection: React.FC = () => {
 
   return (
     <section id="journey" ref={containerRef} className="relative w-full bg-[#090D0F] text-white">
-      {/* 600vh total distance (~100vh per stage) prevents excessive empty scrolling */}
-      <div className="h-[600vh] relative">
+      {/* 420vh total distance (~70vh per stage) ensures tight, responsive pacing */}
+      <div className="h-[420vh] relative">
         <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
           {/* Subtle Grid Texture */}
           <div className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-screen">

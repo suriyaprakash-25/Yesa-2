@@ -32,16 +32,16 @@ export const FutureVisionSection: React.FC = () => {
   const word4Scale = useTransform(smoothProgress, [0.55, 0.75, 1], [0.95, 1.15, 1.15]);
 
   // Transition between Word Stack (0 -> 0.45) and Two Branching Paths (0.45 -> 1.0)
-  const stackOpacity = useTransform(smoothProgress, [0, 0.35, 0.48], [1, 0.8, 0]);
-  const stackY = useTransform(smoothProgress, [0, 0.48], [0, -30]);
+  const stackOpacity = useTransform(smoothProgress, [0, 0.35, 0.46], [1, 0.8, 0]);
+  const stackY = useTransform(smoothProgress, [0, 0.46], [0, -30]);
 
-  const pathsOpacity = useTransform(smoothProgress, [0.48, 0.62, 1], [0, 1, 1]);
-  const pathsY = useTransform(smoothProgress, [0.48, 0.62, 1], [30, 0, 0]);
+  const pathsOpacity = useTransform(smoothProgress, [0.46, 0.6, 1], [0, 1, 1]);
+  const pathsY = useTransform(smoothProgress, [0.46, 0.6, 1], [25, 0, 0]);
 
   return (
     <section id="future" ref={containerRef} className="relative w-full bg-[#090D0F] text-white">
-      {/* 200vh pinned scroll interaction with generous reading window */}
-      <div className="h-[200vh] relative">
+      {/* 120vh compact pinned scroll interaction */}
+      <div className="h-[120vh] relative">
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
           {/* Subtle Grid Texture */}
           <div className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-screen">

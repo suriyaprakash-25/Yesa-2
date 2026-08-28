@@ -34,8 +34,8 @@ export const PhilosophyManifestoSection: React.FC = () => {
 
   return (
     <section ref={containerRef} className="relative w-full bg-[#090D0F]">
-      {/* Pinned 180vh scroll interaction */}
-      <div className="h-[180vh] relative">
+      {/* Pinned 130vh scroll interaction */}
+      <div className="h-[130vh] relative">
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
           
           {/* Central Architectural Spine */}

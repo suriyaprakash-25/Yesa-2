@@ -6,25 +6,25 @@ interface BranchingPathVisualizerProps {
 }
 
 export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = ({ progress }) => {
-  // Main trunk enters from top center (0.45 -> 0.62)
-  const mainLineLength = useTransform(progress, [0.45, 0.62], [0, 1]);
-  // Branches diverge left and right down into the two cards (0.6 -> 0.85)
-  const leftBranchLength = useTransform(progress, [0.6, 0.85], [0, 1]);
-  const rightBranchLength = useTransform(progress, [0.6, 0.85], [0, 1]);
-  // Junction and terminal node glows appear as the paths connect (0.75 -> 0.88)
-  const junctionOpacity = useTransform(progress, [0.58, 0.65], [0, 1]);
-  const nodeOpacity = useTransform(progress, [0.8, 0.9], [0, 1]);
+  // Main trunk enters from top center (0.45 -> 0.6)
+  const mainLineLength = useTransform(progress, [0.45, 0.6], [0, 1]);
+  // Branches diverge left and right down into the two cards (0.55 -> 0.75)
+  const leftBranchLength = useTransform(progress, [0.55, 0.75], [0, 1]);
+  const rightBranchLength = useTransform(progress, [0.55, 0.75], [0, 1]);
+  // Terminal anchor nodes and junction glows
+  const junctionOpacity = useTransform(progress, [0.5, 0.6], [0, 1]);
+  const nodeOpacity = useTransform(progress, [0.7, 0.82], [0, 1]);
 
   return (
-    <div className="w-full h-24 sm:h-28 md:h-36 relative flex justify-center items-center overflow-visible pointer-events-none">
+    <div className="w-full h-24 sm:h-28 md:h-32 relative flex justify-center items-center overflow-visible pointer-events-none">
       <svg
-        viewBox="0 0 800 140"
+        viewBox="0 0 800 120"
         preserveAspectRatio="none"
         className="w-full h-full overflow-visible"
       >
         <defs>
           <filter id="branchGlowPrimary" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feGaussianBlur stdDeviation="4" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -32,7 +32,36 @@ export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = (
           </filter>
         </defs>
 
-        <g stroke="none" strokeWidth="1" fill="none">
+        {/* 1. Subtle Baseline Guidelines (Always Visible in Phase 2) */}
+        <g stroke="none" fill="none">
+          {/* Trunk guideline */}
+          <line
+            x1="400"
+            y1="4"
+            x2="400"
+            y2="30"
+            stroke="rgba(0, 157, 158, 0.3)"
+            strokeWidth="2"
+            strokeDasharray="3 3"
+          />
+          {/* Left curve guideline */}
+          <path
+            d="M400,30 C400,75 200,75 200,120"
+            stroke="rgba(0, 157, 158, 0.3)"
+            strokeWidth="2"
+            strokeDasharray="4 4"
+          />
+          {/* Right curve guideline */}
+          <path
+            d="M400,30 C400,75 600,75 600,120"
+            stroke="rgba(154, 237, 252, 0.3)"
+            strokeWidth="2"
+            strokeDasharray="4 4"
+          />
+        </g>
+
+        {/* 2. Active Glowing Branch Paths */}
+        <g fill="none">
           {/* Top Origin Node */}
           <motion.circle
             cx="400"
@@ -45,14 +74,15 @@ export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = (
             style={{ opacity: junctionOpacity }}
           />
 
-          {/* 1. Main trunk descending from top origin down to the split junction */}
+          {/* Main Trunk: descends from origin to split junction */}
           <motion.line
             x1="400"
             y1="4"
             x2="400"
-            y2="45"
+            y2="30"
             stroke="#009D9E"
-            strokeWidth="2"
+            strokeWidth="2.5"
+            strokeLinecap="round"
             filter="url(#branchGlowPrimary)"
             style={{ pathLength: mainLineLength }}
           />
@@ -60,8 +90,8 @@ export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = (
           {/* Central Split Junction Node */}
           <motion.circle
             cx="400"
-            cy="45"
-            r="4"
+            cy="30"
+            r="4.5"
             fill="#009D9E"
             stroke="#9AEDFC"
             strokeWidth="1.5"
@@ -69,28 +99,30 @@ export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = (
             style={{ opacity: junctionOpacity }}
           />
 
-          {/* 2. Left Branch: curves outward & downward to left card center (x = 200, y = 140) */}
+          {/* Left Branch: curves outward & downward to Card 01 top anchor */}
           <motion.path
-            d="M400,45 C400,95 200,80 200,140"
+            d="M400,30 C400,75 200,75 200,120"
             stroke="#009D9E"
-            strokeWidth="2"
+            strokeWidth="2.5"
+            strokeLinecap="round"
             filter="url(#branchGlowPrimary)"
             style={{ pathLength: leftBranchLength }}
           />
 
-          {/* 3. Right Branch: curves outward & downward to right card center (x = 600, y = 140) */}
+          {/* Right Branch: curves outward & downward to Card 02 top anchor */}
           <motion.path
-            d="M400,45 C400,95 600,80 600,140"
+            d="M400,30 C400,75 600,75 600,120"
             stroke="#9AEDFC"
-            strokeWidth="2"
+            strokeWidth="2.5"
+            strokeLinecap="round"
             filter="url(#branchGlowPrimary)"
             style={{ pathLength: rightBranchLength }}
           />
 
-          {/* Left Terminal Anchor Node (connecting directly to top of Card 01) */}
+          {/* Left Terminal Node (Top Center of Card 01) */}
           <motion.circle
             cx="200"
-            cy="138"
+            cy="118"
             r="5"
             fill="#009D9E"
             stroke="#9AEDFC"
@@ -99,10 +131,10 @@ export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = (
             style={{ opacity: nodeOpacity }}
           />
 
-          {/* Right Terminal Anchor Node (connecting directly to top of Card 02) */}
+          {/* Right Terminal Node (Top Center of Card 02) */}
           <motion.circle
             cx="600"
-            cy="138"
+            cy="118"
             r="5"
             fill="#9AEDFC"
             stroke="#009D9E"

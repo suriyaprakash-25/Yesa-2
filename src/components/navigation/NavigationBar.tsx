@@ -13,10 +13,10 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: 'journey', label: 'JOURNEY' },
-  { id: 'what-we-do', label: 'WHAT WE DO' },
-  { id: 'fields', label: 'FIELDS' },
-  { id: 'future', label: 'FUTURE' },
+  { id: 'journey', label: 'Journey' },
+  { id: 'what-we-do', label: 'What We Do' },
+  { id: 'fields', label: 'Fields' },
+  { id: 'future', label: 'Future' },
 ];
 
 export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => {
@@ -30,7 +30,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 30);
+      setIsScrolled(scrollY > 20);
 
       // Scrollspy calculation only on home route
       if (location.pathname === '/') {
@@ -94,17 +94,18 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || isApplyRoute
-          ? 'py-3.5 bg-[#090D0F]/85 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.6)]'
-          : 'py-6 bg-transparent border-b border-transparent'
+          ? 'py-3 bg-[#090D0F]/85 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.6)]'
+          : 'py-5 bg-transparent border-b border-transparent'
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
-        {/* Brand Logo "YESA" Left */}
+        
+        {/* 1. Left Brand Logo "YESA" */}
         <button
           onClick={scrollToTop}
           className="flex items-center gap-2.5 group cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-4 rounded-lg"
         >
-          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
+          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm">
             <span className="text-[#090D0F] font-display font-black text-xs tracking-tighter">Y.</span>
           </div>
           <span className="font-display font-black text-xl tracking-wider text-white">
@@ -112,26 +113,26 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
           </span>
         </button>
 
-        {/* Center-Right Nav Links (Desktop) */}
-        <nav className="hidden md:flex items-center gap-7 lg:gap-9">
+        {/* 2. Center Pill/Capsule Enclosed Navigation Menu (Desktop) */}
+        <nav className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#131719]/90 border border-white/[0.12] backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
           {NAV_ITEMS.map((item) => {
             const isActive = activeSection === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`font-mono text-xs tracking-[0.18em] uppercase transition-all duration-200 cursor-pointer relative py-1.5 ${
+                className={`font-sans text-xs font-medium px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer relative ${
                   isActive
-                    ? 'text-[#009D9E] font-semibold'
-                    : 'text-white/60 hover:text-white'
+                    ? 'text-white bg-white/[0.1] shadow-inner font-semibold'
+                    : 'text-[#8A8A8A] hover:text-white hover:bg-white/[0.04]'
                 }`}
               >
                 <span>{item.label}</span>
                 {isActive && (
                   <motion.div
-                    layoutId="activeNavIndicator"
-                    className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#009D9E] shadow-[0_0_8px_rgba(0,157,158,0.8)]"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    layoutId="activeNavPill"
+                    className="absolute inset-0 rounded-full bg-white/[0.08] border border-white/[0.12] -z-10"
+                    transition={{ type: 'spring', stiffness: 450, damping: 32 }}
                   />
                 )}
               </button>
@@ -139,21 +140,26 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
           })}
         </nav>
 
-        {/* Right CTA Button & Mobile Menu Toggle */}
+        {/* 3. Right Pill CTA Button & Mobile Toggle */}
         <div className="flex items-center gap-3">
+          {/* Outlined Pill Button with Accent Circular Arrow Tile */}
           <button
             onClick={handleApplyClick}
-            className={`group relative inline-flex items-center justify-center gap-1.5 px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+            className={`group relative inline-flex items-center gap-3 pl-4 pr-1.5 py-1.5 rounded-full border transition-all duration-200 cursor-pointer ${
               isApplyRoute
-                ? 'bg-[#9AEDFC] text-[#090D0F] shadow-[0_0_20px_rgba(0,157,158,0.6)]'
-                : 'text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] hover:scale-105 hover:shadow-[0_0_20px_rgba(0,157,158,0.4)] active:scale-95'
+                ? 'bg-white/[0.08] border-[#009D9E] text-white shadow-[0_0_15px_rgba(0,157,158,0.4)]'
+                : 'bg-white/[0.03] hover:bg-white/[0.07] border-white/[0.15] hover:border-white/[0.3] text-white'
             }`}
           >
-            <span>Apply</span>
-            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <span className="font-sans text-xs font-medium tracking-wide">
+              Apply
+            </span>
+            <div className="w-7 h-7 rounded-full bg-[#009D9E] group-hover:bg-[#9AEDFC] text-[#090D0F] flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-[0_0_10px_rgba(0,157,158,0.5)]">
+              <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </div>
           </button>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Hamburger Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 rounded-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[#009D9E] focus-visible:outline-offset-2"
@@ -164,7 +170,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer Dropdown */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -172,32 +178,36 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden bg-[#090D0F]/95 backdrop-blur-xl border-b border-white/[0.08] overflow-hidden px-6 py-5"
+            className="md:hidden border-b border-white/[0.08] bg-[#090D0F]/95 backdrop-blur-xl overflow-hidden shadow-2xl"
           >
-            <div className="flex flex-col gap-3">
-              {NAV_ITEMS.map((item) => {
-                const isActive = activeSection === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`flex items-center justify-between py-2.5 px-3 rounded-lg font-mono text-xs uppercase tracking-[0.18em] transition-colors text-left ${
-                      isActive
-                        ? 'bg-white/[0.06] text-[#009D9E] font-semibold border border-[#009D9E]/20'
-                        : 'text-white/70 hover:text-white hover:bg-white/[0.03]'
-                    }`}
-                  >
-                    <span>{item.label}</span>
-                    {isActive && <div className="w-1.5 h-1.5 rounded-full bg-[#009D9E]" />}
-                  </button>
-                );
-              })}
-              {/* Mobile Apply Button */}
+            <div className="px-6 py-6 flex flex-col gap-4">
+              <div className="flex flex-col gap-1 p-2 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
+                {NAV_ITEMS.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`text-left px-4 py-2.5 rounded-xl font-sans text-sm tracking-wide transition-colors cursor-pointer ${
+                        isActive
+                          ? 'text-[#009D9E] bg-[#009D9E]/10 font-semibold'
+                          : 'text-white/70 hover:text-white hover:bg-white/[0.04]'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  );
+                })}
+              </div>
+
               <button
                 onClick={handleApplyClick}
-                className="mt-2 w-full py-3 px-4 rounded-xl font-mono text-xs font-bold uppercase tracking-wider text-[#090D0F] bg-[#009D9E] hover:bg-[#9AEDFC] text-center transition-colors"
+                className="w-full flex items-center justify-between px-5 py-3 rounded-full bg-white/[0.04] border border-[#009D9E]/40 text-white font-sans text-sm font-semibold tracking-wide hover:border-[#009D9E] transition-colors"
               >
-                Apply to YESA
+                <span>Apply to YESA</span>
+                <div className="w-7 h-7 rounded-full bg-[#009D9E] text-[#090D0F] flex items-center justify-center">
+                  <ArrowUpRight className="w-4 h-4" />
+                </div>
               </button>
             </div>
           </motion.div>

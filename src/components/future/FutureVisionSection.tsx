@@ -50,18 +50,6 @@ export const FutureVisionSection: React.FC = () => {
       {/* 160vh pinned scroll interaction */}
       <div className="h-[160vh] relative">
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-          {/* Subtle Grid Texture */}
-          <div className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-screen">
-            <div
-              className="w-full h-full"
-              style={{
-                backgroundImage:
-                  'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-                backgroundSize: '4rem 4rem',
-              }}
-            />
-          </div>
-
           <Container size="full" className="max-w-[1440px] px-6 sm:px-10 lg:px-12 xl:px-16 w-full relative z-10">
             {/* Phase 1: Progressive Word-Stack (0.0 -> 0.32) */}
             <motion.div

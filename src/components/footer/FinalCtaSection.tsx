@@ -24,18 +24,6 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
       id="apply"
       className="relative w-full bg-[#090D0F] pt-14 pb-0 md:pt-20 md:pb-0 border-t border-white/[0.06] overflow-hidden flex flex-col justify-between"
     >
-      {/* Background Subtle Grid Accent */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-            backgroundSize: '4rem 4rem',
-          }}
-        />
-      </div>
-
       <Container size="full" className="max-w-[1440px] px-6 sm:px-10 lg:px-16 relative z-10 flex flex-col items-center text-center">
         {/* Descending Path Line to Anchor the Section */}
         <div className="flex flex-col items-center mb-10">

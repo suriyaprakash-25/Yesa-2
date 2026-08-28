@@ -34,18 +34,6 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
       id="fields"
       className="relative w-full bg-[#090D0F] pt-14 pb-14 md:pt-18 md:pb-18 border-t border-white/[0.06] overflow-hidden scroll-mt-20"
     >
-      {/* Background Subtle Grid Texture */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-            backgroundSize: '4rem 4rem',
-          }}
-        />
-      </div>
-
       <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
         {/* Section Header */}
         <div className="max-w-3xl mb-6 md:mb-8 text-left">

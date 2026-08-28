@@ -269,17 +269,6 @@ export const YesaJourneySection: React.FC = () => {
       {/* 420vh total distance (~70vh per stage) ensures tight, responsive pacing */}
       <div className="h-[420vh] relative">
         <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
-          {/* Subtle Grid Texture */}
-          <div className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-screen">
-            <div
-              className="w-full h-full"
-              style={{
-                backgroundImage:
-                  'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-                backgroundSize: '4rem 4rem',
-              }}
-            />
-          </div>
 
           {/* Central Architectural Spine */}
           <div className="absolute top-0 bottom-0 left-6 md:left-1/2 w-[1px] bg-white/[0.08] md:-translate-x-1/2 z-0">

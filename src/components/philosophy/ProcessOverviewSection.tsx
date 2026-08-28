@@ -208,18 +208,6 @@ export const ProcessOverviewSection: React.FC = () => {
       {/* 220vh pinned container gives comfortable, controllable horizontal scroll travel */}
       <div className="h-[220vh] relative">
         <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden py-6 md:py-10">
-          
-          {/* Background Architectural Grid Accent */}
-          <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">
-            <div
-              className="w-full h-full"
-              style={{
-                backgroundImage:
-                  'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-                backgroundSize: '4rem 4rem',
-              }}
-            />
-          </div>
 
           {/* Section Header with Live Scroll Progress Indicator */}
           <div className="max-w-[1600px] w-full mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 z-20 shrink-0 mb-4 sm:mb-6">

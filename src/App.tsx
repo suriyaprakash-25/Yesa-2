@@ -11,7 +11,6 @@ import { FinalCtaSection } from './components/footer/FinalCtaSection';
 import { Footer } from './components/footer/Footer';
 import { StyleGuide } from './pages/StyleGuide';
 import { ApplyPage } from './pages/ApplyPage';
-import { GridBackground } from './components/core/GridBackground';
 import { CustomCursor } from './components/core/CustomCursor';
 import { IntroLoader } from './components/core/IntroLoader';
 import { NavigationBar } from './components/navigation/NavigationBar';
@@ -82,7 +81,6 @@ export function App() {
       <div className="min-h-screen bg-[var(--color-bg-base)] text-[var(--text-primary)] flex flex-col justify-between selection:bg-[var(--accent-dim)] selection:text-[var(--accent-light)] overflow-clip relative">
         <IntroLoader />
         <CustomCursor />
-        <GridBackground />
         
         <Routes>
           <Route path="/" element={<MainSite />} />

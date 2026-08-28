@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full bg-[#090D0F] border-t border-white/[0.08] py-12 md:py-16 relative z-20">
+    <footer className="w-full bg-[#090D0F] border-t border-white/[0.08] py-6 md:py-8 relative z-20">
       <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Left: Brand & Tagline */}
         <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">

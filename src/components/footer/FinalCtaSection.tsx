@@ -22,7 +22,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
   return (
     <section
       id="apply"
-      className="relative w-full bg-[#090D0F] pt-28 pb-20 md:pt-40 md:pb-28 border-t border-white/[0.06] overflow-hidden flex flex-col justify-between"
+      className="relative w-full bg-[#090D0F] pt-14 pb-10 md:pt-20 md:pb-14 border-t border-white/[0.06] overflow-hidden flex flex-col justify-between"
     >
       {/* Background Subtle Grid Accent */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">

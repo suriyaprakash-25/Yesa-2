@@ -60,7 +60,7 @@ export const InfrastructureSection: React.FC = () => {
   ];
 
   return (
-    <section id="what-we-do" className="relative w-full bg-[#090D0F] pt-32 pb-32 md:pt-44 md:pb-44 border-t border-white/[0.06] overflow-hidden scroll-mt-24">
+    <section id="what-we-do" className="relative w-full bg-[#090D0F] pt-16 pb-16 md:pt-22 md:pb-22 border-t border-white/[0.06] overflow-hidden scroll-mt-20">
       {/* Background Subtle Grid Texture */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">
         <div
@@ -75,8 +75,8 @@ export const InfrastructureSection: React.FC = () => {
 
       <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
         {/* Section Header with generous breathing room below sticky nav */}
-        <div className="max-w-3xl mb-16 md:mb-20 text-left">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-6">
+        <div className="max-w-3xl mb-8 md:mb-10 text-left">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#009D9E] font-semibold">
               WHAT WE DO
@@ -94,7 +94,7 @@ export const InfrastructureSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full rounded-2xl md:rounded-3xl overflow-hidden border border-white/[0.08] mb-12 lg:mb-16 bg-[#131719] shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
+          className="relative w-full rounded-2xl md:rounded-3xl overflow-hidden border border-white/[0.08] mb-8 lg:mb-10 bg-[#131719] shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
         >
           {/* 16:9 Aspect ratio container with overlay */}
           <div className="relative aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden">

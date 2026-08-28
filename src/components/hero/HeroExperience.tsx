@@ -86,7 +86,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[100vh] w-full bg-[#090D0F] overflow-hidden flex flex-col justify-between pt-32 pb-16 md:pt-40 md:pb-24"
+      className="relative min-h-[100vh] w-full bg-[#090D0F] overflow-hidden flex flex-col justify-between pt-20 pb-8 md:pt-28 md:pb-12"
     >
       {/* Bespoke Interactive Particle/Line Field */}
       <HeroInteractiveField mousePosition={mousePos} />

@@ -32,7 +32,7 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
   return (
     <section
       id="fields"
-      className="relative w-full bg-[#090D0F] pt-28 pb-28 md:pt-36 md:pb-36 border-t border-white/[0.06] overflow-hidden scroll-mt-24"
+      className="relative w-full bg-[#090D0F] pt-14 pb-14 md:pt-18 md:pb-18 border-t border-white/[0.06] overflow-hidden scroll-mt-20"
     >
       {/* Background Subtle Grid Texture */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">
@@ -48,16 +48,16 @@ export const FieldSelectionSection: React.FC<FieldSelectionSectionProps> = ({ on
 
       <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
         {/* Section Header */}
-        <div className="max-w-3xl mb-12 md:mb-16 text-left">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-5">
+        <div className="max-w-3xl mb-6 md:mb-8 text-left">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#009D9E] animate-pulse" />
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#009D9E] font-semibold">
-              STAGE 07 — FIELD SELECTION
+              CHOOSE YOUR FIELD
             </span>
           </div>
 
-          <h2 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[0.95] [overflow-wrap:normal] [word-break:keep-all]">
-            CHOOSE<br />YOUR FIELD.
+          <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white tracking-tight leading-[1.05] [overflow-wrap:normal] [word-break:keep-all]">
+            Specialized tracks built for exceptional talent.
           </h2>
           <p className="text-sm md:text-base text-[#8A8A8A] font-light mt-4 max-w-xl leading-relaxed">
             Select your discipline. Your entire YESA path — from initial volunteering to world-class

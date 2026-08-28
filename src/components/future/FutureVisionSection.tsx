@@ -196,7 +196,7 @@ export const FutureVisionSection: React.FC = () => {
       </div>
 
       {/* Spacious, Emotional Statement */}
-      <div className="relative w-full py-36 md:py-48 border-t border-white/[0.06] flex items-center justify-center overflow-hidden">
+      <div className="relative w-full py-18 md:py-24 border-t border-white/[0.06] flex items-center justify-center overflow-hidden">
         {/* Subtle Ambient Radial Aura */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,157,158,0.08),transparent_70%)] pointer-events-none" />
 

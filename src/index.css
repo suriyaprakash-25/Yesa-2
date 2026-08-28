@@ -44,10 +44,13 @@ html.theme-transitioning *::after {
 body {
   min-height: 100vh;
   background-color: var(--color-bg-base);
-  background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-dim), transparent 70%);
   background-attachment: fixed;
   overflow-x: clip;
+}
+
+html[data-theme="dark"] body {
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-dim), transparent 70%);
 }
 
 /* Glassmorphism & Hairline Surfaces */

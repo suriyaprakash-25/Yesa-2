@@ -134,10 +134,10 @@
   --particle-blend: normal;
   --ghost-wordmark-color: rgba(0, 0, 0, 0.04);
 
-  /* Elevations, Blurs & Shadows (Crisp modern micro-shadows, zero muddy fog) */
-  --shadow-subtle: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
-  --shadow-elevated: 0 8px 24px -4px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
-  --shadow-glow-accent: 0 0 24px -4px rgba(0, 117, 119, 0.15);
+  /* Elevations, Blurs & Shadows (Zero blurry shadows to eliminate shadowy cast around cards and images) */
+  --shadow-subtle: none;
+  --shadow-elevated: none;
+  --shadow-glow-accent: none;
   --blur-glass: 16px;
   --blur-nav: 24px;
 }

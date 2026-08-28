@@ -296,15 +296,13 @@ const RoadmapLargeCard: React.FC<RoadmapLargeCardProps> = ({
       </div>
 
       {/* Center: High-Resolution Roadmap Stage Image Asset */}
-      <div className="w-full h-40 sm:h-48 rounded-2xl overflow-hidden bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] relative my-2 group-hover:border-[var(--accent-base)]/40 transition-all duration-300 shadow-sm flex items-center justify-center">
+      <div className="w-full h-40 sm:h-48 rounded-2xl overflow-hidden bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] relative my-2 group-hover:border-[var(--accent-base)]/40 transition-all duration-300 flex items-center justify-center">
         <img
           src={stage.image}
           alt={`YESA Stage ${stage.num} — ${stage.title}`}
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
-        {/* Subtle vignette gradient overlay only in dark mode */}
-        <div className="hidden dark:block absolute inset-0 bg-gradient-to-t from-[#131719]/50 via-transparent to-transparent pointer-events-none" />
       </div>
 
       {/* Bottom Architectural Highlight & Metric Card */}

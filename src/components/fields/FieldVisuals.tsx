@@ -8,20 +8,17 @@ import salesMarketingImg from '../../assets/roadmap/04-sales-marketing.jpg';
 
 export const AgentDevelopmentVisual: React.FC = () => {
   return (
-    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-sm">
-      {/* High-Resolution Background Image */}
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group">
+      {/* High-Resolution Blueprint Image — Inverted to crisp blueprint in light mode, original in dark mode */}
       <img
         src={agentDevImg}
         alt="YESA Agent Development Discipline"
-        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
+        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-all duration-700 ease-out invert hue-rotate-180 brightness-95 dark:invert-0 dark:hue-rotate-0 dark:brightness-100"
         loading="lazy"
       />
 
-      {/* Crisp Scrim Overlay — zero milky fog */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/25 dark:from-[#090D0F]/90 dark:via-[#090D0F]/20 dark:to-[#090D0F]/60 pointer-events-none" />
-
-      {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+      {/* Top HUD — Zero shadow, crisp border */}
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/90 border border-[var(--border-medium)] backdrop-blur-md">
         <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           AGENT_TOPOLOGY
@@ -29,8 +26,8 @@ export const AgentDevelopmentVisual: React.FC = () => {
         <span className="text-[var(--text-primary)] font-semibold">DISCIPLINE 01</span>
       </div>
 
-      {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+      {/* Bottom Status — Zero shadow, crisp border */}
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10">
         <span className="text-[var(--text-secondary)] font-medium">TOPOLOGY: MULTI-AGENT</span>
         <span className="text-[var(--accent-base)] font-bold">SYSTEMS ARCHITECTURE</span>
       </div>
@@ -40,20 +37,17 @@ export const AgentDevelopmentVisual: React.FC = () => {
 
 export const DesignVisual: React.FC = () => {
   return (
-    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-sm">
-      {/* High-Resolution Background Image */}
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group">
+      {/* High-Resolution Blueprint Image — Inverted to crisp blueprint in light mode, original in dark mode */}
       <img
         src={designImg}
         alt="YESA Design Discipline"
-        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
+        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-all duration-700 ease-out invert hue-rotate-180 brightness-95 dark:invert-0 dark:hue-rotate-0 dark:brightness-100"
         loading="lazy"
       />
 
-      {/* Crisp Scrim Overlay — zero milky fog */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/25 dark:from-[#090D0F]/90 dark:via-[#090D0F]/20 dark:to-[#090D0F]/60 pointer-events-none" />
-
-      {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+      {/* Top HUD — Zero shadow, crisp border */}
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/90 border border-[var(--border-medium)] backdrop-blur-md">
         <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           GRID_ARCHITECTURE
@@ -61,8 +55,8 @@ export const DesignVisual: React.FC = () => {
         <span className="text-[var(--text-primary)] font-semibold">DISCIPLINE 02</span>
       </div>
 
-      {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+      {/* Bottom Status — Zero shadow, crisp border */}
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10">
         <span className="text-[var(--text-secondary)] font-medium">CANVAS: DESIGN SYSTEMS</span>
         <span className="text-[var(--accent-base)] font-bold">INTERFACE PRECISION</span>
       </div>
@@ -72,20 +66,17 @@ export const DesignVisual: React.FC = () => {
 
 export const ProductVisual: React.FC = () => {
   return (
-    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-sm">
-      {/* High-Resolution Background Image */}
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group">
+      {/* High-Resolution Blueprint Image — Inverted to crisp blueprint in light mode, original in dark mode */}
       <img
         src={productImg}
         alt="YESA Product Discipline"
-        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
+        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-all duration-700 ease-out invert hue-rotate-180 brightness-95 dark:invert-0 dark:hue-rotate-0 dark:brightness-100"
         loading="lazy"
       />
 
-      {/* Crisp Scrim Overlay — zero milky fog */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/25 dark:from-[#090D0F]/90 dark:via-[#090D0F]/20 dark:to-[#090D0F]/60 pointer-events-none" />
-
-      {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+      {/* Top HUD — Zero shadow, crisp border */}
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/90 border border-[var(--border-medium)] backdrop-blur-md">
         <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           ROADMAP_ORCHESTRATION
@@ -93,8 +84,8 @@ export const ProductVisual: React.FC = () => {
         <span className="text-[var(--text-primary)] font-semibold">DISCIPLINE 03</span>
       </div>
 
-      {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+      {/* Bottom Status — Zero shadow, crisp border */}
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10">
         <span className="text-[var(--text-secondary)] font-medium">ALIGNMENT: STRATEGY & ROADMAP</span>
         <span className="text-[var(--accent-base)] font-bold">END-TO-END EXECUTION</span>
       </div>
@@ -104,20 +95,17 @@ export const ProductVisual: React.FC = () => {
 
 export const SalesMarketingVisual: React.FC = () => {
   return (
-    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group shadow-sm">
-      {/* High-Resolution Background Image */}
+    <div className="w-full h-48 sm:h-52 md:h-56 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)] p-3.5 sm:p-4 flex flex-col justify-between relative overflow-hidden group">
+      {/* High-Resolution Blueprint Image — Inverted to crisp blueprint in light mode, original in dark mode */}
       <img
         src={salesMarketingImg}
         alt="YESA Sales & Marketing Discipline"
-        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
+        className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-105 transition-all duration-700 ease-out invert hue-rotate-180 brightness-95 dark:invert-0 dark:hue-rotate-0 dark:brightness-100"
         loading="lazy"
       />
 
-      {/* Crisp Scrim Overlay — zero milky fog */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/25 dark:from-[#090D0F]/90 dark:via-[#090D0F]/20 dark:to-[#090D0F]/60 pointer-events-none" />
-
-      {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+      {/* Top HUD — Zero shadow, crisp border */}
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/90 border border-[var(--border-medium)] backdrop-blur-md">
         <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           GLOBAL_DISTRIBUTION
@@ -125,8 +113,8 @@ export const SalesMarketingVisual: React.FC = () => {
         <span className="text-[var(--text-primary)] font-semibold">DISCIPLINE 04</span>
       </div>
 
-      {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+      {/* Bottom Status — Zero shadow, crisp border */}
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10">
         <span className="text-[var(--text-secondary)] font-medium">GROWTH: ENTERPRISE SPRINT</span>
         <span className="text-[var(--accent-base)] font-bold">REVENUE ARCHITECTURE</span>
       </div>

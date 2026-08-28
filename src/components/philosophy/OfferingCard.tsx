@@ -176,8 +176,8 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({
         <ThematicPattern type={type} />
       </div>
 
-      {/* Ambient Corner Accent Glow */}
-      <div className="absolute top-0 right-0 w-36 h-36 bg-[var(--accent-dim)] group-hover:bg-[var(--accent-glow)] rounded-full blur-2xl transition-all duration-500 pointer-events-none z-0" />
+      {/* Ambient Corner Accent Glow (Dark mode only) */}
+      <div className="hidden dark:block absolute top-0 right-0 w-36 h-36 bg-[var(--accent-dim)] group-hover:bg-[var(--accent-glow)] rounded-full blur-2xl transition-all duration-500 pointer-events-none z-0" />
 
       {/* Card Content */}
       <div className="relative z-10">

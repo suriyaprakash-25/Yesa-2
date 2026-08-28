@@ -93,8 +93,8 @@ export const InfrastructureSection: React.FC = () => {
               decoding="async"
               className="w-full h-full object-cover object-center filter brightness-95 contrast-105"
             />
-            {/* Cinematic Gradient Overlays: Crisp dark bottom scrim for HUD legibility, zero milky fog on faces */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+            {/* Bottom Scrim for HUD legibility only (bottom 176px) — upper photo is 100% untouched and crystal clear */}
+            <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
 
             {/* Corner Architectural Brackets */}
             <div className="absolute top-6 left-6 w-8 h-8 border-t border-l border-[var(--accent-base)]/60 pointer-events-none" />

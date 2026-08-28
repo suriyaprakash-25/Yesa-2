@@ -285,27 +285,25 @@ export const YesaJourneySection: React.FC = () => {
           <div className="absolute top-0 bottom-0 left-6 md:left-1/2 w-[1px] bg-white/[0.08] md:-translate-x-1/2 z-0">
             {/* The active progression cyan path with liquid mercury ball */}
             <motion.div
-              className="w-full bg-gradient-to-b from-[#009D9E]/30 via-[#009D9E] to-[#9AEDFC] shadow-[0_0_16px_rgba(0,157,158,0.8)] origin-top relative"
+              className="w-full bg-gradient-to-b from-[#009D9E]/30 via-[#009D9E] to-[#9AEDFC] shadow-[0_0_10px_rgba(0,157,158,0.5)] origin-top relative"
               style={{ height: pathHeight }}
             >
               {/* Liquid Mercury Glowing Ball at the moving tip of the central line */}
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 flex items-center justify-center pointer-events-none z-30">
-                {/* Outer Ambient Glowing Aura */}
-                <div className="absolute w-12 h-12 rounded-full bg-[#009D9E]/40 blur-lg animate-pulse" />
-                <div className="absolute w-8 h-8 rounded-full bg-[#9AEDFC]/60 blur-md" />
+                {/* Reduced subtle ambient aura */}
+                <div className="absolute w-6 h-6 rounded-full bg-[#009D9E]/25 blur-[3px]" />
 
                 {/* Mercury Liquid Droplet Shell (Metallic Chrome & Cyan Reflective Core) */}
-                <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-tr from-[#00484A] via-[#9AEDFC] to-[#FFFFFF] p-[1.5px] shadow-[0_0_24px_rgba(154,237,252,0.9),0_0_10px_rgba(0,157,158,0.8)] border border-white/70">
+                <div className="relative w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gradient-to-tr from-[#00484A] via-[#9AEDFC] to-[#FFFFFF] p-[1px] shadow-[0_0_10px_rgba(154,237,252,0.7),0_0_4px_rgba(0,157,158,0.4)] border border-white/80">
                   <div className="w-full h-full rounded-full bg-gradient-to-br from-[#FFFFFF] via-[#009D9E] to-[#041A1C] relative overflow-hidden flex items-center justify-center">
                     {/* Specular Liquid Reflection Highlight */}
-                    <div className="absolute top-0.5 left-1 w-1.5 h-1 rounded-full bg-white/95 blur-[0.3px]" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#FFFFFF]" />
+                    <div className="absolute top-0.5 left-0.5 w-1.2 h-0.8 rounded-full bg-white/95 blur-[0.2px]" />
+                    <div className="w-1 h-1 rounded-full bg-white shadow-[0_0_3px_#FFFFFF]" />
                   </div>
                 </div>
 
-                {/* Trailing Fluid Droplets */}
-                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#009D9E]/80 blur-[0.4px] shadow-[0_0_6px_#009D9E]" />
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#9AEDFC]/60 blur-[0.2px]" />
+                {/* Subtle Trailing Fluid Droplet */}
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#009D9E]/70 blur-[0.3px]" />
               </div>
             </motion.div>
           </div>

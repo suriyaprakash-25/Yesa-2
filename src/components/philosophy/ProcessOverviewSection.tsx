@@ -259,13 +259,27 @@ export const ProcessOverviewSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Connected Glowing Timeline Bar */}
+          {/* Connected Glowing Timeline Bar with Liquid Mercury Ball */}
           <div className="w-full relative z-10 my-2 px-6 sm:px-10 lg:px-16">
             <div className="w-full h-[1px] bg-white/[0.08] relative">
               <motion.div
                 style={{ width: timelineFill }}
-                className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-[#009D9E] via-[#9AEDFC] to-[#009D9E] shadow-[0_0_12px_rgba(0,157,158,0.9)]"
-              />
+                className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-[#009D9E] via-[#9AEDFC] to-[#009D9E] shadow-[0_0_8px_rgba(0,157,158,0.5)] relative"
+              >
+                {/* Mercury Liquid Droplet at the moving tip of the horizontal line */}
+                <div className="absolute -right-2 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none z-30">
+                  {/* Reduced subtle ambient aura */}
+                  <div className="absolute w-5 h-5 rounded-full bg-[#009D9E]/30 blur-xs" />
+
+                  {/* Mercury Droplet Metallic Shell */}
+                  <div className="relative w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gradient-to-tr from-[#00484A] via-[#9AEDFC] to-[#FFFFFF] p-[1px] shadow-[0_0_8px_rgba(154,237,252,0.7),0_0_4px_rgba(0,157,158,0.5)] border border-white/80">
+                    <div className="w-full h-full rounded-full bg-gradient-to-br from-[#FFFFFF] via-[#009D9E] to-[#041A1C] relative overflow-hidden flex items-center justify-center">
+                      <div className="absolute top-0.5 left-0.5 w-1 h-0.5 rounded-full bg-white/95 blur-[0.2px]" />
+                      <div className="w-1 h-1 rounded-full bg-white shadow-[0_0_3px_#FFFFFF]" />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
 

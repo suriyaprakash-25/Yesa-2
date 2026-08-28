@@ -68,12 +68,12 @@ export const CustomCursor: React.FC = () => {
       animate={{
         width: isHovered ? 40 : isClicked ? 6 : 8,
         height: isHovered ? 40 : isClicked ? 6 : 8,
-        backgroundColor: isHovered ? 'transparent' : '#009D9E',
-        borderColor: isHovered ? '#9AEDFC' : 'transparent',
+        backgroundColor: isHovered ? 'transparent' : 'var(--accent-base)',
+        borderColor: isHovered ? 'var(--accent-light)' : 'transparent',
         borderWidth: isHovered ? '1.5px' : '0px',
         boxShadow: isHovered
-          ? '0 0 16px rgba(0, 157, 158, 0.4), inset 0 0 8px rgba(0, 157, 158, 0.2)'
-          : '0 0 10px rgba(0, 157, 158, 0.8)',
+          ? '0 0 16px var(--accent-glow), inset 0 0 8px var(--accent-dim)'
+          : '0 0 10px var(--accent-glow)',
         opacity: isVisible ? 1 : 0,
       }}
       transition={{
@@ -85,7 +85,7 @@ export const CustomCursor: React.FC = () => {
     >
       {/* Inner subtle center dot when hovered */}
       {isHovered && (
-        <div className="w-1 h-1 rounded-full bg-[#9AEDFC] shadow-[0_0_6px_#9AEDFC]" />
+        <div className="w-1 h-1 rounded-full bg-[var(--accent-light)] shadow-[0_0_6px_var(--accent-light)]" />
       )}
     </motion.div>
   );

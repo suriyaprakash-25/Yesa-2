@@ -88,6 +88,12 @@ export const HeroInteractiveField: React.FC<HeroInteractiveFieldProps> = ({ mous
       smoothMouseX += (mouseRef.current.x - smoothMouseX) * 0.05;
       smoothMouseY += (mouseRef.current.y - smoothMouseY) * 0.05;
 
+      // Detect theme dynamically
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const particleRgb = isLight ? '0, 117, 119' : '0, 157, 158';
+      const particleAlphaScale = isLight ? 0.6 : 1.0;
+      const lineAlphaScale = isLight ? 0.075 : 0.12;
+
       // Draw subtle ambient radial glow around mouse
       const mouseGrad = ctx.createRadialGradient(
         smoothMouseX,
@@ -97,25 +103,27 @@ export const HeroInteractiveField: React.FC<HeroInteractiveFieldProps> = ({ mous
         smoothMouseY,
         450
       );
-      mouseGrad.addColorStop(0, 'rgba(0, 157, 158, 0.07)');
-      mouseGrad.addColorStop(0.5, 'rgba(0, 157, 158, 0.02)');
-      mouseGrad.addColorStop(1, 'rgba(0, 157, 158, 0)');
+      mouseGrad.addColorStop(0, isLight ? 'rgba(0, 117, 119, 0.035)' : 'rgba(0, 157, 158, 0.07)');
+      mouseGrad.addColorStop(0.5, isLight ? 'rgba(0, 117, 119, 0.01)' : 'rgba(0, 157, 158, 0.02)');
+      mouseGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = mouseGrad;
       ctx.fillRect(0, 0, width, height);
 
-      // Secondary ambient glow top right
-      const ambientGrad = ctx.createRadialGradient(
-        width * 0.8,
-        height * 0.3,
-        0,
-        width * 0.8,
-        height * 0.3,
-        600
-      );
-      ambientGrad.addColorStop(0, 'rgba(154, 237, 252, 0.03)');
-      ambientGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = ambientGrad;
-      ctx.fillRect(0, 0, width, height);
+      // Secondary ambient glow top right (dark mode only)
+      if (!isLight) {
+        const ambientGrad = ctx.createRadialGradient(
+          width * 0.8,
+          height * 0.3,
+          0,
+          width * 0.8,
+          height * 0.3,
+          600
+        );
+        ambientGrad.addColorStop(0, 'rgba(154, 237, 252, 0.03)');
+        ambientGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = ambientGrad;
+        ctx.fillRect(0, 0, width, height);
+      }
 
       // Update and draw particles & connections
       const maxConnectDistance = 140;
@@ -146,7 +154,7 @@ export const HeroInteractiveField: React.FC<HeroInteractiveFieldProps> = ({ mous
         // Draw particle dot
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 157, 158, ${p.baseAlpha})`;
+        ctx.fillStyle = `rgba(${particleRgb}, ${p.baseAlpha * particleAlphaScale})`;
         ctx.fill();
 
         // Connect nearby particles with thin architectural lines
@@ -157,12 +165,12 @@ export const HeroInteractiveField: React.FC<HeroInteractiveFieldProps> = ({ mous
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxConnectDistance) {
-            const lineAlpha = (1 - dist / maxConnectDistance) * 0.12;
+            const lineAlpha = (1 - dist / maxConnectDistance) * lineAlphaScale;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(0, 157, 158, ${lineAlpha})`;
-            ctx.lineWidth = 0.75;
+            ctx.strokeStyle = `rgba(${particleRgb}, ${lineAlpha})`;
+            ctx.lineWidth = isLight ? 0.65 : 0.75;
             ctx.stroke();
           }
         }
@@ -184,7 +192,8 @@ export const HeroInteractiveField: React.FC<HeroInteractiveFieldProps> = ({ mous
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
       <canvas
         ref={canvasRef}
-        className="w-full h-full block opacity-80 mix-blend-screen"
+        className="w-full h-full block opacity-80"
+        style={{ mixBlendMode: 'var(--particle-blend)' as React.CSSProperties['mixBlendMode'] }}
         aria-hidden="true"
       />
     </div>

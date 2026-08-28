@@ -18,11 +18,32 @@ html {
   scroll-padding-top: 80px;
 }
 
+/* Theme Transition Support */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease, fill 0.35s ease, stroke 0.35s ease !important;
+  transition-delay: 0s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning,
+  html.theme-transitioning * {
+    transition: none !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-base);
+  outline-offset: 2px;
+}
+
 body {
   min-height: 100vh;
   background-color: var(--color-bg-base);
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 157, 158, 0.05), transparent 70%);
+    radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-dim), transparent 70%);
   background-attachment: fixed;
   overflow-x: clip;
 }

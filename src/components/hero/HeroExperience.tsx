@@ -229,7 +229,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       {/* 4. Ghost "YESA" Wordmark Backdrop                                         */}
       {/* ========================================================================= */}
       <div className="relative w-full overflow-hidden pointer-events-none select-none flex justify-center -mb-6 sm:-mb-10 md:-mb-14 z-10">
-        <span className="font-display font-black text-[18vw] leading-none text-white/[0.08] tracking-tighter block translate-y-1/4 select-none">
+        <span className="font-display font-black text-[18vw] leading-none text-[var(--ghost-wordmark-color)] tracking-tighter block translate-y-1/4 select-none transition-colors duration-300">
           YESA
         </span>
       </div>

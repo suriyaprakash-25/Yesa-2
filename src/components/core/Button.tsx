@@ -30,22 +30,22 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary: 
-      "bg-[#F3F5F7] text-[#08090B] font-semibold hover:bg-white active:bg-[#E2E8F0] shadow-[0_1px_15px_rgba(255,255,255,0.12)] border border-white",
+      "bg-[var(--text-primary)] text-[var(--color-bg-base)] font-semibold hover:opacity-90 active:scale-[0.98] shadow-sm border border-[var(--text-primary)]",
     
     secondary: 
-      "bg-[#13171E] text-[#F3F5F7] hover:bg-[#1A1F29] border border-white/[0.12] hover:border-white/[0.25] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5)]",
+      "bg-[var(--color-surface-elevated)] text-[var(--text-primary)] hover:bg-[var(--color-surface-subtle)] border border-[var(--border-medium)] hover:border-[var(--border-strong)] shadow-[var(--shadow-subtle)]",
     
     outline: 
-      "bg-transparent text-[#E2E8F0] border border-white/[0.18] hover:border-white/[0.4] hover:bg-white/[0.04]",
+      "bg-transparent text-[var(--text-primary)] border border-[var(--border-medium)] hover:border-[var(--border-strong)] hover:bg-[var(--border-subtle)]",
     
     ghost: 
-      "bg-transparent text-[#94A3B8] hover:text-[#F3F5F7] hover:bg-white/[0.06] border border-transparent",
+      "bg-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--border-subtle)] border border-transparent",
     
     glow: 
-      "bg-[var(--accent-subtle)] text-[var(--accent-hover)] border border-[var(--accent-glow)] hover:bg-[var(--accent-glow)] hover:border-[var(--accent-base)] shadow-[0_0_25px_-5px_var(--accent-glow)]",
+      "bg-[var(--accent-dim)] text-[var(--accent-base)] border border-[var(--accent-glow)] hover:bg-[var(--accent-glow)] hover:border-[var(--accent-base)] shadow-[var(--shadow-glow-accent)]",
     
     monastic: 
-      "bg-transparent text-[#CBD5E1] border-b border-white/30 hover:border-[var(--accent-base)] rounded-none px-1 py-1 hover:text-white"
+      "bg-transparent text-[var(--text-secondary)] border-b border-[var(--border-medium)] hover:border-[var(--accent-base)] rounded-none px-1 py-1 hover:text-[var(--text-primary)]"
   };
 
   return (
@@ -55,7 +55,7 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled || isLoading}
       className={clsx(
         "relative inline-flex items-center justify-center gap-2.5 rounded-full cursor-pointer select-none outline-none font-sans transition-colors duration-200",
-        "focus-visible:ring-2 focus-visible:ring-[var(--accent-base)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#08090B]",
+        "focus-visible:ring-2 focus-visible:ring-[var(--accent-base)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-base)]",
         "disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none",
         sizeStyles[size],
         variantStyles[variant],

@@ -14,6 +14,7 @@ import { ApplyPage } from './pages/ApplyPage';
 import { CustomCursor } from './components/core/CustomCursor';
 import { IntroLoader } from './components/core/IntroLoader';
 import { NavigationBar } from './components/navigation/NavigationBar';
+import { ThemeProvider } from './context/ThemeContext';
 
 function MainSite() {
   const navigate = useNavigate();
@@ -77,18 +78,20 @@ function MainSite() {
 
 export function App() {
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-[var(--color-bg-base)] text-[var(--text-primary)] flex flex-col justify-between selection:bg-[var(--accent-dim)] selection:text-[var(--accent-light)] overflow-clip relative">
-        <IntroLoader />
-        <CustomCursor />
-        
-        <Routes>
-          <Route path="/" element={<MainSite />} />
-          <Route path="/apply" element={<ApplyPage />} />
-          <Route path="/style-guide" element={<StyleGuide />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <div className="min-h-screen bg-[var(--color-bg-base)] text-[var(--text-primary)] flex flex-col justify-between selection:bg-[var(--accent-dim)] selection:text-[var(--accent-light)] overflow-clip relative transition-colors duration-300">
+          <IntroLoader />
+          <CustomCursor />
+          
+          <Routes>
+            <Route path="/" element={<MainSite />} />
+            <Route path="/apply" element={<ApplyPage />} />
+            <Route path="/style-guide" element={<StyleGuide />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

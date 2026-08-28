@@ -1,45 +1,150 @@
-:root {
+:root,
+[data-theme="dark"] {
   /* ==========================================================================
-     YESA DESIGN SYSTEM — FOUNDATIONAL TOKENS
+     YESA DESIGN SYSTEM — DARK THEME TOKENS
      Concept: "THE ASCENT" | Institutional & Futuristic Restraint
      ========================================================================== */
 
-  /* ---------------------------------------------------------
-     1. COLOR SYSTEM (Matched to eesa.ai live palette)
-     --------------------------------------------------------- */
   /* Canvas & Backgrounds */
   --color-bg-base: #090D0F;
   --color-surface-elevated: #131719;
+  --color-surface-card: #131719;
+  --color-surface-subtle: #0E1214;
 
   /* Hairline Borders & Dividers */
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-medium: rgba(255, 255, 255, 0.15);
+  --border-strong: rgba(255, 255, 255, 0.25);
 
   /* Typography Colors */
   --text-primary: #FFFFFF;
   --text-secondary: #8A8A8A;
-  --text-tertiary: #4A4A4A;
-  --text-ghost: #4A4A4A;
+  --text-tertiary: #52565A;
+  --text-ghost: #3E4246;
   --text-inverse: #090D0F;
 
   /* Alert / Error States */
   --color-alert-bg: #32161A;
   --color-alert-text: #FF4D4D;
 
-  /* ---------------------------------------------------------
-     2. ACCENT SYSTEM & PATH PROGRESSION
-     --------------------------------------------------------- */
-  --accent-base: #009D9E; /* Teal */
+  /* Accent System & Path Progression */
+  --accent-base: #009D9E;
   --accent-light: #9AEDFC;
-  --accent-dim: rgba(0, 157, 158, 0.15); /* 15% opacity */
+  --accent-dim: rgba(0, 157, 158, 0.15);
   --accent-glow: rgba(0, 157, 158, 0.25);
   
   --path-origin: rgba(255, 255, 255, 0.2);
   --path-active: #009D9E;
   --path-glow: rgba(0, 157, 158, 0.4);
 
+  /* Navigation Tokens */
+  --nav-bg: rgba(9, 13, 15, 0.85);
+  --nav-pill-bg: rgba(19, 23, 25, 0.9);
+  --nav-pill-border: rgba(255, 255, 255, 0.12);
+  --nav-link-color: #8A8A8A;
+  --nav-link-hover: #FFFFFF;
+  --nav-active-bg: rgba(255, 255, 255, 0.1);
+  --nav-active-border: rgba(255, 255, 255, 0.12);
+  --nav-btn-bg: rgba(255, 255, 255, 0.03);
+  --nav-btn-border: rgba(255, 255, 255, 0.15);
+  --nav-btn-hover-border: rgba(255, 255, 255, 0.3);
+  --nav-btn-text: #FFFFFF;
+
+  /* Footer Tokens */
+  --footer-bg: #090D0F;
+  --footer-border: rgba(255, 255, 255, 0.08);
+  --footer-text: #8A8A8A;
+  --footer-heading: #FFFFFF;
+
+  /* Particles & Atmosphere */
+  --particle-rgb: 0, 157, 158;
+  --particle-alpha-mult: 1;
+  --particle-blend: screen;
+  --ghost-wordmark-color: rgba(255, 255, 255, 0.08);
+
+  /* Elevations, Blurs & Shadows */
+  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 12px 32px -4px rgba(0, 0, 0, 0.6);
+  --shadow-glow-accent: 0 0 35px -5px rgba(0, 157, 158, 0.25);
+  --blur-glass: 16px;
+  --blur-nav: 24px;
+}
+
+[data-theme="light"] {
+  /* ==========================================================================
+     YESA DESIGN SYSTEM — LIGHT THEME TOKENS
+     Concept: "WARM EDITORIAL" | Approachable, Human & Premium Restraint
+     All contrast ratios verified against WCAG AA / AAA
+     ========================================================================== */
+
+  /* Canvas & Backgrounds (Warm off-white cream) */
+  --color-bg-base: #F8F6F1;
+  --color-surface-elevated: #EFECE6;
+  --color-surface-card: #EFECE6;
+  --color-surface-subtle: #F3F0EA;
+
+  /* Hairline Borders & Dividers (Soft warm gray) */
+  --border-subtle: rgba(26, 28, 30, 0.09);
+  --border-medium: rgba(26, 28, 30, 0.16);
+  --border-strong: rgba(26, 28, 30, 0.26);
+
+  /* Typography Colors (Warm dark charcoal & mid warm gray) */
+  --text-primary: #1A1C1E; /* 15.8:1 contrast on #F8F6F1 (WCAG AAA) */
+  --text-secondary: #5C6064; /* 5.87:1 contrast on #F8F6F1 (WCAG AA) */
+  --text-tertiary: #84888D;
+  --text-ghost: #B2B5BA;
+  --text-inverse: #FFFFFF;
+
+  /* Alert / Error States */
+  --color-alert-bg: #FDE8E8;
+  --color-alert-text: #C5221F;
+
+  /* Accent System (Deepened saturated teal for proper light contrast) */
+  --accent-base: #007577; /* 5.10:1 contrast on #F8F6F1 (WCAG AA) */
+  --accent-light: #008F91;
+  --accent-dim: rgba(0, 117, 119, 0.12);
+  --accent-glow: rgba(0, 117, 119, 0.22);
+  
+  --path-origin: rgba(26, 28, 30, 0.18);
+  --path-active: #007577;
+  --path-glow: rgba(0, 117, 119, 0.35);
+
+  /* Navigation Tokens */
+  --nav-bg: rgba(248, 246, 241, 0.92);
+  --nav-pill-bg: rgba(239, 236, 230, 0.95);
+  --nav-pill-border: rgba(26, 28, 30, 0.1);
+  --nav-link-color: #5C6064;
+  --nav-link-hover: #1A1C1E;
+  --nav-active-bg: rgba(26, 28, 30, 0.08);
+  --nav-active-border: rgba(26, 28, 30, 0.12);
+  --nav-btn-bg: rgba(26, 28, 30, 0.04);
+  --nav-btn-border: rgba(26, 28, 30, 0.15);
+  --nav-btn-hover-border: rgba(0, 117, 119, 0.4);
+  --nav-btn-text: #1A1C1E;
+
+  /* Footer Tokens */
+  --footer-bg: #F8F6F1;
+  --footer-border: rgba(26, 28, 30, 0.09);
+  --footer-text: #5C6064;
+  --footer-heading: #1A1C1E;
+
+  /* Particles & Atmosphere */
+  --particle-rgb: 0, 117, 119;
+  --particle-alpha-mult: 0.85;
+  --particle-blend: normal;
+  --ghost-wordmark-color: rgba(26, 28, 30, 0.06);
+
+  /* Elevations, Blurs & Shadows */
+  --shadow-subtle: 0 4px 20px -2px rgba(26, 28, 30, 0.06);
+  --shadow-elevated: 0 12px 32px -4px rgba(26, 28, 30, 0.1);
+  --shadow-glow-accent: 0 0 35px -5px rgba(0, 117, 119, 0.2);
+  --blur-glass: 16px;
+  --blur-nav: 24px;
+}
+
+:root {
   /* ---------------------------------------------------------
-     3. TYPOGRAPHY SCALES & STACKS
+     SHARED TYPOGRAPHY SCALES & STACKS
      --------------------------------------------------------- */
   --font-sans: 'Familjen Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Familjen Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -47,15 +152,15 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Typography Hierarchy Scale */
-  --text-hero: clamp(2.5rem, 8vw, 9rem); /* Hero Display / Strict Clamp */
-  --text-section: clamp(2rem, 5vw, 4rem); /* Section Label */
-  --text-h2: clamp(1.75rem, 4vw, 3rem); /* Sub-heading */
+  --text-hero: clamp(2.5rem, 8vw, 9rem);
+  --text-section: clamp(2rem, 5vw, 4rem);
+  --text-h2: clamp(1.75rem, 4vw, 3rem);
   --text-h3: clamp(1.25rem, 2vw, 1.75rem);
-  --text-supporting: clamp(1rem, 1.2vw, 1.125rem); /* Supporting Copy */
-  --text-cta: 0.875rem; /* CTA */
-  --text-nav: 0.75rem; /* Navigation */
-  --text-eyebrow: 0.75rem; /* Eyebrow */
-  --text-micro: 0.625rem; /* Micro Label */
+  --text-supporting: clamp(1rem, 1.2vw, 1.125rem);
+  --text-cta: 0.875rem;
+  --text-nav: 0.75rem;
+  --text-eyebrow: 0.75rem;
+  --text-micro: 0.625rem;
 
   /* Line Heights */
   --leading-tight: 1.05;
@@ -70,24 +175,12 @@
   --tracking-wide: 0.05em;
   --tracking-widest: 0.15em;
 
-  /* ---------------------------------------------------------
-     4. MOTION & TRANSITIONS
-     --------------------------------------------------------- */
-  --ease-institutional: cubic-bezier(0.16, 1, 0.3, 1); /* expo-out for entrances */
+  /* Motion Curves */
+  --ease-institutional: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --duration-micro: 200ms;
   --duration-standard: 500ms;
   --duration-hero: 900ms;
-
-  /* ---------------------------------------------------------
-     5. ELEVATIONS, BLURS & SHADOWS
-     --------------------------------------------------------- */
-  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
-  --shadow-elevated: 0 12px 32px -4px rgba(0, 0, 0, 0.6);
-  --shadow-glow-accent: 0 0 35px -5px rgba(56, 189, 248, 0.25);
-
-  --blur-glass: 16px;
-  --blur-nav: 24px;
 }

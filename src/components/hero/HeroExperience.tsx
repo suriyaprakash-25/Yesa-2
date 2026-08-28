@@ -197,9 +197,9 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
         </motion.div>
       </Container>
 
-      {/* Large faint "YESA" wordmark bleeding off the bottom edge as a scroll cue */}
-      <div className="relative w-full overflow-hidden pointer-events-none select-none flex justify-center -mb-6 sm:-mb-10 md:-mb-14 opacity-60">
-        <span className="font-display font-black text-[18vw] leading-none text-white/[0.03] tracking-tighter block translate-y-1/4">
+      {/* Large "YESA" wordmark bleeding off the bottom edge as a scroll cue */}
+      <div className="relative w-full overflow-hidden pointer-events-none select-none flex justify-center -mb-6 sm:-mb-10 md:-mb-14">
+        <span className="font-display font-black text-[18vw] leading-none text-white/[0.09] tracking-tighter block translate-y-1/4">
           YESA
         </span>
       </div>

@@ -17,21 +17,21 @@ export const AgentDevelopmentVisual: React.FC = () => {
         loading="lazy"
       />
 
-      {/* Vignette & Edge Shadow Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-card)]/90 via-[var(--color-surface-card)]/30 to-[var(--color-surface-card)]/70 pointer-events-none transition-colors duration-300" />
+      {/* Crisp Scrim Overlay — zero milky fog */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/25 dark:from-[#090D0F]/90 dark:via-[#090D0F]/20 dark:to-[#090D0F]/60 pointer-events-none" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
         <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           AGENT_TOPOLOGY
         </span>
-        <span className="text-[var(--text-primary)] font-medium">DISCIPLINE 01</span>
+        <span className="text-[var(--text-primary)] font-semibold">DISCIPLINE 01</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
-        <span className="text-[var(--text-secondary)]">TOPOLOGY: MULTI-AGENT</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+        <span className="text-[var(--text-secondary)] font-medium">TOPOLOGY: MULTI-AGENT</span>
         <span className="text-[var(--accent-base)] font-bold">SYSTEMS ARCHITECTURE</span>
       </div>
     </div>
@@ -49,21 +49,21 @@ export const DesignVisual: React.FC = () => {
         loading="lazy"
       />
 
-      {/* Vignette & Edge Shadow Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-card)]/90 via-[var(--color-surface-card)]/30 to-[var(--color-surface-card)]/70 pointer-events-none transition-colors duration-300" />
+      {/* Crisp Scrim Overlay — zero milky fog */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/25 dark:from-[#090D0F]/90 dark:via-[#090D0F]/20 dark:to-[#090D0F]/60 pointer-events-none" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
         <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           GRID_ARCHITECTURE
         </span>
-        <span className="text-[var(--text-primary)] font-medium">DISCIPLINE 02</span>
+        <span className="text-[var(--text-primary)] font-semibold">DISCIPLINE 02</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
-        <span className="text-[var(--text-secondary)]">CANVAS: DESIGN SYSTEMS</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+        <span className="text-[var(--text-secondary)] font-medium">CANVAS: DESIGN SYSTEMS</span>
         <span className="text-[var(--accent-base)] font-bold">INTERFACE PRECISION</span>
       </div>
     </div>
@@ -81,21 +81,21 @@ export const ProductVisual: React.FC = () => {
         loading="lazy"
       />
 
-      {/* Vignette & Edge Shadow Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-card)]/90 via-[var(--color-surface-card)]/30 to-[var(--color-surface-card)]/70 pointer-events-none transition-colors duration-300" />
+      {/* Crisp Scrim Overlay — zero milky fog */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/25 dark:from-[#090D0F]/90 dark:via-[#090D0F]/20 dark:to-[#090D0F]/60 pointer-events-none" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
         <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           ROADMAP_ORCHESTRATION
         </span>
-        <span className="text-[var(--text-primary)] font-medium">DISCIPLINE 03</span>
+        <span className="text-[var(--text-primary)] font-semibold">DISCIPLINE 03</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
-        <span className="text-[var(--text-secondary)]">ALIGNMENT: STRATEGY & ROADMAP</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+        <span className="text-[var(--text-secondary)] font-medium">ALIGNMENT: STRATEGY & ROADMAP</span>
         <span className="text-[var(--accent-base)] font-bold">END-TO-END EXECUTION</span>
       </div>
     </div>
@@ -113,21 +113,21 @@ export const SalesMarketingVisual: React.FC = () => {
         loading="lazy"
       />
 
-      {/* Vignette & Edge Shadow Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-card)]/90 via-[var(--color-surface-card)]/30 to-[var(--color-surface-card)]/70 pointer-events-none transition-colors duration-300" />
+      {/* Crisp Scrim Overlay — zero milky fog */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/25 dark:from-[#090D0F]/90 dark:via-[#090D0F]/20 dark:to-[#090D0F]/60 pointer-events-none" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-secondary)] relative z-10 px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md shadow-sm">
         <span className="text-[var(--accent-base)] font-bold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-base)] animate-pulse" />
           GLOBAL_DISTRIBUTION
         </span>
-        <span className="text-[var(--text-primary)] font-medium">DISCIPLINE 04</span>
+        <span className="text-[var(--text-primary)] font-semibold">DISCIPLINE 04</span>
       </div>
 
       {/* Bottom Status */}
-      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
-        <span className="text-[var(--text-secondary)]">GROWTH: ENTERPRISE SPRINT</span>
+      <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-primary)] px-3 py-1.5 rounded-lg bg-[var(--color-surface-card)]/95 border border-[var(--border-medium)] backdrop-blur-md relative z-10 shadow-sm">
+        <span className="text-[var(--text-secondary)] font-medium">GROWTH: ENTERPRISE SPRINT</span>
         <span className="text-[var(--accent-base)] font-bold">REVENUE ARCHITECTURE</span>
       </div>
     </div>

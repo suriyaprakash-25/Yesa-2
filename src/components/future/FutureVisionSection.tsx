@@ -18,18 +18,18 @@ export const FutureVisionSection: React.FC = () => {
     mass: 0.6,
   });
 
-  // Step 1: Word stack progressive lighting (0.0 -> 0.28)
-  const word1Opacity = useTransform(smoothProgress, [0, 0.08, 0.22], [1, 0.4, 0.2]);
-  const word1Scale = useTransform(smoothProgress, [0, 0.08, 0.22], [1.08, 1, 0.95]);
+  // Step 1: Word stack progressive lighting (0.0 -> 0.28) with high baseline contrast (no foggy fading)
+  const word1Opacity = useTransform(smoothProgress, [0, 0.08, 0.22], [1, 0.65, 0.45]);
+  const word1Scale = useTransform(smoothProgress, [0, 0.08, 0.22], [1.08, 1, 0.96]);
 
-  const word2Opacity = useTransform(smoothProgress, [0.06, 0.14, 0.24], [0.3, 1, 0.3]);
-  const word2Scale = useTransform(smoothProgress, [0.06, 0.14, 0.24], [0.95, 1.08, 0.95]);
+  const word2Opacity = useTransform(smoothProgress, [0.06, 0.14, 0.24], [0.55, 1, 0.55]);
+  const word2Scale = useTransform(smoothProgress, [0.06, 0.14, 0.24], [0.96, 1.08, 0.96]);
 
-  const word3Opacity = useTransform(smoothProgress, [0.12, 0.20, 0.28], [0.3, 1, 0.3]);
-  const word3Scale = useTransform(smoothProgress, [0.12, 0.20, 0.28], [0.95, 1.08, 0.95]);
+  const word3Opacity = useTransform(smoothProgress, [0.12, 0.20, 0.28], [0.55, 1, 0.55]);
+  const word3Scale = useTransform(smoothProgress, [0.12, 0.20, 0.28], [0.96, 1.08, 0.96]);
 
-  const word4Opacity = useTransform(smoothProgress, [0.18, 0.26, 0.32], [0.3, 1, 1]);
-  const word4Scale = useTransform(smoothProgress, [0.18, 0.26, 0.32], [0.95, 1.12, 1.12]);
+  const word4Opacity = useTransform(smoothProgress, [0.18, 0.26, 0.32], [0.55, 1, 1]);
+  const word4Scale = useTransform(smoothProgress, [0.18, 0.26, 0.32], [0.96, 1.12, 1.12]);
 
   // Word Stack fades out cleanly by 0.32
   const stackOpacity = useTransform(smoothProgress, [0, 0.22, 0.32], [1, 0.7, 0]);
@@ -68,7 +68,7 @@ export const FutureVisionSection: React.FC = () => {
                   LEARNING
                 </motion.span>
                 <div className="w-[1px] h-4 sm:h-6 bg-[var(--border-medium)]" />
-                <motion.span style={{ opacity: word2Opacity, scale: word2Scale }} className="text-[var(--accent-base)] dark:text-[#9AEDFC]">
+                <motion.span style={{ opacity: word2Opacity, scale: word2Scale }} className="text-[var(--accent-base)] dark:text-[#009D9E]">
                   BUILDING
                 </motion.span>
                 <div className="w-[1px] h-4 sm:h-6 bg-[var(--border-medium)]" />
@@ -78,7 +78,7 @@ export const FutureVisionSection: React.FC = () => {
                 <div className="w-[1px] h-4 sm:h-6 bg-[var(--border-medium)]" />
                 <motion.span
                   style={{ opacity: word4Opacity, scale: word4Scale }}
-                  className="text-[var(--text-primary)] drop-shadow-[var(--shadow-glow-accent)]"
+                  className="text-[var(--text-primary)]"
                 >
                   CREATING
                 </motion.span>

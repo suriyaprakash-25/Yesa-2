@@ -81,23 +81,20 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
     >
       {/* ========================================================================= */}
       {/* 1. Full-Bleed Ambient Background Photo Layer (z-0)                         */}
-      {/* Covers right ~65% with multi-directional gradients matching active theme   */}
+      {/* Uses crisp directional alpha masking to eliminate milky/foggy overlays     */}
       {/* ========================================================================= */}
-      <div className="absolute right-0 top-0 bottom-0 w-full md:w-[70%] lg:w-[65%] xl:w-[60%] pointer-events-none select-none z-0 overflow-hidden">
+      <div className="absolute right-0 top-0 bottom-0 w-full md:w-[70%] lg:w-[65%] xl:w-[60%] pointer-events-none select-none z-0 overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.3)_30%,rgba(0,0,0,0.95)_80%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.3)_30%,rgba(0,0,0,0.95)_80%)]">
         <img
           src={heroFellowsImg}
           alt=""
           role="presentation"
-          className="w-full h-full object-cover object-center opacity-20 md:opacity-28 lg:opacity-30 filter saturate-[0.85] contrast-[1.05] transition-opacity duration-300"
+          className="w-full h-full object-cover object-center opacity-35 md:opacity-45 filter contrast-115 saturate-95 dark:opacity-28 dark:saturate-[0.85] dark:contrast-[1.05] transition-all duration-300"
           loading="eager"
         />
 
-        {/* Strong Left Horizontal Fade Mask into current background color */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-bg-base)] via-[var(--color-bg-base)]/75 to-transparent w-full h-full transition-colors duration-300" />
-        
-        {/* Subtle Vertical Top, Bottom and Right Edge Blend Masks */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-base)] via-transparent to-[var(--color-bg-base)]/85 w-full h-full transition-colors duration-300" />
-        <div className="absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-[var(--color-bg-base)]/50 to-transparent transition-colors duration-300" />
+        {/* Dark-mode specific edge shadows */}
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#090D0F] via-[#090D0F]/70 to-transparent w-full h-full" />
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-t from-[#090D0F] via-transparent to-[#090D0F]/85 w-full h-full" />
       </div>
 
       {/* ========================================================================= */}

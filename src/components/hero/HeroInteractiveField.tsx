@@ -91,8 +91,8 @@ export const HeroInteractiveField: React.FC<HeroInteractiveFieldProps> = ({ mous
       // Detect theme dynamically
       const isLight = document.documentElement.getAttribute('data-theme') === 'light';
       const particleRgb = isLight ? '0, 117, 119' : '0, 157, 158';
-      const particleAlphaScale = isLight ? 0.6 : 1.0;
-      const lineAlphaScale = isLight ? 0.075 : 0.12;
+      const particleAlphaScale = isLight ? 0.25 : 1.0;
+      const lineAlphaScale = isLight ? 0.03 : 0.12;
 
       // Draw subtle ambient radial glow around mouse
       const mouseGrad = ctx.createRadialGradient(
@@ -103,8 +103,8 @@ export const HeroInteractiveField: React.FC<HeroInteractiveFieldProps> = ({ mous
         smoothMouseY,
         450
       );
-      mouseGrad.addColorStop(0, isLight ? 'rgba(0, 117, 119, 0.035)' : 'rgba(0, 157, 158, 0.07)');
-      mouseGrad.addColorStop(0.5, isLight ? 'rgba(0, 117, 119, 0.01)' : 'rgba(0, 157, 158, 0.02)');
+      mouseGrad.addColorStop(0, isLight ? 'rgba(0, 117, 119, 0.015)' : 'rgba(0, 157, 158, 0.07)');
+      mouseGrad.addColorStop(0.5, isLight ? 'rgba(0, 117, 119, 0.005)' : 'rgba(0, 157, 158, 0.02)');
       mouseGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = mouseGrad;
       ctx.fillRect(0, 0, width, height);

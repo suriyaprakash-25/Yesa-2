@@ -303,8 +303,8 @@ const RoadmapLargeCard: React.FC<RoadmapLargeCardProps> = ({
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
-        {/* Subtle vignette gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-card)]/40 via-transparent to-transparent pointer-events-none" />
+        {/* Subtle vignette gradient overlay only in dark mode */}
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-t from-[#131719]/50 via-transparent to-transparent pointer-events-none" />
       </div>
 
       {/* Bottom Architectural Highlight & Metric Card */}

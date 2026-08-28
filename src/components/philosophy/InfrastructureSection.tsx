@@ -93,9 +93,8 @@ export const InfrastructureSection: React.FC = () => {
               decoding="async"
               className="w-full h-full object-cover object-center filter brightness-95 contrast-105"
             />
-            {/* Cinematic Gradient Overlays matched to active theme */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-card)] via-[var(--color-surface-card)]/40 to-transparent transition-colors duration-300" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-surface-card)]/70 via-transparent to-[var(--color-surface-card)]/70 transition-colors duration-300" />
+            {/* Cinematic Gradient Overlays: Crisp dark bottom scrim for HUD legibility, zero milky fog on faces */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
 
             {/* Corner Architectural Brackets */}
             <div className="absolute top-6 left-6 w-8 h-8 border-t border-l border-[var(--accent-base)]/60 pointer-events-none" />
@@ -104,25 +103,25 @@ export const InfrastructureSection: React.FC = () => {
             <div className="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-[var(--accent-base)]/60 pointer-events-none" />
 
             {/* Image Overlay HUD Metadata */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row lg:items-end justify-between gap-5 lg:gap-8 max-w-full">
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row lg:items-end justify-between gap-5 lg:gap-8 max-w-full z-10">
               <div className="max-w-2xl">
-                <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold block mb-1.5">
+                <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9AEDFC] font-bold block mb-1.5">
                   INCUBATOR ECOSYSTEM · COHORT LABS
                 </span>
-                <p className="font-display font-bold text-lg sm:text-2xl text-[var(--text-primary)] tracking-tight leading-snug">
+                <p className="font-display font-bold text-lg sm:text-2xl text-white tracking-tight leading-snug">
                   High-velocity peer immersion & verified industry mentorship.
                 </p>
               </div>
 
-              {/* HUD Badges with legible light-mode pill treatment */}
+              {/* HUD Badges */}
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 shrink-0">
-                <span className="font-mono text-[10px] sm:text-xs px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 backdrop-blur-md border border-[var(--border-medium)] text-[var(--text-primary)] whitespace-nowrap shadow-sm font-medium">
+                <span className="font-mono text-[10px] sm:text-xs px-3 py-1.5 rounded-lg bg-black/40 backdrop-blur-md border border-white/20 text-white whitespace-nowrap shadow-sm font-medium">
                   ZERO TUITION
                 </span>
-                <span className="font-mono text-[10px] sm:text-xs px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)]/90 backdrop-blur-md border border-[var(--border-medium)] text-[var(--text-primary)] whitespace-nowrap shadow-sm font-medium">
+                <span className="font-mono text-[10px] sm:text-xs px-3 py-1.5 rounded-lg bg-black/40 backdrop-blur-md border border-white/20 text-white whitespace-nowrap shadow-sm font-medium">
                   1-ON-1 GUIDANCE
                 </span>
-                <span className="font-mono text-[10px] sm:text-xs px-3 py-1.5 rounded-lg bg-[var(--accent-dim)] text-[var(--accent-base)] backdrop-blur-md border border-[var(--accent-base)]/50 font-bold whitespace-nowrap shadow-sm">
+                <span className="font-mono text-[10px] sm:text-xs px-3 py-1.5 rounded-lg bg-[#009D9E]/30 text-[#9AEDFC] backdrop-blur-md border border-[#009D9E]/60 font-bold whitespace-nowrap shadow-sm">
                   100% MERIT
                 </span>
               </div>

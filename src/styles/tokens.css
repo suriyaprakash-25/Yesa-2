@@ -73,71 +73,71 @@
 [data-theme="light"] {
   /* ==========================================================================
      YESA DESIGN SYSTEM — LIGHT THEME TOKENS
-     Concept: "WARM EDITORIAL" | Approachable, Human & Premium Restraint
+     Concept: "CRISP EDITORIAL" | Clean, Luminous, High-Contrast & Premium
      All contrast ratios verified against WCAG AA / AAA
      ========================================================================== */
 
-  /* Canvas & Backgrounds (Warm off-white cream) */
-  --color-bg-base: #F8F6F1;
-  --color-surface-elevated: #EFECE6;
-  --color-surface-card: #EFECE6;
-  --color-surface-subtle: #F3F0EA;
+  /* Canvas & Backgrounds (Bright, clean, luminous off-white) */
+  --color-bg-base: #FBFBFA;
+  --color-surface-elevated: #F5F5F3;
+  --color-surface-card: #FFFFFF;
+  --color-surface-subtle: #F0F0ED;
 
-  /* Hairline Borders & Dividers (Soft warm gray) */
-  --border-subtle: rgba(26, 28, 30, 0.09);
-  --border-medium: rgba(26, 28, 30, 0.16);
-  --border-strong: rgba(26, 28, 30, 0.26);
+  /* Hairline Borders & Dividers (Clean, crisp hairline definition) */
+  --border-subtle: rgba(0, 0, 0, 0.07);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-strong: rgba(0, 0, 0, 0.22);
 
-  /* Typography Colors (Warm dark charcoal & mid warm gray) */
-  --text-primary: #1A1C1E; /* 15.8:1 contrast on #F8F6F1 (WCAG AAA) */
-  --text-secondary: #5C6064; /* 5.87:1 contrast on #F8F6F1 (WCAG AA) */
-  --text-tertiary: #84888D;
-  --text-ghost: #B2B5BA;
+  /* Typography Colors (Sharp dark charcoal & balanced reading gray) */
+  --text-primary: #111827; /* 16.5:1 contrast on #FBFBFA (WCAG AAA) */
+  --text-secondary: #4B5563; /* 6.8:1 contrast on #FBFBFA (WCAG AA) */
+  --text-tertiary: #6B7280;
+  --text-ghost: #9CA3AF;
   --text-inverse: #FFFFFF;
 
   /* Alert / Error States */
-  --color-alert-bg: #FDE8E8;
-  --color-alert-text: #C5221F;
+  --color-alert-bg: #FEF2F2;
+  --color-alert-text: #DC2626;
 
-  /* Accent System (Deepened saturated teal for proper light contrast) */
-  --accent-base: #007577; /* 5.10:1 contrast on #F8F6F1 (WCAG AA) */
+  /* Accent System (Deep institutional teal with crisp clarity) */
+  --accent-base: #007577; /* 5.3:1 contrast on #FBFBFA (WCAG AA) */
   --accent-light: #008F91;
-  --accent-dim: rgba(0, 117, 119, 0.12);
-  --accent-glow: rgba(0, 117, 119, 0.22);
+  --accent-dim: rgba(0, 117, 119, 0.08);
+  --accent-glow: rgba(0, 117, 119, 0.18);
   
-  --path-origin: rgba(26, 28, 30, 0.18);
+  --path-origin: rgba(0, 0, 0, 0.15);
   --path-active: #007577;
-  --path-glow: rgba(0, 117, 119, 0.35);
+  --path-glow: rgba(0, 117, 119, 0.25);
 
   /* Navigation Tokens */
-  --nav-bg: rgba(248, 246, 241, 0.92);
-  --nav-pill-bg: rgba(239, 236, 230, 0.95);
-  --nav-pill-border: rgba(26, 28, 30, 0.1);
-  --nav-link-color: #5C6064;
-  --nav-link-hover: #1A1C1E;
-  --nav-active-bg: rgba(26, 28, 30, 0.08);
-  --nav-active-border: rgba(26, 28, 30, 0.12);
-  --nav-btn-bg: rgba(26, 28, 30, 0.04);
-  --nav-btn-border: rgba(26, 28, 30, 0.15);
+  --nav-bg: rgba(251, 251, 250, 0.92);
+  --nav-pill-bg: rgba(255, 255, 255, 0.96);
+  --nav-pill-border: rgba(0, 0, 0, 0.08);
+  --nav-link-color: #4B5563;
+  --nav-link-hover: #111827;
+  --nav-active-bg: rgba(0, 0, 0, 0.05);
+  --nav-active-border: rgba(0, 0, 0, 0.1);
+  --nav-btn-bg: rgba(0, 0, 0, 0.03);
+  --nav-btn-border: rgba(0, 0, 0, 0.12);
   --nav-btn-hover-border: rgba(0, 117, 119, 0.4);
-  --nav-btn-text: #1A1C1E;
+  --nav-btn-text: #111827;
 
   /* Footer Tokens */
-  --footer-bg: #F8F6F1;
-  --footer-border: rgba(26, 28, 30, 0.09);
-  --footer-text: #5C6064;
-  --footer-heading: #1A1C1E;
+  --footer-bg: #FBFBFA;
+  --footer-border: rgba(0, 0, 0, 0.07);
+  --footer-text: #4B5563;
+  --footer-heading: #111827;
 
   /* Particles & Atmosphere */
   --particle-rgb: 0, 117, 119;
-  --particle-alpha-mult: 0.85;
+  --particle-alpha-mult: 0.22;
   --particle-blend: normal;
-  --ghost-wordmark-color: rgba(26, 28, 30, 0.06);
+  --ghost-wordmark-color: rgba(0, 0, 0, 0.04);
 
-  /* Elevations, Blurs & Shadows */
-  --shadow-subtle: 0 4px 20px -2px rgba(26, 28, 30, 0.06);
-  --shadow-elevated: 0 12px 32px -4px rgba(26, 28, 30, 0.1);
-  --shadow-glow-accent: 0 0 35px -5px rgba(0, 117, 119, 0.2);
+  /* Elevations, Blurs & Shadows (Crisp modern micro-shadows, zero muddy fog) */
+  --shadow-subtle: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+  --shadow-elevated: 0 8px 24px -4px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  --shadow-glow-accent: 0 0 24px -4px rgba(0, 117, 119, 0.15);
   --blur-glass: 16px;
   --blur-nav: 24px;
 }

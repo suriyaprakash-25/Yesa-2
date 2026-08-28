@@ -83,12 +83,12 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       {/* 1. Full-Bleed Ambient Background Photo Layer (z-0)                         */}
       {/* Uses crisp directional alpha masking to eliminate milky/foggy overlays     */}
       {/* ========================================================================= */}
-      <div className="absolute right-0 top-0 bottom-0 w-full md:w-[70%] lg:w-[65%] xl:w-[60%] pointer-events-none select-none z-0 overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.3)_30%,rgba(0,0,0,0.95)_80%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.3)_30%,rgba(0,0,0,0.95)_80%)]">
+      <div className="absolute right-0 top-0 bottom-0 w-full md:w-[70%] lg:w-[65%] xl:w-[60%] pointer-events-none select-none z-0 overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,transparent_10%,rgba(0,0,0,0.5)_40%,rgba(0,0,0,1)_80%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,transparent_10%,rgba(0,0,0,0.5)_40%,rgba(0,0,0,1)_80%)]">
         <img
           src={heroFellowsImg}
           alt=""
           role="presentation"
-          className="w-full h-full object-cover object-center opacity-35 md:opacity-45 filter contrast-115 saturate-95 dark:opacity-28 dark:saturate-[0.85] dark:contrast-[1.05] transition-all duration-300"
+          className="w-full h-full object-cover object-center opacity-75 md:opacity-85 filter contrast-110 saturate-100 dark:opacity-35 dark:saturate-[0.85] dark:contrast-[1.05] transition-all duration-300"
           loading="eager"
         />
 

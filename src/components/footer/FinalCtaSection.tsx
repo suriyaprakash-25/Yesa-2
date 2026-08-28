@@ -111,12 +111,12 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
         </motion.div>
       </Container>
 
-      {/* Massive "YESA" Wordmark Backdrop Impression bleeding completely to the end */}
-      <div className="w-full mt-12 md:mt-16 pointer-events-none select-none flex flex-col items-center justify-end overflow-hidden -mb-4 sm:-mb-8 md:-mb-12">
-        <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.35em] text-[#8A8A8A] font-semibold mb-1">
+      {/* Massive Full "YESA" Wordmark Backdrop (100% visible, unclipped) */}
+      <div className="w-full mt-10 md:mt-14 pb-6 md:pb-8 pointer-events-none select-none flex flex-col items-center justify-center overflow-visible px-4">
+        <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.35em] text-[#8A8A8A] font-semibold mb-2">
           INCUBATOR FOR FUTURE LEADERS
         </span>
-        <span className="font-display font-black text-[20vw] leading-none text-white/[0.09] tracking-tighter block translate-y-1/4 select-none">
+        <span className="font-display font-black text-[15vw] sm:text-[17vw] leading-none text-white/[0.09] tracking-tighter block select-none">
           YESA
         </span>
       </div>

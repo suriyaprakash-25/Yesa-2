@@ -60,6 +60,11 @@ body {
   font-family: var(--font-display);
 }
 
+.font-editorial {
+  font-family: var(--font-editorial);
+  font-optical-sizing: auto;
+}
+
 .font-mono-tag {
   font-family: var(--font-mono);
   letter-spacing: var(--tracking-wide);

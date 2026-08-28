@@ -200,9 +200,9 @@ export const FutureVisionSection: React.FC = () => {
               THE YESA PHILOSOPHY
             </span>
 
-            <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-tight leading-[1.02] [overflow-wrap:normal] [word-break:keep-all]">
+            <h2 className="font-editorial font-normal md:font-medium text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-tight leading-[1.08] [overflow-wrap:normal] [word-break:keep-all]">
               Your journey<br />can become someone else's<br />
-              <span className="text-[#9AEDFC]">beginning.</span>
+              <span className="text-[#9AEDFC] italic">beginning.</span>
             </h2>
           </motion.div>
         </Container>

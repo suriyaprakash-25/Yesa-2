@@ -71,7 +71,7 @@ export const PhilosophyManifestoSection: React.FC = () => {
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#8A8A8A] mb-4">
                 THE REALITY
               </span>
-              <h2 className="font-display font-black text-[#8A8A8A] tracking-[-0.03em] text-[clamp(2.4rem,6vw+1rem,5.5rem)] leading-[1.02] [overflow-wrap:normal] [word-break:keep-all]">
+              <h2 className="font-editorial font-medium text-[#8A8A8A] tracking-[-0.02em] text-[clamp(2.2rem,5.5vw+1rem,5rem)] leading-[1.08] [overflow-wrap:normal] [word-break:keep-all]">
                 YOU DON'T NEED<br />ANOTHER COURSE.
               </h2>
             </motion.div>
@@ -91,7 +91,7 @@ export const PhilosophyManifestoSection: React.FC = () => {
                   THE FORMULA
                 </span>
               </div>
-              <h2 className="font-display font-black text-white tracking-[-0.04em] text-[clamp(3.2rem,8.5vw+1.5rem,7.5rem)] leading-[0.96] [overflow-wrap:normal] [word-break:keep-all]">
+              <h2 className="font-editorial font-medium md:font-semibold text-white tracking-[-0.025em] text-[clamp(3rem,8vw+1.2rem,7rem)] leading-[1.04] [overflow-wrap:normal] [word-break:keep-all]">
                 YOU NEED<br />A PATH.
               </h2>
             </motion.div>

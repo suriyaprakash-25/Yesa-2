@@ -22,7 +22,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
   return (
     <section
       id="apply"
-      className="relative w-full bg-[#090D0F] pt-14 pb-10 md:pt-20 md:pb-14 border-t border-white/[0.06] overflow-hidden flex flex-col justify-between"
+      className="relative w-full bg-[#090D0F] pt-14 pb-0 md:pt-20 md:pb-0 border-t border-white/[0.06] overflow-hidden flex flex-col justify-between"
     >
       {/* Background Subtle Grid Accent */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-screen">
@@ -111,12 +111,12 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
         </motion.div>
       </Container>
 
-      {/* Massive "YESA" Wordmark Backdrop Impression */}
-      <div className="w-full mt-16 md:mt-20 pointer-events-none select-none flex flex-col items-center justify-end overflow-hidden px-4">
-        <span className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.35em] text-[#8A8A8A] font-semibold mb-2">
+      {/* Massive "YESA" Wordmark Backdrop Impression bleeding completely to the end */}
+      <div className="w-full mt-12 md:mt-16 pointer-events-none select-none flex flex-col items-center justify-end overflow-hidden -mb-4 sm:-mb-8 md:-mb-12">
+        <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.35em] text-[#8A8A8A] font-semibold mb-1">
           INCUBATOR FOR FUTURE LEADERS
         </span>
-        <span className="font-display font-black text-[18vw] leading-none text-white/[0.09] tracking-tighter block translate-y-1/4">
+        <span className="font-display font-black text-[20vw] leading-none text-white/[0.09] tracking-tighter block translate-y-1/4 select-none">
           YESA
         </span>
       </div>

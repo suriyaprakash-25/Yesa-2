@@ -32,16 +32,16 @@ export const FutureVisionSection: React.FC = () => {
   const word4Scale = useTransform(smoothProgress, [0.55, 0.75, 1], [0.95, 1.15, 1.15]);
 
   // Transition between Word Stack (0 -> 0.45) and Two Branching Paths (0.45 -> 1.0)
-  const stackOpacity = useTransform(smoothProgress, [0, 0.35, 0.48], [1, 0.9, 0]);
-  const stackY = useTransform(smoothProgress, [0, 0.48], [0, -40]);
+  const stackOpacity = useTransform(smoothProgress, [0, 0.35, 0.48], [1, 0.8, 0]);
+  const stackY = useTransform(smoothProgress, [0, 0.48], [0, -30]);
 
-  const pathsOpacity = useTransform(smoothProgress, [0.45, 0.65, 1], [0, 1, 1]);
-  const pathsY = useTransform(smoothProgress, [0.45, 0.65, 1], [40, 0, 0]);
+  const pathsOpacity = useTransform(smoothProgress, [0.48, 0.62, 1], [0, 1, 1]);
+  const pathsY = useTransform(smoothProgress, [0.48, 0.62, 1], [30, 0, 0]);
 
   return (
     <section id="future" ref={containerRef} className="relative w-full bg-[#090D0F] text-white">
-      {/* 150vh single compact pinned scroll interaction */}
-      <div className="h-[150vh] relative">
+      {/* 200vh pinned scroll interaction with generous reading window */}
+      <div className="h-[200vh] relative">
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
           {/* Subtle Grid Texture */}
           <div className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-screen">
@@ -55,9 +55,7 @@ export const FutureVisionSection: React.FC = () => {
             />
           </div>
 
-          <BranchingPathVisualizer progress={smoothProgress} />
-
-          <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 w-full relative z-10">
+          <Container size="full" className="max-w-[1440px] px-6 sm:px-10 lg:px-12 xl:px-16 w-full relative z-10">
             {/* Phase 1: Progressive Word-Stack (Compressed into 1 screen) */}
             <motion.div
               style={{ opacity: stackOpacity, y: stackY }}
@@ -92,27 +90,36 @@ export const FutureVisionSection: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Phase 2: Two Diverging Future Pathways */}
+            {/* Phase 2: Two Diverging Future Pathways (Top-to-Bottom Flow) */}
             <motion.div
               style={{ opacity: pathsOpacity, y: pathsY }}
-              className="w-full flex flex-col items-center"
+              className="w-full flex flex-col items-center max-w-5xl mx-auto"
             >
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-4">
+              {/* 1. Header (Top) */}
+              <div className="text-center mb-1 sm:mb-2 z-10">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-3">
                   <Sparkles className="w-3.5 h-3.5 text-[#009D9E]" />
                   <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#009D9E] font-semibold">
                     IN THE FUTURE
                   </span>
                 </div>
-                <h3 className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-white tracking-tight">
+                <h3 className="font-display font-black text-2xl sm:text-4xl md:text-5xl text-white tracking-tight">
                   Two Pathways for Future Leaders.
                 </h3>
               </div>
 
-              {/* Side-by-Side Pathway Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full max-w-5xl">
-                {/* Path 01 */}
-                <div className="p-8 sm:p-10 rounded-2xl bg-[#131719]/90 border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-[#009D9E]/40 hover:bg-[#131719] transition-all duration-300 flex flex-col justify-between min-h-[260px]">
+              {/* 2. Visual Branching Path: Originates from top center, splits outward & downward */}
+              <div className="w-full max-w-4xl px-4 sm:px-6">
+                <BranchingPathVisualizer progress={smoothProgress} />
+              </div>
+
+              {/* 3. Side-by-Side Pathway Cards positioned directly at branch terminals */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full relative z-10 -mt-2">
+                {/* Path 01 Card */}
+                <div className="relative p-7 sm:p-9 rounded-2xl bg-[#131719] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-[#009D9E]/50 transition-all duration-300 flex flex-col justify-between min-h-[240px]">
+                  {/* Top Connector Anchor Node */}
+                  <div className="hidden md:block absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#009D9E] border border-[#9AEDFC] shadow-[0_0_10px_#009D9E]" />
+
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <span className="font-mono text-xs font-bold text-[#009D9E] tracking-widest uppercase">
@@ -139,8 +146,11 @@ export const FutureVisionSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Path 02 */}
-                <div className="p-8 sm:p-10 rounded-2xl bg-[#131719]/90 border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-[#9AEDFC]/40 hover:bg-[#131719] transition-all duration-300 flex flex-col justify-between min-h-[260px]">
+                {/* Path 02 Card */}
+                <div className="relative p-7 sm:p-9 rounded-2xl bg-[#131719] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-[#9AEDFC]/50 transition-all duration-300 flex flex-col justify-between min-h-[240px]">
+                  {/* Top Connector Anchor Node */}
+                  <div className="hidden md:block absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#9AEDFC] border border-[#009D9E] shadow-[0_0_10px_#9AEDFC]" />
+
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <span className="font-mono text-xs font-bold text-[#9AEDFC] tracking-widest uppercase">

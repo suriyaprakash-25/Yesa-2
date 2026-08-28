@@ -18,30 +18,38 @@ export const FutureVisionSection: React.FC = () => {
     mass: 0.8,
   });
 
-  // Dynamic progressive word lighting during the 150vh pinned scroll
-  const word1Opacity = useTransform(smoothProgress, [0, 0.25, 0.5], [1, 0.4, 0.2]);
-  const word1Scale = useTransform(smoothProgress, [0, 0.25, 0.5], [1.1, 1, 0.95]);
+  // Step 1: Word stack progressive lighting (0.0 -> 0.45)
+  const word1Opacity = useTransform(smoothProgress, [0, 0.22, 0.44], [1, 0.4, 0.2]);
+  const word1Scale = useTransform(smoothProgress, [0, 0.22, 0.44], [1.1, 1, 0.95]);
 
-  const word2Opacity = useTransform(smoothProgress, [0.15, 0.35, 0.6], [0.3, 1, 0.3]);
-  const word2Scale = useTransform(smoothProgress, [0.15, 0.35, 0.6], [0.95, 1.1, 0.95]);
+  const word2Opacity = useTransform(smoothProgress, [0.12, 0.30, 0.50], [0.3, 1, 0.3]);
+  const word2Scale = useTransform(smoothProgress, [0.12, 0.30, 0.50], [0.95, 1.1, 0.95]);
 
-  const word3Opacity = useTransform(smoothProgress, [0.35, 0.55, 0.8], [0.3, 1, 0.3]);
-  const word3Scale = useTransform(smoothProgress, [0.35, 0.55, 0.8], [0.95, 1.1, 0.95]);
+  const word3Opacity = useTransform(smoothProgress, [0.28, 0.42, 0.58], [0.3, 1, 0.3]);
+  const word3Scale = useTransform(smoothProgress, [0.28, 0.42, 0.58], [0.95, 1.1, 0.95]);
 
-  const word4Opacity = useTransform(smoothProgress, [0.55, 0.75, 1], [0.3, 1, 1]);
-  const word4Scale = useTransform(smoothProgress, [0.55, 0.75, 1], [0.95, 1.15, 1.15]);
+  const word4Opacity = useTransform(smoothProgress, [0.40, 0.48, 0.56], [0.3, 1, 1]);
+  const word4Scale = useTransform(smoothProgress, [0.40, 0.48, 0.56], [0.95, 1.15, 1.15]);
 
-  // Transition between Word Stack (0 -> 0.45) and Two Branching Paths (0.45 -> 1.0)
-  const stackOpacity = useTransform(smoothProgress, [0, 0.35, 0.46], [1, 0.8, 0]);
+  // Word Stack fades out as user progresses into Phase 2
+  const stackOpacity = useTransform(smoothProgress, [0, 0.36, 0.46], [1, 0.8, 0]);
   const stackY = useTransform(smoothProgress, [0, 0.46], [0, -30]);
 
-  const pathsOpacity = useTransform(smoothProgress, [0.46, 0.6, 1], [0, 1, 1]);
-  const pathsY = useTransform(smoothProgress, [0.46, 0.6, 1], [25, 0, 0]);
+  // Step 2: In The Future Header & Downward Branching Path emerge
+  const headerOpacity = useTransform(smoothProgress, [0.46, 0.58], [0, 1]);
+  const headerY = useTransform(smoothProgress, [0.46, 0.58], [20, 0]);
+
+  const branchOpacity = useTransform(smoothProgress, [0.48, 0.58], [0, 1]);
+
+  // Step 3: Pathway Cards fade in sequentially as branches reach their destination
+  const cardsOpacity = useTransform(smoothProgress, [0.68, 0.82, 1], [0, 1, 1]);
+  const cardsY = useTransform(smoothProgress, [0.68, 0.82, 1], [35, 0, 0]);
+  const cardsScale = useTransform(smoothProgress, [0.68, 0.82, 1], [0.96, 1, 1]);
 
   return (
     <section id="future" ref={containerRef} className="relative w-full bg-[#090D0F] text-white">
-      {/* 120vh compact pinned scroll interaction */}
-      <div className="h-[120vh] relative">
+      {/* 160vh pinned scroll interaction with clear sequential choreography */}
+      <div className="h-[160vh] relative">
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
           {/* Subtle Grid Texture */}
           <div className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-screen">
@@ -56,7 +64,7 @@ export const FutureVisionSection: React.FC = () => {
           </div>
 
           <Container size="full" className="max-w-[1440px] px-6 sm:px-10 lg:px-12 xl:px-16 w-full relative z-10">
-            {/* Phase 1: Progressive Word-Stack (Compressed into 1 screen) */}
+            {/* Phase 1: Progressive Word-Stack (0.0 -> 0.46) */}
             <motion.div
               style={{ opacity: stackOpacity, y: stackY }}
               className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-4"
@@ -90,13 +98,13 @@ export const FutureVisionSection: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Phase 2: Two Diverging Future Pathways (Top-to-Bottom Flow) */}
-            <motion.div
-              style={{ opacity: pathsOpacity, y: pathsY }}
-              className="w-full flex flex-col items-center max-w-5xl mx-auto"
-            >
+            {/* Phase 2: Sequential Top-to-Bottom Pathway Choreography */}
+            <div className="w-full flex flex-col items-center max-w-5xl mx-auto">
               {/* 1. Header (Top) */}
-              <div className="text-center mb-1 sm:mb-2 z-10">
+              <motion.div
+                style={{ opacity: headerOpacity, y: headerY }}
+                className="text-center mb-1 sm:mb-2 z-10"
+              >
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-3">
                   <Sparkles className="w-3.5 h-3.5 text-[#009D9E]" />
                   <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#009D9E] font-semibold">
@@ -106,15 +114,21 @@ export const FutureVisionSection: React.FC = () => {
                 <h3 className="font-display font-black text-2xl sm:text-4xl md:text-5xl text-white tracking-tight">
                   Two Pathways for Future Leaders.
                 </h3>
-              </div>
+              </motion.div>
 
-              {/* 2. Visual Branching Path: Originates from top center, splits outward & downward */}
-              <div className="w-full max-w-4xl px-4 sm:px-6">
+              {/* 2. Visual Branching Path (Diverging downward from Origin point) */}
+              <motion.div
+                style={{ opacity: branchOpacity }}
+                className="w-full max-w-4xl px-4 sm:px-6"
+              >
                 <BranchingPathVisualizer progress={smoothProgress} />
-              </div>
+              </motion.div>
 
-              {/* 3. Side-by-Side Pathway Cards positioned directly at branch terminals */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full relative z-10 -mt-2">
+              {/* 3. Pathway Cards (Smoothly revealed as branches arrive at the bottom) */}
+              <motion.div
+                style={{ opacity: cardsOpacity, y: cardsY, scale: cardsScale }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full relative z-10 -mt-2"
+              >
                 {/* Path 01 Card */}
                 <div className="relative p-7 sm:p-9 rounded-2xl bg-[#131719] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-[#009D9E]/50 transition-all duration-300 flex flex-col justify-between min-h-[240px]">
                   {/* Top Connector Anchor Node */}
@@ -176,8 +190,8 @@ export const FutureVisionSection: React.FC = () => {
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </Container>
         </div>
       </div>

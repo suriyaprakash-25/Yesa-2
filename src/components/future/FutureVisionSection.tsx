@@ -18,42 +18,37 @@ export const FutureVisionSection: React.FC = () => {
     mass: 0.8,
   });
 
-  // Step 1: Word stack progressive lighting (0.0 -> 0.35)
-  const word1Opacity = useTransform(smoothProgress, [0, 0.15, 0.32], [1, 0.4, 0.2]);
-  const word1Scale = useTransform(smoothProgress, [0, 0.15, 0.32], [1.1, 1, 0.95]);
+  // Step 1: Word stack progressive lighting (0.0 -> 0.45)
+  const word1Opacity = useTransform(smoothProgress, [0, 0.20, 0.42], [1, 0.4, 0.2]);
+  const word1Scale = useTransform(smoothProgress, [0, 0.20, 0.42], [1.1, 1, 0.95]);
 
-  const word2Opacity = useTransform(smoothProgress, [0.08, 0.22, 0.36], [0.3, 1, 0.3]);
-  const word2Scale = useTransform(smoothProgress, [0.08, 0.22, 0.36], [0.95, 1.1, 0.95]);
+  const word2Opacity = useTransform(smoothProgress, [0.10, 0.28, 0.48], [0.3, 1, 0.3]);
+  const word2Scale = useTransform(smoothProgress, [0.10, 0.28, 0.48], [0.95, 1.1, 0.95]);
 
-  const word3Opacity = useTransform(smoothProgress, [0.18, 0.28, 0.40], [0.3, 1, 0.3]);
-  const word3Scale = useTransform(smoothProgress, [0.18, 0.28, 0.40], [0.95, 1.1, 0.95]);
+  const word3Opacity = useTransform(smoothProgress, [0.24, 0.38, 0.54], [0.3, 1, 0.3]);
+  const word3Scale = useTransform(smoothProgress, [0.24, 0.38, 0.54], [0.95, 1.1, 0.95]);
 
-  const word4Opacity = useTransform(smoothProgress, [0.26, 0.34, 0.42], [0.3, 1, 1]);
-  const word4Scale = useTransform(smoothProgress, [0.26, 0.34, 0.42], [0.95, 1.15, 1.15]);
+  const word4Opacity = useTransform(smoothProgress, [0.36, 0.46, 0.54], [0.3, 1, 1]);
+  const word4Scale = useTransform(smoothProgress, [0.36, 0.46, 0.54], [0.95, 1.15, 1.15]);
 
-  // Word Stack fades out as user progresses into Phase 2
-  const stackOpacity = useTransform(smoothProgress, [0, 0.26, 0.35], [1, 0.8, 0]);
-  const stackY = useTransform(smoothProgress, [0, 0.35], [0, -30]);
+  // Word Stack fades out as user scrolls toward Phase 2
+  const stackOpacity = useTransform(smoothProgress, [0, 0.34, 0.44], [1, 0.8, 0]);
+  const stackY = useTransform(smoothProgress, [0, 0.44], [0, -30]);
 
   // Step 2: "IN THE FUTURE" Header & Origin Diagram emerge
-  const headerOpacity = useTransform(smoothProgress, [0.34, 0.44], [0, 1]);
-  const headerY = useTransform(smoothProgress, [0.34, 0.44], [20, 0]);
-  const branchOpacity = useTransform(smoothProgress, [0.35, 0.44], [0, 1]);
+  const headerOpacity = useTransform(smoothProgress, [0.44, 0.56], [0, 1]);
+  const headerY = useTransform(smoothProgress, [0.44, 0.56], [20, 0]);
+  const branchOpacity = useTransform(smoothProgress, [0.46, 0.56], [0, 1]);
 
-  // Step 3: Card 01 ("Work on our idea") activates on its OWN separate scroll stage (0.45 -> 0.62)
-  const card1Opacity = useTransform(smoothProgress, [0.45, 0.58, 1], [0, 1, 1]);
-  const card1Y = useTransform(smoothProgress, [0.45, 0.58, 1], [30, 0, 0]);
-  const card1Scale = useTransform(smoothProgress, [0.45, 0.58, 0.70], [0.94, 1, 1]);
-
-  // Step 4: Card 02 ("We invest in your idea") activates on its NEXT separate scroll stage (0.68 -> 0.85)
-  const card2Opacity = useTransform(smoothProgress, [0.68, 0.82, 1], [0, 1, 1]);
-  const card2Y = useTransform(smoothProgress, [0.68, 0.82, 1], [30, 0, 0]);
-  const card2Scale = useTransform(smoothProgress, [0.68, 0.82, 1], [0.94, 1, 1]);
+  // Step 3: Both Pathway Cards are revealed AT ONCE as the two branches reach their destination (0.66 -> 0.80)
+  const cardsOpacity = useTransform(smoothProgress, [0.66, 0.80, 1], [0, 1, 1]);
+  const cardsY = useTransform(smoothProgress, [0.66, 0.80, 1], [30, 0, 0]);
+  const cardsScale = useTransform(smoothProgress, [0.66, 0.80, 1], [0.96, 1, 1]);
 
   return (
     <section id="future" ref={containerRef} className="relative w-full bg-[#090D0F] text-white">
-      {/* 220vh pinned scroll interaction with individual, separate scroll steps for Card 01 and Card 02 */}
-      <div className="h-[220vh] relative">
+      {/* 160vh pinned scroll interaction */}
+      <div className="h-[160vh] relative">
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
           {/* Subtle Grid Texture */}
           <div className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-screen">
@@ -68,7 +63,7 @@ export const FutureVisionSection: React.FC = () => {
           </div>
 
           <Container size="full" className="max-w-[1440px] px-6 sm:px-10 lg:px-12 xl:px-16 w-full relative z-10">
-            {/* Phase 1: Progressive Word-Stack (0.0 -> 0.35) */}
+            {/* Phase 1: Progressive Word-Stack (0.0 -> 0.44) */}
             <motion.div
               style={{ opacity: stackOpacity, y: stackY }}
               className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-4"
@@ -102,7 +97,7 @@ export const FutureVisionSection: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Phase 2: Sequential Separate Scroll for Pathway Cards */}
+            {/* Phase 2: Two Pathways revealed together at once */}
             <div className="w-full flex flex-col items-center max-w-5xl mx-auto">
               {/* 1. Header (Top) */}
               <motion.div
@@ -128,13 +123,13 @@ export const FutureVisionSection: React.FC = () => {
                 <BranchingPathVisualizer progress={smoothProgress} />
               </motion.div>
 
-              {/* 3. Pathway Cards Revealed on Separate Scroll Steps */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full relative z-10 -mt-2">
-                {/* Path 01 Card — Revealed on First Dedicated Scroll Stage */}
-                <motion.div
-                  style={{ opacity: card1Opacity, y: card1Y, scale: card1Scale }}
-                  className="relative p-7 sm:p-9 rounded-2xl bg-[#131719] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-[#009D9E]/50 transition-all duration-300 flex flex-col justify-between min-h-[240px]"
-                >
+              {/* 3. Both Pathway Cards Revealed Together At Once */}
+              <motion.div
+                style={{ opacity: cardsOpacity, y: cardsY, scale: cardsScale }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full relative z-10 -mt-2"
+              >
+                {/* Path 01 Card */}
+                <div className="relative p-7 sm:p-9 rounded-2xl bg-[#131719] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-[#009D9E]/50 transition-all duration-300 flex flex-col justify-between min-h-[240px]">
                   {/* Top Connector Anchor Node */}
                   <div className="hidden md:block absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#009D9E] border border-[#9AEDFC] shadow-[0_0_10px_#009D9E]" />
 
@@ -162,13 +157,10 @@ export const FutureVisionSection: React.FC = () => {
                     <span>Institutional Track</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
-                </motion.div>
+                </div>
 
-                {/* Path 02 Card — Revealed on Second Separate Scroll Stage */}
-                <motion.div
-                  style={{ opacity: card2Opacity, y: card2Y, scale: card2Scale }}
-                  className="relative p-7 sm:p-9 rounded-2xl bg-[#131719] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-[#9AEDFC]/50 transition-all duration-300 flex flex-col justify-between min-h-[240px]"
-                >
+                {/* Path 02 Card */}
+                <div className="relative p-7 sm:p-9 rounded-2xl bg-[#131719] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:border-[#9AEDFC]/50 transition-all duration-300 flex flex-col justify-between min-h-[240px]">
                   {/* Top Connector Anchor Node */}
                   <div className="hidden md:block absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#9AEDFC] border border-[#009D9E] shadow-[0_0_10px_#9AEDFC]" />
 
@@ -196,8 +188,8 @@ export const FutureVisionSection: React.FC = () => {
                     <span>Incubator Capital</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
-                </motion.div>
-              </div>
+                </div>
+              </motion.div>
             </div>
           </Container>
         </div>

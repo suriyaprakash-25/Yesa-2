@@ -6,17 +6,16 @@ interface BranchingPathVisualizerProps {
 }
 
 export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = ({ progress }) => {
-  // Step 2a: Main trunk descends (0.35 -> 0.44)
-  const mainLineLength = useTransform(progress, [0.35, 0.44], [0, 1]);
-  const junctionOpacity = useTransform(progress, [0.35, 0.42], [0, 1]);
+  // Main trunk descends from top origin down to split junction (0.46 -> 0.58)
+  const mainLineLength = useTransform(progress, [0.46, 0.58], [0, 1]);
+  const junctionOpacity = useTransform(progress, [0.46, 0.54], [0, 1]);
 
-  // Step 2b: Left Branch draws down to Card 01 on first scroll stage (0.40 -> 0.55)
-  const leftBranchLength = useTransform(progress, [0.40, 0.55], [0, 1]);
-  const leftNodeOpacity = useTransform(progress, [0.50, 0.58], [0, 1]);
+  // Both branches draw outward & downward together to the two cards (0.54 -> 0.74)
+  const leftBranchLength = useTransform(progress, [0.54, 0.74], [0, 1]);
+  const rightBranchLength = useTransform(progress, [0.54, 0.74], [0, 1]);
 
-  // Step 2c: Right Branch draws down to Card 02 on second separate scroll stage (0.65 -> 0.82)
-  const rightBranchLength = useTransform(progress, [0.65, 0.82], [0, 1]);
-  const rightNodeOpacity = useTransform(progress, [0.78, 0.86], [0, 1]);
+  // Both terminal anchor nodes light up together as branches arrive (0.68 -> 0.78)
+  const nodeOpacity = useTransform(progress, [0.68, 0.78], [0, 1]);
 
   return (
     <div className="w-full h-36 sm:h-44 md:h-52 relative flex justify-center items-center overflow-visible pointer-events-none">
@@ -102,7 +101,7 @@ export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = (
             style={{ opacity: junctionOpacity }}
           />
 
-          {/* Left Branch: draws down to Card 01 on separate scroll stage */}
+          {/* Left Branch: curves outward & downward to Card 01 top anchor */}
           <motion.path
             d="M400,36 C400,105 200,90 200,160"
             stroke="#009D9E"
@@ -112,7 +111,7 @@ export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = (
             style={{ pathLength: leftBranchLength }}
           />
 
-          {/* Right Branch: draws down to Card 02 on next separate scroll stage */}
+          {/* Right Branch: curves outward & downward to Card 02 top anchor */}
           <motion.path
             d="M400,36 C400,105 600,90 600,160"
             stroke="#9AEDFC"
@@ -131,7 +130,7 @@ export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = (
             stroke="#9AEDFC"
             strokeWidth="2"
             filter="url(#branchGlowPrimary)"
-            style={{ opacity: leftNodeOpacity }}
+            style={{ opacity: nodeOpacity }}
           />
 
           {/* Right Terminal Node (Top Center of Card 02) */}
@@ -143,7 +142,7 @@ export const BranchingPathVisualizer: React.FC<BranchingPathVisualizerProps> = (
             stroke="#009D9E"
             strokeWidth="2"
             filter="url(#branchGlowPrimary)"
-            style={{ opacity: rightNodeOpacity }}
+            style={{ opacity: nodeOpacity }}
           />
         </g>
       </svg>

@@ -81,16 +81,16 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
           transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="w-full max-w-2xl relative group"
         >
-          {/* Subtle Ambient Pulsing Glow behind the button */}
-          <div className="absolute inset-0 bg-[#009D9E]/25 rounded-3xl blur-2xl group-hover:bg-[#009D9E]/40 group-hover:blur-3xl transition-all duration-500 animate-pulse pointer-events-none" />
+          {/* Subtle Ambient Glow behind the button */}
+          <div className="absolute inset-0 bg-[#009D9E]/12 rounded-3xl blur-xl group-hover:bg-[#009D9E]/22 group-hover:blur-2xl transition-all duration-500 pointer-events-none" />
 
           {/* Premium Button Container */}
           <button
             onClick={handleApply}
-            className="group/btn relative w-full overflow-hidden rounded-3xl bg-[#131719] border border-white/[0.12] hover:border-[#009D9E]/60 p-1.5 transition-all duration-300 hover:shadow-[0_0_50px_rgba(0,157,158,0.3)] cursor-pointer"
+            className="group/btn relative w-full overflow-hidden rounded-3xl bg-[#131719] border border-white/[0.12] hover:border-[#009D9E]/50 p-1.5 transition-all duration-300 hover:shadow-[0_0_24px_rgba(0,157,158,0.18)] cursor-pointer"
           >
             {/* Shimmer Fill-Sweep Overlay */}
-            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-[#009D9E]/15 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-out" />
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-[#009D9E]/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-out" />
 
             <div className="flex items-center justify-between px-8 py-6 sm:px-12 sm:py-8 relative z-10">
               <div className="text-left">
@@ -103,7 +103,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
               </div>
 
               {/* Action Circle */}
-              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-[#009D9E] group-hover/btn:bg-[#9AEDFC] text-[#090D0F] flex items-center justify-center shadow-[0_0_20px_rgba(0,157,158,0.5)] group-hover/btn:scale-105 group-hover/btn:rotate-[-4deg] transition-all duration-300">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-[#009D9E] group-hover/btn:bg-[#9AEDFC] text-[#090D0F] flex items-center justify-center shadow-[0_0_10px_rgba(0,157,158,0.3)] group-hover/btn:scale-105 group-hover/btn:rotate-[-4deg] transition-all duration-300">
                 <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 group-hover/btn:translate-x-0.5 transition-transform" />
               </div>
             </div>

@@ -46,9 +46,9 @@ export const FutureVisionSection: React.FC = () => {
   const cardsScale = useTransform(smoothProgress, [0.38, 0.52, 1], [0.96, 1, 1]);
 
   return (
-    <section id="future" ref={containerRef} className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] transition-colors duration-300">
-      {/* 160vh pinned scroll interaction */}
-      <div className="h-[160vh] relative">
+    <section id="future" ref={containerRef} className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] border-t border-[var(--border-subtle)] transition-colors duration-300">
+      {/* 135vh pinned scroll interaction */}
+      <div className="h-[135vh] relative">
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
           <Container size="full" className="max-w-[1440px] px-6 sm:px-10 lg:px-12 xl:px-16 w-full relative z-10">
             {/* Phase 1: Progressive Word-Stack (0.0 -> 0.32) */}
@@ -56,7 +56,7 @@ export const FutureVisionSection: React.FC = () => {
               style={{ opacity: stackOpacity, y: stackY }}
               className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-4"
             >
-              <div className="flex items-center gap-3 mb-8 font-mono text-xs uppercase tracking-[0.25em] text-[#009D9E] font-bold">
+              <div className="flex items-center gap-3 mb-6 font-mono text-xs uppercase tracking-[0.25em] text-[#009D9E] font-bold">
                 <span className="w-5 h-[1.5px] bg-[#009D9E]" />
                 <span>FUTURE PROGRESSION</span>
                 <span className="w-5 h-[1.5px] bg-[#009D9E]" />

@@ -65,7 +65,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
   };
 
   return (
-    <section id="apply" className="relative w-full pt-16 sm:pt-20 md:pt-24 bg-[var(--color-bg-base)] transition-colors duration-300 overflow-visible">
+    <section id="apply" className="relative w-full pt-10 md:pt-12 bg-[var(--color-bg-base)] transition-colors duration-300 overflow-visible">
       {/* Outer wrapper to contain the curved card */}
       <div className="w-full relative px-2 sm:px-4 lg:px-6">
         
@@ -74,7 +74,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
 
         {/* The Grand Rounded Footer Card */}
         <div
-          className="relative w-full rounded-t-[32px] sm:rounded-t-[48px] lg:rounded-t-[56px] bg-[#0A1316] text-white pt-14 sm:pt-20 md:pt-24 pb-8 sm:pb-12 border-t border-white/[0.12] shadow-[0_-12px_40px_rgba(0,0,0,0.15)] overflow-hidden"
+          className="relative w-full rounded-t-[32px] sm:rounded-t-[48px] lg:rounded-t-[56px] bg-[#0A1316] text-white pt-10 sm:pt-14 md:pt-16 pb-8 sm:pb-10 border-t border-white/[0.12] shadow-[0_-12px_40px_rgba(0,0,0,0.15)] overflow-hidden"
           style={{
             backgroundImage: `
               linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
@@ -89,7 +89,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
           <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
             
             {/* 1. Top Row: Headline & Main Action Button */}
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 sm:gap-12 pb-16 sm:pb-20 border-b border-white/[0.08]">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 sm:gap-12 pb-10 sm:pb-12 border-b border-white/[0.08]">
               {/* Left: Heading & Subheading */}
               <div className="max-w-2xl text-left">
                 <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl text-white tracking-tight leading-[1.02] [overflow-wrap:normal] [word-break:keep-all]">

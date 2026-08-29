@@ -77,7 +77,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-[100vh] w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] overflow-hidden flex flex-col justify-between pt-24 pb-8 md:pt-32 md:pb-12 transition-colors duration-300"
+      className="relative min-h-[90vh] lg:min-h-[92vh] w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] overflow-hidden flex flex-col justify-between pt-20 pb-4 md:pt-24 md:pb-6 transition-colors duration-300"
     >
       {/* ========================================================================= */}
       {/* 1. Full-Bleed Ambient Background Photo Layer (z-0)                         */}

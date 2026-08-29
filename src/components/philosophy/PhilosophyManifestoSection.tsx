@@ -7,7 +7,7 @@ export const PhilosophyManifestoSection: React.FC = () => {
   return (
     <section
       id="philosophy"
-      className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] pt-20 pb-20 sm:pt-28 sm:pb-28 md:pt-36 md:pb-36 border-t border-[var(--border-subtle)] overflow-hidden transition-colors duration-300"
+      className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] py-10 md:py-12 border-t border-[var(--border-subtle)] overflow-hidden transition-colors duration-300"
     >
       {/* Subtle Background Radial Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--accent-dim)] rounded-full blur-3xl pointer-events-none opacity-40 dark:opacity-25" />
@@ -15,14 +15,14 @@ export const PhilosophyManifestoSection: React.FC = () => {
       <Container size="full" className="max-w-[1440px] px-6 sm:px-10 lg:px-16 relative z-10 w-full">
         
         {/* 1. Header Architectural Kicker */}
-        <div className="flex items-center justify-center gap-3 mb-6 font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold">
+        <div className="flex items-center justify-center gap-3 mb-4 font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold">
           <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
           <span>THE YESA THESIS</span>
           <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
         </div>
 
         {/* 2. Bold Editorial Manifesto Headline */}
-        <div className="max-w-4xl mx-auto text-center mb-16 sm:mb-20 md:mb-24">
+        <div className="max-w-4xl mx-auto text-center mb-10 md:mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}

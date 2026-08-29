@@ -143,18 +143,18 @@ export const YesaJourneySection: React.FC = () => {
   return (
     <section
       id="journey"
-      className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] pt-20 pb-32 md:pt-28 md:pb-40 border-t border-[var(--border-subtle)] overflow-visible scroll-mt-20 transition-colors duration-300"
+      className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] py-10 md:py-12 border-t border-[var(--border-subtle)] overflow-visible scroll-mt-20 transition-colors duration-300"
     >
       <Container size="full" className="max-w-[1440px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto mb-16 sm:mb-20 md:mb-24 text-center">
+        <div className="max-w-3xl mx-auto mb-8 sm:mb-10 text-center">
           <div className="flex items-center justify-center gap-3 mb-4 font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold">
             <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
             <span>OUR PROCESS</span>
             <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
           </div>
 
-          <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl text-[var(--text-primary)] tracking-tight leading-[1.05] mb-5 [overflow-wrap:normal] [word-break:keep-all]">
+          <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl text-[var(--text-primary)] tracking-tight leading-[1.05] mb-4 [overflow-wrap:normal] [word-break:keep-all]">
             The 6 Stages of Growth.
           </h2>
 
@@ -164,18 +164,18 @@ export const YesaJourneySection: React.FC = () => {
         </div>
 
         {/* Sticky Card Stacking Deck */}
-        <div className="relative max-w-[740px] mx-auto pb-24">
+        <div className="relative max-w-[740px] mx-auto pb-4">
           {JOURNEY_STAGES.map((stage, idx) => {
             // Progressive top offset ensures preceding card headers remain stacked & visible
-            const topOffsetDesktop = 120 + idx * 24; // e.g. 120px, 144px, 168px, 192px...
-            const topOffsetMobile = 90 + idx * 16;
+            const topOffsetDesktop = 110 + idx * 22;
+            const topOffsetMobile = 85 + idx * 14;
 
             return (
               <div
                 key={stage.num}
-                className="sticky w-full mb-12 sm:mb-16 md:mb-20 last:mb-0 transition-all duration-300"
+                className="sticky w-full mb-6 sm:mb-8 md:mb-10 last:mb-0 transition-all duration-300"
                 style={{
-                  top: `clamp(${topOffsetMobile}px, 14vh + ${idx * 20}px, ${topOffsetDesktop}px)`,
+                  top: `clamp(${topOffsetMobile}px, 12vh + ${idx * 18}px, ${topOffsetDesktop}px)`,
                   zIndex: idx + 10,
                 }}
               >

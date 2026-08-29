@@ -60,7 +60,7 @@ export const InfrastructureSection: React.FC = () => {
   ];
 
   return (
-    <section id="what-we-do" className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] pt-16 pb-16 md:pt-22 md:pb-22 border-t border-[var(--border-subtle)] overflow-hidden scroll-mt-20 transition-colors duration-300">
+    <section id="what-we-do" className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] py-10 md:py-12 border-t border-[var(--border-subtle)] overflow-hidden scroll-mt-20 transition-colors duration-300">
       <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 w-full">
         {/* Section Header */}
         <div className="max-w-3xl mb-8 md:mb-10 text-left">

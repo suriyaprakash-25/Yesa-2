@@ -123,11 +123,11 @@ export const ProcessOverviewSection: React.FC = () => {
     <section
       id="process-overview"
       ref={containerRef}
-      className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] transition-colors duration-300"
+      className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] border-t border-[var(--border-subtle)] transition-colors duration-300"
     >
-      {/* Pinned 260vh container for generous, controlled horizontal scroll */}
-      <div className="h-[260vh] relative">
-        <div className="sticky top-0 h-screen w-full flex flex-col justify-between py-6 sm:py-8 lg:py-10 overflow-hidden">
+      {/* Pinned 185vh container for compact, responsive horizontal scroll */}
+      <div className="h-[185vh] relative">
+        <div className="sticky top-0 h-screen w-full flex flex-col justify-between py-5 sm:py-7 lg:py-8 overflow-hidden">
 
           {/* Section Header */}
           <div className="max-w-[1600px] w-full mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 z-20 shrink-0">

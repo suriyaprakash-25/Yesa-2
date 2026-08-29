@@ -88,13 +88,13 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           src={heroFellowsImg}
           alt=""
           role="presentation"
-          className="w-full h-full object-cover object-center opacity-75 md:opacity-85 filter contrast-110 saturate-100 dark:opacity-35 dark:saturate-[0.85] dark:contrast-[1.05] transition-all duration-300"
+          className="w-full h-full object-cover object-center opacity-75 md:opacity-85 filter contrast-110 saturate-100 dark:opacity-55 md:dark:opacity-65 dark:saturate-[0.95] dark:contrast-[1.1] transition-all duration-300"
           loading="eager"
         />
 
         {/* Dark-mode specific edge shadows */}
-        <div className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#090D0F] via-[#090D0F]/70 to-transparent w-full h-full" />
-        <div className="hidden dark:block absolute inset-0 bg-gradient-to-t from-[#090D0F] via-transparent to-[#090D0F]/85 w-full h-full" />
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#090D0F] via-[#090D0F]/40 to-transparent w-full h-full" />
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-t from-[#090D0F]/60 via-transparent to-[#090D0F]/60 w-full h-full" />
       </div>
 
       {/* ========================================================================= */}

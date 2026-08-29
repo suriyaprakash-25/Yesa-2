@@ -22,6 +22,11 @@ export const Footer: React.FC = () => {
     }
   };
 
+  // When on the home page, the grand unified footer card in FinalCtaSection renders the complete footer
+  if (location.pathname === '/') {
+    return null;
+  }
+
   return (
     <footer className="w-full bg-[var(--footer-bg)] border-t border-[var(--footer-border)] py-6 md:py-8 relative z-20 transition-colors duration-300">
       <Container size="full" className="max-w-[1600px] px-6 sm:px-10 lg:px-12 xl:px-16 flex flex-col md:flex-row items-center justify-between gap-8">

@@ -1,12 +1,50 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Container } from '../core/Container';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 interface FinalCtaSectionProps {
   onOpenApply?: () => void;
 }
+
+// Decorative geometric shape cluster resting on top of the footer curve
+const GeometricShapeCluster: React.FC = () => {
+  const shapes = [
+    { type: 'circle', color: 'bg-[#009D9E]', size: 'w-2.5 h-2.5', delay: 0 },
+    { type: 'square', color: 'bg-[#F59E0B]', size: 'w-2.5 h-2.5', delay: 0.1 },
+    { type: 'diamond', color: 'bg-[#38BDF8]', size: 'w-3 h-3', delay: 0.2 },
+    { type: 'circle', color: 'bg-[#34D399]', size: 'w-2 h-2', delay: 0.15 },
+    { type: 'square', color: 'bg-white/80', size: 'w-2 h-2', delay: 0.05 },
+    { type: 'diamond', color: 'bg-[#F59E0B]', size: 'w-2.5 h-2.5', delay: 0.25 },
+    { type: 'circle', color: 'bg-[#009D9E]', size: 'w-3 h-3', delay: 0.1 },
+    { type: 'square', color: 'bg-[#38BDF8]', size: 'w-2.5 h-2.5', delay: 0.3 },
+    { type: 'circle', color: 'bg-[#FDE68A]', size: 'w-2 h-2', delay: 0.18 },
+    { type: 'diamond', color: 'bg-[#34D399]', size: 'w-2.5 h-2.5', delay: 0.22 },
+    { type: 'square', color: 'bg-white/70', size: 'w-2 h-2', delay: 0.08 },
+    { type: 'circle', color: 'bg-[#009D9E]', size: 'w-2.5 h-2.5', delay: 0.12 },
+  ];
+
+  return (
+    <div className="absolute -top-3.5 sm:-top-4 left-8 sm:left-16 lg:left-24 z-20 flex items-center gap-1.5 sm:gap-2 pointer-events-none select-none">
+      {shapes.map((s, i) => (
+        <motion.div
+          key={i}
+          initial={{ y: 6, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: s.delay, ease: [0.16, 1, 0.3, 1] }}
+          className={`${s.size} ${s.color} ${
+            s.type === 'circle'
+              ? 'rounded-full'
+              : s.type === 'diamond'
+              ? 'rotate-45 rounded-[1px]'
+              : 'rounded-[2px]'
+          } shadow-sm`}
+        />
+      ))}
+    </div>
+  );
+};
 
 export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply }) => {
   const navigate = useNavigate();
@@ -19,93 +57,140 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenApply })
     }
   };
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section
-      id="apply"
-      className="relative w-full bg-[var(--color-bg-base)] text-[var(--text-primary)] pt-14 pb-0 md:pt-20 md:pb-0 border-t border-[var(--border-subtle)] overflow-hidden flex flex-col justify-between transition-colors duration-300"
-    >
-      <Container size="full" className="max-w-[1440px] px-6 sm:px-10 lg:px-16 relative z-10 flex flex-col items-center text-center">
-        {/* Descending Path Line to Anchor the Section */}
-        <div className="flex flex-col items-center mb-10">
-          <motion.div
-            initial={{ height: 0 }}
-            whileInView={{ height: 100 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="w-[1.5px] bg-gradient-to-b from-[var(--accent-base)]/0 via-[var(--accent-base)] to-[var(--accent-light)]"
-          />
-          <div className="w-3 h-3 rounded-full bg-[var(--accent-base)] border-2 border-[var(--accent-light)] shadow-[var(--shadow-glow-accent)] mt-[-1px]" />
-        </div>
+    <section id="apply" className="relative w-full pt-16 sm:pt-20 md:pt-24 bg-[var(--color-bg-base)] transition-colors duration-300 overflow-visible">
+      {/* Outer wrapper to contain the curved card */}
+      <div className="w-full relative px-2 sm:px-4 lg:px-6">
+        
+        {/* Decorative Top Geometric Shape Cluster */}
+        <GeometricShapeCluster />
 
-        {/* Messaging */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-3xl mb-12"
+        {/* The Grand Rounded Footer Card */}
+        <div
+          className="relative w-full rounded-t-[32px] sm:rounded-t-[48px] lg:rounded-t-[56px] bg-[#0A1316] text-white pt-14 sm:pt-20 md:pt-24 pb-8 sm:pb-12 border-t border-white/[0.12] shadow-[0_-12px_40px_rgba(0,0,0,0.15)] overflow-hidden"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
+            `,
+            backgroundSize: '44px 44px',
+          }}
         >
-          <div className="flex items-center justify-center gap-3 mb-6 font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent-base)] font-bold">
-            <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
-            <span>THE BEGINNING</span>
-            <span className="w-5 h-[1.5px] bg-[var(--accent-base)]" />
-          </div>
+          {/* Subtle Ambient Radial Glow */}
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[var(--accent-base)]/10 rounded-full blur-3xl pointer-events-none" />
 
-          <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl text-[var(--text-primary)] tracking-tight leading-[1.0] mb-6 [overflow-wrap:normal] [word-break:keep-all]">
-            Your journey starts with a choice.
-          </h2>
-
-          <p className="text-lg sm:text-xl md:text-2xl text-[var(--text-secondary)] font-light leading-snug">
-            Choose your field. <span className="text-[var(--text-primary)] font-normal">We provide the path.</span>
-          </p>
-        </motion.div>
-
-        {/* Massive Interactive CTA Button with Ambient Glow & Fill-Sweep */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-2xl relative group"
-        >
-          {/* Ambient Glow behind the button */}
-          <div className="absolute inset-0 bg-[var(--accent-dim)] rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 pointer-events-none" />
-
-          {/* Premium Button Container */}
-          <button
-            onClick={handleApply}
-            className="group/btn relative w-full overflow-hidden rounded-3xl bg-[var(--color-surface-card)] border border-[var(--border-medium)] hover:border-[var(--accent-base)]/60 p-1.5 transition-all duration-300 hover:shadow-[var(--shadow-elevated)] cursor-pointer"
-          >
-            {/* Shimmer Fill-Sweep Overlay */}
-            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-[var(--accent-base)]/15 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-out" />
-
-            <div className="flex items-center justify-between px-8 py-6 sm:px-12 sm:py-8 relative z-10">
-              <div className="text-left">
-                <span className="font-mono text-[10px] sm:text-xs text-[var(--accent-base)] font-bold uppercase tracking-widest block mb-1">
-                  100% FREE INCUBATOR
-                </span>
-                <span className="font-display font-black text-2xl sm:text-4xl md:text-5xl text-[var(--text-primary)] tracking-tight">
-                  Apply to YESA
-                </span>
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+            
+            {/* 1. Top Row: Headline & Main Action Button */}
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 sm:gap-12 pb-16 sm:pb-20 border-b border-white/[0.08]">
+              {/* Left: Heading & Subheading */}
+              <div className="max-w-2xl text-left">
+                <h2 className="font-display font-black text-4xl sm:text-6xl md:text-7xl text-white tracking-tight leading-[1.02] [overflow-wrap:normal] [word-break:keep-all]">
+                  Join the fellowship!
+                </h2>
+                <p className="text-white/70 text-base sm:text-lg md:text-xl font-normal leading-relaxed mt-4 max-w-xl">
+                  100% free incubator. Zero tuition barrier. A structured pathway from raw potential to recognized architectural leadership.
+                </p>
               </div>
 
-              {/* Action Circle */}
-              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-[var(--accent-base)] group-hover/btn:bg-[var(--accent-light)] text-[var(--color-bg-base)] flex items-center justify-center shadow-md group-hover/btn:scale-105 group-hover/btn:rotate-[-4deg] transition-all duration-300">
-                <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 group-hover/btn:translate-x-0.5 transition-transform" />
+              {/* Right: Large Soft-Pill Action Button (matches reference design) */}
+              <div className="flex items-center">
+                <button
+                  onClick={handleApply}
+                  className="group relative inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-2xl sm:rounded-full bg-[#E5F4EC] hover:bg-white text-[#0A4E3B] font-sans font-bold text-base sm:text-lg transition-all duration-300 hover:scale-105 shadow-xl cursor-pointer whitespace-nowrap"
+                >
+                  <span>Start Application</span>
+                  <div className="w-8 h-8 rounded-full bg-[#0A4E3B]/10 flex items-center justify-center transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
+                    <ArrowUpRight className="w-4 h-4 text-[#0A4E3B]" />
+                  </div>
+                </button>
               </div>
             </div>
-          </button>
-        </motion.div>
-      </Container>
 
-      {/* Massive Full "YESA" Wordmark Backdrop attached directly to the footer line */}
-      <div className="w-full mt-8 md:mt-12 pointer-events-none select-none flex flex-col items-center justify-end overflow-visible px-4">
-        <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.35em] text-[var(--text-secondary)] font-semibold mb-2">
-          INCUBATOR FOR FUTURE LEADERS
-        </span>
-        <span className="font-display font-black text-[15vw] sm:text-[17vw] leading-[0.78] text-[var(--ghost-wordmark-color)] tracking-tighter block select-none -mb-[1.2vw] transition-colors duration-300">
-          YESA
-        </span>
+            {/* 2. Middle Row: Provenance / Location & Navigation Links */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 py-10 sm:py-14 border-b border-white/[0.08]">
+              {/* Left: Status & Provenance */}
+              <div className="flex flex-col gap-1.5 text-left">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[var(--accent-base)] animate-pulse" />
+                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent-base)] font-bold">
+                    YESA LABS
+                  </span>
+                </div>
+                <p className="text-white/60 text-xs sm:text-sm font-light">
+                  Autonomous Incubator Ecosystem · Architecting Future Leaders.
+                </p>
+              </div>
+
+              {/* Right: Horizontal Nav Links */}
+              <nav className="flex flex-wrap items-center gap-6 sm:gap-8 lg:gap-10" aria-label="Footer Navigation">
+                <button
+                  onClick={() => scrollToSection('journey')}
+                  className="font-sans text-sm text-white/70 hover:text-white transition-colors cursor-pointer"
+                >
+                  Journey
+                </button>
+                <button
+                  onClick={() => scrollToSection('what-we-do')}
+                  className="font-sans text-sm text-white/70 hover:text-white transition-colors cursor-pointer"
+                >
+                  Process
+                </button>
+                <button
+                  onClick={() => scrollToSection('fields')}
+                  className="font-sans text-sm text-white/70 hover:text-white transition-colors cursor-pointer"
+                >
+                  Fields
+                </button>
+                <button
+                  onClick={() => scrollToSection('future')}
+                  className="font-sans text-sm text-white/70 hover:text-white transition-colors cursor-pointer"
+                >
+                  Future
+                </button>
+                <button
+                  onClick={handleApply}
+                  className="font-sans text-sm text-[var(--accent-light)] hover:text-white font-semibold transition-colors cursor-pointer"
+                >
+                  Apply
+                </button>
+              </nav>
+            </div>
+
+            {/* 3. Bottom Row: Massive Display Watermark Logo */}
+            <div className="pt-10 sm:pt-14 pb-4 pointer-events-none select-none flex flex-col items-center justify-center overflow-hidden">
+              <div className="w-full text-center">
+                <span className="font-display font-black text-[21vw] leading-[0.72] tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white/90 via-white/50 to-white/10 block select-none">
+                  YES<span className="text-[var(--accent-base)]">A</span>
+                </span>
+              </div>
+            </div>
+
+            {/* 4. Legal / Copyright Bar */}
+            <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/50 border-t border-white/[0.06]">
+              <div className="flex items-center gap-6">
+                <button onClick={() => {}} className="hover:text-white/80 transition-colors cursor-pointer">
+                  Terms &amp; conditions
+                </button>
+                <span>·</span>
+                <button onClick={() => {}} className="hover:text-white/80 transition-colors cursor-pointer">
+                  Privacy policy
+                </button>
+              </div>
+              <div>
+                © {new Date().getFullYear()} YESA Labs. All rights reserved.
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </section>
   );

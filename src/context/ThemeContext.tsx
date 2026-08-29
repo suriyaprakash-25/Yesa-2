@@ -33,26 +33,26 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (typeof window === 'undefined') return;
 
     const root = document.documentElement;
+    const updateThemeDom = () => {
+      root.setAttribute('data-theme', newTheme);
+      // Also toggle Tailwind's dark class for maximum compatibility
+      if (newTheme === 'dark') {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+      localStorage.setItem(STORAGE_KEY, newTheme);
+    };
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!prefersReducedMotion) {
-      root.classList.add('theme-transitioning');
-    }
-
-    root.setAttribute('data-theme', newTheme);
-    // Also toggle Tailwind's dark class for maximum compatibility
-    if (newTheme === 'dark') {
-      root.classList.add('dark');
+    // Use native View Transitions API if supported for ultra-smooth 60fps cross-fade
+    if (!prefersReducedMotion && 'startViewTransition' in document) {
+      (document as unknown as { startViewTransition: (cb: () => void) => void }).startViewTransition(() => {
+        updateThemeDom();
+      });
     } else {
-      root.classList.remove('dark');
-    }
-
-    localStorage.setItem(STORAGE_KEY, newTheme);
-
-    if (!prefersReducedMotion) {
-      window.setTimeout(() => {
-        root.classList.remove('theme-transitioning');
-      }, 350);
+      updateThemeDom();
     }
   }, []);
 

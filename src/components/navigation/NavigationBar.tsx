@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 
 interface NavigationBarProps {
@@ -21,7 +21,6 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -32,7 +31,6 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 20);
 
       // Scrollspy calculation only on home route
       if (location.pathname === '/') {
@@ -57,7 +55,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname]);
 
@@ -74,6 +72,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
   };
 
   const scrollToTop = () => {
+    setMobileMenuOpen(false);
     if (location.pathname !== '/') {
       navigate('/');
     } else {
@@ -90,118 +89,75 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
     }
   };
 
-  const isApplyRoute = location.pathname === '/apply';
-
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isApplyRoute
-          ? 'py-3 bg-[var(--nav-bg)] backdrop-blur-md border-b border-[var(--border-subtle)] shadow-[var(--shadow-subtle)]'
-          : 'py-5 bg-transparent border-b border-transparent'
-      }`}
-    >
-      <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
+    <header className="fixed top-3 sm:top-5 left-0 right-0 z-50 flex flex-col items-center px-4 sm:px-6 pointer-events-none">
+      {/* Unified Floating Pill Capsule Navbar */}
+      <div className="w-full max-w-[1020px] pointer-events-auto rounded-full px-5 sm:px-7 py-2.5 sm:py-3 bg-white/95 dark:bg-[#101518]/95 backdrop-blur-xl border border-black/[0.08] dark:border-white/[0.12] shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex items-center justify-between transition-all duration-300">
         
-        {/* 1. Left Brand Logo "YESA" */}
+        {/* 1. Left Brand Logo */}
         <button
           onClick={scrollToTop}
-          className="flex items-center gap-2.5 group cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--accent-base)] focus-visible:outline-offset-4 rounded-lg"
+          className="flex items-center gap-2.5 group cursor-pointer select-none focus-visible:outline-none"
           aria-label="YESA home"
         >
-          <div className="w-8 h-8 rounded-full bg-[var(--text-primary)] text-[var(--color-bg-base)] flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm">
-            <span className="font-display font-black text-xs tracking-tighter">Y.</span>
+          <div className="w-7 h-7 rounded-full bg-[var(--text-primary)] text-[var(--color-bg-base)] flex items-center justify-center font-display font-black text-xs shadow-xs transition-transform duration-200 group-hover:scale-105">
+            Y.
           </div>
-          <span className="font-display font-black text-xl tracking-wider text-[var(--text-primary)]">
+          <span className="font-display font-black text-xl tracking-tight text-[var(--text-primary)]">
             YESA
           </span>
         </button>
 
-        {/* 2. Center Pill/Capsule Enclosed Navigation Menu (Desktop) */}
-        <nav className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--nav-pill-bg)] border border-[var(--nav-pill-border)] backdrop-blur-md shadow-[var(--shadow-subtle)]">
+        {/* 2. Center Nav Links (Desktop) */}
+        <nav className="hidden md:flex items-center gap-7 lg:gap-9">
           {NAV_ITEMS.map((item) => {
             const isActive = activeSection === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`font-sans text-xs font-medium px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer relative ${
+                className={`font-sans text-[14px] transition-colors duration-200 cursor-pointer ${
                   isActive
-                    ? 'text-[var(--text-primary)] font-semibold'
-                    : 'text-[var(--nav-link-color)] hover:text-[var(--nav-link-hover)] hover:bg-[var(--nav-active-bg)]'
+                    ? 'text-[var(--text-primary)] font-bold'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium'
                 }`}
               >
-                <span>{item.label}</span>
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNavPill"
-                    className="absolute inset-0 rounded-full bg-[var(--nav-active-bg)] border border-[var(--nav-active-border)] -z-10 shadow-inner"
-                    transition={{ type: 'spring', stiffness: 450, damping: 32 }}
-                  />
-                )}
+                {item.label}
               </button>
             );
           })}
         </nav>
 
-        {/* 3. Right Action Cluster: Theme Toggle, Apply Pill & Mobile Hamburger */}
+        {/* 3. Right Action Cluster: Theme Toggle + Pill CTA */}
         <div className="flex items-center gap-2.5 sm:gap-3">
-          {/* Circular Theme Toggle Button (Sun / Moon) */}
+          {/* Subtle Sun/Moon Theme Toggle */}
           <button
             id="theme-toggle-btn"
             onClick={toggleTheme}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[var(--nav-btn-bg)] border border-[var(--nav-btn-border)] hover:border-[var(--nav-btn-hover-border)] text-[var(--nav-btn-text)] flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm focus-visible:outline-2 focus-visible:outline-[var(--accent-base)] focus-visible:outline-offset-2"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer focus-visible:outline-none"
             aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
             title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
           >
-            <AnimatePresence mode="wait" initial={false}>
-              {theme === 'dark' ? (
-                <motion.div
-                  key="moon"
-                  initial={{ rotate: -45, opacity: 0, scale: 0.75 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: 45, opacity: 0, scale: 0.75 }}
-                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex items-center justify-center text-[#9AEDFC]"
-                >
-                  <Moon className="w-4 h-4" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="sun"
-                  initial={{ rotate: -45, opacity: 0, scale: 0.75 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: 45, opacity: 0, scale: 0.75 }}
-                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex items-center justify-center text-[#007577]"
-                >
-                  <Sun className="w-4 h-4" />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {theme === 'dark' ? (
+              <Moon className="w-4 h-4 text-[#38BDF8]" />
+            ) : (
+              <Sun className="w-4 h-4 text-[#007577]" />
+            )}
           </button>
 
-          {/* Outlined Pill Button with Accent Circular Arrow Tile */}
+          {/* Soft Tinted Pill Action Button (matches reference design) */}
           <button
             id="nav-apply-btn"
             onClick={handleApplyClick}
-            className={`group relative inline-flex items-center gap-3 pl-4 pr-1.5 py-1.5 rounded-full border transition-all duration-200 cursor-pointer ${
-              isApplyRoute
-                ? 'bg-[var(--accent-dim)] border-[var(--accent-base)] text-[var(--text-primary)] shadow-[0_0_15px_var(--accent-glow)]'
-                : 'bg-[var(--nav-btn-bg)] hover:bg-[var(--nav-active-bg)] border-[var(--nav-btn-border)] hover:border-[var(--nav-btn-hover-border)] text-[var(--nav-btn-text)]'
-            }`}
+            className="font-sans text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2 rounded-full bg-[#E5F2EC] text-[#0A4E3B] hover:bg-[#D7EADE] dark:bg-[#009D9E] dark:text-[#090D0F] dark:hover:bg-[#38BDF8] transition-colors cursor-pointer shadow-xs whitespace-nowrap"
           >
-            <span className="font-sans text-xs font-medium tracking-wide">
-              Apply
-            </span>
-            <div className="w-7 h-7 rounded-full bg-[var(--accent-base)] group-hover:bg-[var(--accent-light)] text-[var(--color-bg-base)] flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm">
-              <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </div>
+            Apply to YESA
           </button>
 
           {/* Mobile Hamburger Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-full bg-[var(--nav-btn-bg)] border border-[var(--nav-btn-border)] text-[var(--text-primary)] hover:bg-[var(--nav-active-bg)] transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-[var(--accent-base)] focus-visible:outline-offset-2"
+            className="md:hidden p-1.5 rounded-full text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -209,48 +165,43 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({ onOpenApply }) => 
         </div>
       </div>
 
-      {/* Mobile Drawer Dropdown */}
+      {/* Mobile Dropdown Menu Sheet */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden border-b border-[var(--border-subtle)] bg-[var(--nav-bg)] backdrop-blur-xl overflow-hidden shadow-2xl"
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-[1020px] pointer-events-auto mt-2 rounded-2xl p-5 bg-white/95 dark:bg-[#101518]/95 backdrop-blur-xl border border-black/[0.08] dark:border-white/[0.12] shadow-xl md:hidden"
           >
-            <div className="px-6 py-6 flex flex-col gap-4">
-              <div className="flex flex-col gap-1 p-2 rounded-2xl bg-[var(--color-surface-subtle)] border border-[var(--border-subtle)]">
-                {NAV_ITEMS.map((item) => {
-                  const isActive = activeSection === item.id;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => scrollToSection(item.id)}
-                      className={`text-left px-4 py-2.5 rounded-xl font-sans text-sm tracking-wide transition-colors cursor-pointer ${
-                        isActive
-                          ? 'text-[var(--accent-base)] bg-[var(--accent-dim)] font-semibold'
-                          : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--nav-active-bg)]'
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="flex items-center justify-between gap-3 pt-2">
+            <nav className="flex flex-col gap-3">
+              {NAV_ITEMS.map((item) => (
                 <button
-                  onClick={handleApplyClick}
-                  className="flex-1 flex items-center justify-between px-5 py-3 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--accent-base)] text-[var(--text-primary)] font-sans text-sm font-semibold tracking-wide hover:bg-[var(--accent-dim)] transition-colors shadow-sm"
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`text-left py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
+                    activeSection === item.id
+                      ? 'bg-black/5 dark:bg-white/10 text-[var(--text-primary)] font-bold'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  }`}
                 >
-                  <span>Apply to YESA</span>
-                  <div className="w-7 h-7 rounded-full bg-[var(--accent-base)] text-[var(--color-bg-base)] flex items-center justify-center">
-                    <ArrowUpRight className="w-4 h-4" />
-                  </div>
+                  {item.label}
+                </button>
+              ))}
+              <div className="pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between">
+                <span className="text-xs font-mono text-[var(--text-secondary)] uppercase">
+                  Theme: {theme}
+                </span>
+                <button
+                  onClick={toggleTheme}
+                  className="px-3 py-1.5 rounded-full text-xs font-medium bg-black/5 dark:bg-white/10 text-[var(--text-primary)] flex items-center gap-1.5"
+                >
+                  {theme === 'dark' ? <Moon className="w-3.5 h-3.5 text-[#38BDF8]" /> : <Sun className="w-3.5 h-3.5 text-[#007577]" />}
+                  <span>Switch</span>
                 </button>
               </div>
-            </div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>

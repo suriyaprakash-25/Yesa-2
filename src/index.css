@@ -20,20 +20,16 @@ html {
   scroll-padding-top: 80px;
 }
 
-/* Theme Transition Support */
-html.theme-transitioning,
-html.theme-transitioning *,
-html.theme-transitioning *::before,
-html.theme-transitioning *::after {
-  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease, fill 0.35s ease, stroke 0.35s ease !important;
-  transition-delay: 0s !important;
+/* Smooth View Transition for Theme Switching */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.28s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html.theme-transitioning,
-  html.theme-transitioning * {
-    transition: none !important;
-  }
+/* Fallback smooth color transitions for structural surfaces */
+body, header, nav, footer, section {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
 :focus-visible {
